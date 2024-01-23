@@ -4,5 +4,9 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: {
+    plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  },
 };
+
+// TODO: make DaisyUI work with Webpack
