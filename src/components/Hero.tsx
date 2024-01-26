@@ -2,7 +2,7 @@ import Carousel from './Carousel';
 
 export default function Hero() {
   return (
-    <>
+    <div className='grid lg:grid-cols-2 gap-24 items-center'>
       <div>
         <h1 className='max-w-2xl text-4xl font-bold tracking-tight sm:text-6xl'>
           We are changing the way people shop
@@ -19,6 +19,6 @@ export default function Hero() {
         </div>
       </div>
       <Carousel />
-    </>
+    </div>
   );
 }
