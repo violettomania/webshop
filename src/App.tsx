@@ -1,8 +1,16 @@
 export default function App() {
   return (
-    <nav className='bg-emerald-100'>
-      <p>it works!</p>
-      <button className='btn btn-primary'>Button</button>
-    </nav>
+    <header className='bg-neutral py-2 text-neutral-content'>
+      <div className='align-element flex justify-center sm:justify-end'>
+        <div className='flex gap-x-6 justify-center items-center'>
+          <a className='link link-hover text-xs sm:text-sm' href='/login'>
+            Sign in / Guest
+          </a>
+          <a className='link link-hover text-xs sm:text-sm' href='/register'>
+            Create Account
+          </a>
+        </div>
+      </div>
+    </header>
   );
 }
