@@ -40,3 +40,5 @@ export default function App() {
     );
   }
 }
+
+// TODO: bugfix: register and login pages appear to be switched
