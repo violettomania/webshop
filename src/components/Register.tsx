@@ -50,3 +50,5 @@ export default function Register() {
     </section>
   );
 }
+
+// TODO: connect this to a backend
