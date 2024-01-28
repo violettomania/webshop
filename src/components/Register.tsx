@@ -3,17 +3,28 @@ export default function Register() {
     <section className='h-screen grid place-items-center'>
       <form
         method='post'
-        action='/login'
-        className='card w-96  p-8 bg-base-100 shadow-lg flex flex-col gap-y-4'
+        action='/register'
+        className='card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4'
       >
-        <h4 className='text-center text-3xl font-bold'>Login</h4>
+        <h4 className='text-center text-3xl font-bold'>Register</h4>
         <div className='form-control'>
-          <label htmlFor='identifier' className='label'>
+          <label htmlFor='username' className='label'>
+            <span className='label-text capitalize'>username</span>
+          </label>
+          <input
+            type='text'
+            name='username'
+            className='input input-bordered undefined'
+            value=''
+          />
+        </div>
+        <div className='form-control'>
+          <label htmlFor='email' className='label'>
             <span className='label-text capitalize'>email</span>
           </label>
           <input
             type='email'
-            name='identifier'
+            name='email'
             className='input input-bordered undefined'
             value=''
           />
@@ -31,19 +42,16 @@ export default function Register() {
         </div>
         <div className='mt-4'>
           <button type='submit' className='btn btn-primary btn-block'>
-            login
+            register
           </button>
         </div>
-        <button type='button' className='btn btn-secondary btn-block'>
-          guest user
-        </button>
         <p className='text-center'>
-          Not a member yet?{' '}
+          Already a member?
           <a
             className='ml-2 link link-hover link-primary capitalize'
-            href='/register'
+            href='/login'
           >
-            register
+            login
           </a>
         </p>
       </form>

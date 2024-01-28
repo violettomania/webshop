@@ -25,8 +25,8 @@ export default function App() {
         <Route path='orders' element={<OrdersPage />} />
       </Route>
       <Route path='*' element={<ErrorPage />} />
-      <Route path='register' element={<RegisterPage />} />
       <Route path='login' element={<LoginPage />} />
+      <Route path='register' element={<RegisterPage />} />
     </Routes>
   );
 
@@ -40,5 +40,3 @@ export default function App() {
     );
   }
 }
-
-// TODO: bugfix: register and login pages appear to be switched

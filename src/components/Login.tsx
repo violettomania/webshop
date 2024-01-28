@@ -3,28 +3,17 @@ export default function Login() {
     <section className='h-screen grid place-items-center'>
       <form
         method='post'
-        action='/register'
-        className='card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4'
+        action='/login'
+        className='card w-96  p-8 bg-base-100 shadow-lg flex flex-col gap-y-4'
       >
-        <h4 className='text-center text-3xl font-bold'>Register</h4>
+        <h4 className='text-center text-3xl font-bold'>Login</h4>
         <div className='form-control'>
-          <label htmlFor='username' className='label'>
-            <span className='label-text capitalize'>username</span>
-          </label>
-          <input
-            type='text'
-            name='username'
-            className='input input-bordered undefined'
-            value=''
-          />
-        </div>
-        <div className='form-control'>
-          <label htmlFor='email' className='label'>
+          <label htmlFor='identifier' className='label'>
             <span className='label-text capitalize'>email</span>
           </label>
           <input
             type='email'
-            name='email'
+            name='identifier'
             className='input input-bordered undefined'
             value=''
           />
@@ -42,16 +31,19 @@ export default function Login() {
         </div>
         <div className='mt-4'>
           <button type='submit' className='btn btn-primary btn-block'>
-            register
+            login
           </button>
         </div>
+        <button type='button' className='btn btn-secondary btn-block'>
+          guest user
+        </button>
         <p className='text-center'>
-          Already a member?
+          Not a member yet?{' '}
           <a
             className='ml-2 link link-hover link-primary capitalize'
-            href='/login'
+            href='/register'
           >
-            login
+            register
           </a>
         </p>
       </form>
