@@ -20,4 +20,4 @@ export const fetchItem = createAsyncThunk(
   }
 );
 
-// TODO: use axios
+// TODO: rewrite to axios
