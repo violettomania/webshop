@@ -2,7 +2,13 @@ import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const setSearchTerm = createAction<string>('');
 
-const itemsUrl = '';
+const url = 'https://strapi-store-server.onrender.com/api/products';
+
+// examples urls
+// const featuredItemsUrl =
+//   'https://strapi-store-server.onrender.com/api/products?featured=true';
+// const itemsUrl = 'https://strapi-store-server.onrender.com/api/products';
+// const itemUrl = 'https://strapi-store-server.onrender.com/api/products/12';
 
 export const fetchItems = createAsyncThunk(
   'items/fetchItems',
@@ -10,8 +16,6 @@ export const fetchItems = createAsyncThunk(
     return {};
   }
 );
-
-const itemUrl = '';
 
 export const fetchItem = createAsyncThunk(
   'items/fetchItem',
