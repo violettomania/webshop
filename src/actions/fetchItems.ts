@@ -21,3 +21,4 @@ export const fetchItem = createAsyncThunk(
 );
 
 // TODO: rewrite to axios
+// TODO: separate files for fetch single item and fetch items
