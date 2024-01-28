@@ -40,3 +40,5 @@ export default function App() {
     );
   }
 }
+
+// TODO: add pages/index.js for easier imports
