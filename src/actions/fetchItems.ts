@@ -1,6 +1,4 @@
-import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-
-export const setSearchTerm = createAction<string>('');
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
 const url = 'https://strapi-store-server.onrender.com/api/products';
 const featuredQuery = '?featured=true';
@@ -13,15 +11,16 @@ const featuredQuery = '?featured=true';
 
 // TODO: add 'attributes' deconsctructing
 // TODO: add price formatting
-export const fetchFeaturedItems = createAsyncThunk(
-  'items/fetchItem',
+// TODO: add error handling
+export const fetchFeaturedProducts = createAsyncThunk(
+  'items/fetchFeaturedProducts',
   async () => {
     const response = await fetch(`${url}${featuredQuery}`);
     const data = await response.json();
-    const { items } = data;
-    if (items) {
-      return items.map((item: FeaturedItem) => {
-        const { id, attributes } = item;
+    const { products } = data;
+    if (products) {
+      return products.map((product: FeaturedProduct) => {
+        const { id, attributes } = product;
         return {
           id: id,
           title: attributes.title,
@@ -35,19 +34,13 @@ export const fetchFeaturedItems = createAsyncThunk(
   }
 );
 
-export const fetchItems = createAsyncThunk(
-  'items/fetchItems',
-  async (searchTerm: string) => {
-    return {};
-  }
-);
+export const fetchProducts = createAsyncThunk('items/fetchItems', async () => {
+  return {};
+});
 
-export const fetchItem = createAsyncThunk(
-  'items/fetchItem',
-  async (searchTerm: string) => {
-    return {};
-  }
-);
+export const fetchProduct = createAsyncThunk('items/fetchItem', async () => {
+  return {};
+});
 
 // TODO: rewrite to axios
 // TODO: separate files for fetch single item and fetch items

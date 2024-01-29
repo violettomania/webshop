@@ -1,4 +1,4 @@
-type FeaturedItem = {
+type FeaturedProduct = {
   id: string;
   attributes: {
     title: string;
