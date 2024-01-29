@@ -22,7 +22,7 @@ const featuredQuery = '?featured=true';
 // TODO: add price formatting
 // TODO: add error handling
 export const fetchFeaturedProducts = createAsyncThunk(
-  'items/fetchFeaturedProducts',
+  'products/fetchFeaturedProducts',
   async () => {
     const response = await fetch(`${url}${featuredQuery}`);
     const data = await response.json();
