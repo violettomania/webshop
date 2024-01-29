@@ -1,3 +1,5 @@
+import formatPrice from '../helper/priceFormatter';
+
 export interface FeaturedProductProps {
   id: string;
   title: string;
@@ -26,7 +28,7 @@ export default function FeaturedProduct({
       </figure>
       <div className='card-body items-center text-center'>
         <h2 className='card-title capitalize tracking-wider'>{title}</h2>
-        <span className='text-secondary'>{price}</span>
+        <span className='text-secondary'>{`$${formatPrice(price)}`}</span>
       </div>
     </a>
   );

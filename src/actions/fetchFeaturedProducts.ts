@@ -18,7 +18,6 @@ const featuredQuery = '?featured=true';
 // const itemsUrl = 'https://strapi-store-server.onrender.com/api/products';
 // const itemUrl = 'https://strapi-store-server.onrender.com/api/products/12';
 
-// TODO: add price formatting
 export const fetchFeaturedProducts = createAsyncThunk(
   'products/fetchFeaturedProducts',
   async () => {
