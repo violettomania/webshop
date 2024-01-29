@@ -1,5 +1,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+interface FeaturedProduct {
+  id: string;
+  attributes: {
+    title: string;
+    image: string;
+    price: string;
+  };
+}
+
 const url = 'https://strapi-store-server.onrender.com/api/products';
 const featuredQuery = '?featured=true';
 

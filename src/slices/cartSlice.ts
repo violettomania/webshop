@@ -1,26 +1,41 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
+import { fetchFeaturedProducts } from '../actions/fetchProducts';
+import { FeaturedProductProps } from '../components/FeaturedProduct';
 
 interface CartState {
-  items: string[];
+  products: FeaturedProductProps[];
 }
 
 const initialState: CartState = {
-  items: [''],
+  products: [],
 };
 
+// TODO: add loading state
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
     test: (state, action) => {
-      state.items = action.payload;
+      state.products = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchFeaturedProducts.pending, (state) => {
+        state.products = [];
+      })
+      .addCase(fetchFeaturedProducts.fulfilled, (state, action) => {
+        state.products = action.payload;
+      })
+      .addCase(fetchFeaturedProducts.rejected, (state, action) => {
+        state.products = [];
+      });
   },
 });
 
 export const { test } = cartSlice.actions;
 
-export const selectCart = (state: RootState) => state.cart.items;
+export const selectCart = (state: RootState) => state.cart.products;
 
 export default cartSlice.reducer;

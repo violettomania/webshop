@@ -1,4 +1,15 @@
-export default function FeaturedProduct() {
+export interface FeaturedProductProps {
+  id: string;
+  title: string;
+  image: string;
+  price: string;
+}
+
+export default function FeaturedProduct({
+  title,
+  image,
+  price,
+}: FeaturedProductProps) {
   return (
     <a
       className='card w-full shadow-xl hover:shadow-2xl transition duration-300'
