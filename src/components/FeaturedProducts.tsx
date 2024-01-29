@@ -14,6 +14,7 @@ export default function FeaturedProducts() {
   }, [dispatch]);
 
   // TODO: bugfix: fix products not loading
+  // TODO: use unified type instead of FeaturedProductProps
   return (
     <div className='pt-24'>
       <div className='border-b border-base-300 pb-5'>
