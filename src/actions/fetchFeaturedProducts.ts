@@ -26,7 +26,7 @@ export const fetchFeaturedProducts = createAsyncThunk(
   async () => {
     const response = await fetch(`${url}${featuredQuery}`);
     const data = await response.json();
-    const { products } = data;
+    const { data: products } = data;
     if (products) {
       return products.map((product: FeaturedProduct) => {
         const { id, attributes } = product;
