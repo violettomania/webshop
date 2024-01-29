@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
-import { fetchFeaturedProducts } from '../actions/fetchProducts';
+import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
 import FeaturedProduct, { FeaturedProductProps } from './FeaturedProduct';
 
 export default function FeaturedProducts() {
