@@ -1,7 +1,16 @@
-// import { useAppDispatch } from '../store/store';
+import { useEffect } from 'react';
+import { RootState, useAppDispatch, useAppSelector } from '../store/store';
+import { fetchFeaturedProducts } from '../actions/fetchProducts';
 
 export default function FeaturedProducts() {
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
+  const featuredProducts = useAppSelector(
+    (state: RootState) => state.cart.items
+  );
+
+  useEffect(() => {
+    dispatch(fetchFeaturedProducts());
+  }, [dispatch]);
 
   return (
     <div className='pt-24'>
