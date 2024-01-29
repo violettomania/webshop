@@ -29,12 +29,15 @@ export const fetchFeaturedProducts = createAsyncThunk(
     const { data: products } = data;
     if (products) {
       return products.map((product: FeaturedProduct) => {
-        const { id, attributes } = product;
+        const {
+          id,
+          attributes: { title, image, price },
+        } = product;
         return {
           id: id,
-          title: attributes.title,
-          image: attributes.image,
-          price: attributes.price,
+          title: title,
+          image: image,
+          price: price,
         };
       });
     } else {
