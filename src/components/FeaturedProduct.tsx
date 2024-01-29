@@ -1,4 +1,4 @@
-import formatPrice from '../helper/priceFormatter';
+import formatPrice from '../util/priceFormatter';
 
 export interface FeaturedProductProps {
   id: string;
