@@ -5,6 +5,7 @@ export interface FeaturedProductProps {
   price: string;
 }
 
+// TODO: change <a> to <Link>
 export default function FeaturedProduct({
   title,
   image,
