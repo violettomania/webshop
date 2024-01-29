@@ -1,4 +1,8 @@
+// import { useAppDispatch } from '../store/store';
+
 export default function FeaturedProducts() {
+  // const dispatch = useAppDispatch();
+
   return (
     <div className='pt-24'>
       <div className='border-b border-base-300 pb-5'>
