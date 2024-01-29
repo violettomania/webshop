@@ -5,13 +5,14 @@ export const setSearchTerm = createAction<string>('');
 const url = 'https://strapi-store-server.onrender.com/api/products';
 const featuredQuery = '?featured=true';
 
-// examples urls
+// example urls
 // const featuredItemsUrl =
 //   'https://strapi-store-server.onrender.com/api/products?featured=true';
 // const itemsUrl = 'https://strapi-store-server.onrender.com/api/products';
 // const itemUrl = 'https://strapi-store-server.onrender.com/api/products/12';
 
 // TODO: add 'attributes' deconsctructing
+// TODO: add price formatting
 export const fetchFeaturedItems = createAsyncThunk(
   'items/fetchItem',
   async () => {
@@ -19,7 +20,7 @@ export const fetchFeaturedItems = createAsyncThunk(
     const data = await response.json();
     const { items } = data;
     if (items) {
-      return items.map((item: any) => {
+      return items.map((item: FeaturedItem) => {
         const { id, attributes } = item;
         return {
           id: id,
