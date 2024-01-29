@@ -18,30 +18,33 @@ const featuredQuery = '?featured=true';
 // const itemsUrl = 'https://strapi-store-server.onrender.com/api/products';
 // const itemUrl = 'https://strapi-store-server.onrender.com/api/products/12';
 
-// TODO: add 'attributes' deconsctructing
 // TODO: add price formatting
-// TODO: add error handling
 export const fetchFeaturedProducts = createAsyncThunk(
   'products/fetchFeaturedProducts',
   async () => {
-    const response = await fetch(`${url}${featuredQuery}`);
-    const data = await response.json();
-    const { data: products } = data;
-    if (products) {
-      return products.map((product: FeaturedProduct) => {
-        const {
-          id,
-          attributes: { title, image, price },
-        } = product;
-        return {
-          id: id,
-          title: title,
-          image: image,
-          price: price,
-        };
-      });
-    } else {
-      return [];
+    try {
+      const response = await fetch(`${url}${featuredQuery}`);
+      const data = await response.json();
+      const { data: products } = data;
+      if (products) {
+        return products.map((product: FeaturedProduct) => {
+          const {
+            id,
+            attributes: { title, image, price },
+          } = product;
+          return {
+            id: id,
+            title: title,
+            image: image,
+            price: price,
+          };
+        });
+      } else {
+        return [];
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   }
 );
