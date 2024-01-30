@@ -6,7 +6,7 @@ import FeaturedProduct, { FeaturedProductProps } from './FeaturedProduct';
 export default function FeaturedProducts() {
   const dispatch = useAppDispatch();
   const featuredProducts = useAppSelector(
-    (state: RootState) => state.cart.products
+    (state: RootState) => state.featured.products
   );
 
   useEffect(() => {

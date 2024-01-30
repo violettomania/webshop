@@ -11,6 +11,7 @@ interface Product {
     colors: string[];
   };
 }
+
 const url = 'https://strapi-store-server.onrender.com/api/products/';
 
 // TODO: enforce Product type (above)

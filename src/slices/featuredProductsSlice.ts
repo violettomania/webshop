@@ -3,17 +3,17 @@ import type { RootState } from '../store/store';
 import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
 import { FeaturedProductProps } from '../components/FeaturedProduct';
 
-interface CartState {
+interface FeaturedProductState {
   products: FeaturedProductProps[];
 }
 
-const initialState: CartState = {
+const initialState: FeaturedProductState = {
   products: [],
 };
 
 // TODO: add loading state
 export const cartSlice = createSlice({
-  name: 'cart',
+  name: 'featured',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -30,6 +30,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const selectCart = (state: RootState) => state.cart.products;
+export const selectCart = (state: RootState) => state.featured.products;
 
 export default cartSlice.reducer;

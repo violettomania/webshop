@@ -8,7 +8,7 @@ import ProductsPage from './pages/ProductsPage';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
 import OrdersPage from './pages/OrdersPage';
-import Product from './components/Product';
+import ProductPage from './pages/ProductPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 
@@ -19,7 +19,7 @@ export default function App() {
         <Route path='/' element={<MainPage />} />
         <Route path='about' element={<AboutPage />} />
         <Route path='products' element={<ProductsPage />} />
-        <Route path='products/:id' element={<Product />} />
+        <Route path='products/:id' element={<ProductPage />} />
         <Route path='cart' element={<CartPage />} />
         <Route path='checkout' element={<CheckoutPage />} />
         <Route path='orders' element={<OrdersPage />} />

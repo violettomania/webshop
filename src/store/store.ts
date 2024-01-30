@@ -1,11 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import cartReducer from '../slices/cartSlice';
+import featuredProductsReducer from '../slices/featuredProductsSlice';
+import singleProductReducer from '../slices/singleProductSlice';
 import userReducer from '../slices/userSlice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
+// TODO: (possibly) find a better naming scheme / unify reducers?
 const store = configureStore({
   reducer: {
-    cart: cartReducer,
+    featured: featuredProductsReducer,
+    single: singleProductReducer,
     user: userReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
