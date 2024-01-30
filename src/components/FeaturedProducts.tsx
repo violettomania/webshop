@@ -13,7 +13,6 @@ export default function FeaturedProducts() {
     dispatch(fetchFeaturedProducts());
   }, [dispatch]);
 
-  // TODO: bugfix: fix products not loading
   // TODO: use unified type instead of FeaturedProductProps (Partial, Omit?)
   return (
     <div className='pt-24'>
