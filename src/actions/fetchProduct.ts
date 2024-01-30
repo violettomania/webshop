@@ -19,9 +19,11 @@ export const fetchProduct = createAsyncThunk(
   'products/fetchProduct',
   async (id: string) => {
     try {
+      console.log('fetching product');
       const response = await fetch(`${url}${id}`);
       const data = await response.json();
       const { data: product } = data;
+      console.log(product);
       if (product) {
         const {
           id,
