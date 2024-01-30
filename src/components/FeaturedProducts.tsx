@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
-import FeaturedProduct, { FeaturedProductProps } from './FeaturedProduct';
+import FeaturedProduct from './FeaturedProduct';
+import { FeaturedProductType } from '../slices/featuredProductsSlice';
 
 export default function FeaturedProducts() {
   const dispatch = useAppDispatch();
@@ -22,7 +23,7 @@ export default function FeaturedProducts() {
         </h2>
       </div>
       <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-        {featuredProducts.map((product: FeaturedProductProps) => (
+        {featuredProducts.map((product: FeaturedProductType) => (
           <FeaturedProduct key={product.id} {...product} />
         ))}
       </div>

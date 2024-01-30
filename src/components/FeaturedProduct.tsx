@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import formatPrice from '../util/priceFormatter';
 
-export interface FeaturedProductProps {
+interface FeaturedProductProps {
   id: string;
   title: string;
   image: string;

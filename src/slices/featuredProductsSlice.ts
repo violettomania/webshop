@@ -1,10 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
 import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
-import { FeaturedProductProps } from '../components/FeaturedProduct';
+
+// TODO: this needs to be renamed and possibly moved to @types
+export interface FeaturedProductType {
+  id: string;
+  title: string;
+  image: string;
+  price: string;
+}
 
 interface FeaturedProductState {
-  products: FeaturedProductProps[];
+  products: FeaturedProductType[];
 }
 
 const initialState: FeaturedProductState = {
