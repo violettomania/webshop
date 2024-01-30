@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-// TODO: make this a generic type
+// TODO: make this a generic type?
 // TODO: replace FeatureProductProps
 interface FeaturedProduct {
   id: string;
@@ -11,6 +11,7 @@ interface FeaturedProduct {
   };
 }
 
+// TODO: move this to a config file
 const url = 'https://strapi-store-server.onrender.com/api/products';
 const featuredQuery = '?featured=true';
 
@@ -20,6 +21,7 @@ const featuredQuery = '?featured=true';
 // const itemsUrl = 'https://strapi-store-server.onrender.com/api/products';
 // const itemUrl = 'https://strapi-store-server.onrender.com/api/products/12';
 
+// TODO: enforce type
 export const fetchFeaturedProducts = createAsyncThunk(
   'products/fetchFeaturedProducts',
   async () => {

@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchProducts = createAsyncThunk(
-  'products/fetchItems',
+  'products/fetchProducts',
   async () => {
     return {};
   }
