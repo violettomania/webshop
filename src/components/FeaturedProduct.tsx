@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import formatPrice from '../util/priceFormatter';
 
 export interface FeaturedProductProps {
@@ -7,16 +8,16 @@ export interface FeaturedProductProps {
   price: string;
 }
 
-// TODO: change <a> to <Link>
 export default function FeaturedProduct({
+  id,
   title,
   image,
   price,
 }: FeaturedProductProps) {
   return (
-    <a
+    <Link
       className='card w-full shadow-xl hover:shadow-2xl transition duration-300'
-      href='/products/19'
+      to={`/products/${id}`}
     >
       <figure className='px-4 pt-4'>
         <img
@@ -30,6 +31,6 @@ export default function FeaturedProduct({
         <h2 className='card-title capitalize tracking-wider'>{title}</h2>
         <span className='text-secondary'>{`$${formatPrice(price)}`}</span>
       </div>
-    </a>
+    </Link>
   );
 }
