@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import formatPrice from '../util/priceFormatter';
+import ColorPicker from './ColorPicker';
 
 interface ProductProps {
   id: string;
@@ -52,15 +53,7 @@ export default function Product({
               <h4 className='text-md font-medium tracking-wider capitalize'>
                 colors
               </h4>
-              <div className='mt-2'>
-                {colors.map((color) => (
-                  <button
-                    type='button'
-                    className='badge w-6 h-6 mr-2 border-2 border-secondary'
-                    style={{ backgroundColor: `${color}` }}
-                  ></button>
-                ))}
-              </div>
+              <ColorPicker colors={colors} />
             </div>
             <div className='form-control w-full max-w-xs'>
               <label className='label' htmlFor='amount'>
