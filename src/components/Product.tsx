@@ -33,7 +33,6 @@ export default function Product({
   price,
   colors,
 }: ProductProps) {
-  console.log('colors', colors, title);
   return (
     <section className='align-element py-20'>
       <section>

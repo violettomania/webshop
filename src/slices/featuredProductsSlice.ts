@@ -12,10 +12,14 @@ export interface FeaturedProductType {
 
 interface FeaturedProductState {
   products: FeaturedProductType[];
+  loading: boolean;
+  error?: string;
 }
 
 const initialState: FeaturedProductState = {
   products: [],
+  loading: false,
+  error: '',
 };
 
 // TODO: add loading state
@@ -26,13 +30,15 @@ export const featuredProductSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchFeaturedProducts.pending, (state) => {
-        state.products = [];
+        state.loading = true;
       })
       .addCase(fetchFeaturedProducts.fulfilled, (state, action) => {
         state.products = action.payload;
+        state.loading = false;
       })
       .addCase(fetchFeaturedProducts.rejected, (state, action) => {
-        state.products = [];
+        state.error = action.error.message;
+        state.loading = false;
       });
   },
 });
