@@ -19,7 +19,7 @@ const initialState: FeaturedProductState = {
 };
 
 // TODO: add loading state
-export const cartSlice = createSlice({
+export const featuredProductSlice = createSlice({
   name: 'featured',
   initialState,
   reducers: {},
@@ -39,4 +39,4 @@ export const cartSlice = createSlice({
 
 export const selectCart = (state: RootState) => state.featured.products;
 
-export default cartSlice.reducer;
+export default featuredProductSlice.reducer;

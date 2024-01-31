@@ -29,13 +29,14 @@ const initialState: SingleProductState = {
 };
 
 // TODO: add loading state
-export const cartSlice = createSlice({
+export const singleProductSlice = createSlice({
   name: 'single',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchFeaturedProducts.pending, (state) => {
+        console.log('pending');
         state.product = {
           id: '',
           title: '',
@@ -47,9 +48,11 @@ export const cartSlice = createSlice({
         };
       })
       .addCase(fetchFeaturedProducts.fulfilled, (state, action) => {
+        console.log('action.payload', action.payload);
         state.product = action.payload;
       })
       .addCase(fetchFeaturedProducts.rejected, (state, action) => {
+        console.log('rejected');
         state.product = {
           id: '',
           title: '',
@@ -63,6 +66,6 @@ export const cartSlice = createSlice({
   },
 });
 
-export const selectCart = (state: RootState) => state.single.product;
+export const selectSingleProduct = (state: RootState) => state.single.product;
 
-export default cartSlice.reducer;
+export default singleProductSlice.reducer;

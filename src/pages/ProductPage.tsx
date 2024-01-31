@@ -14,6 +14,7 @@ export default function ProductPage() {
   let { id } = useParams();
 
   useEffect(() => {
+    console.log('useffect', id);
     if (id) {
       console.log('id', id);
       dispatch(fetchProduct(id));
