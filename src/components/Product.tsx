@@ -12,17 +12,6 @@ interface ProductProps {
 }
 
 // TODO: implement color selection with classes
-// <button
-//   type='button'
-//   className='badge w-6 h-6 mr-2 border-2 border-secondary'
-//   style={{ backgroundColor: 'rgb(255, 87, 51)' }}
-// ></button>
-// <button
-//   type='button'
-//   className='badge w-6 h-6 mr-2 false'
-//   style={{ backgroundColor: 'rgb(255, 255, 0)' }}
-// ></button>
-
 export default function Product({
   id,
   title,
