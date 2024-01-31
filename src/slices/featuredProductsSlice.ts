@@ -22,7 +22,6 @@ const initialState: FeaturedProductState = {
   error: '',
 };
 
-// TODO: add loading state
 export const featuredProductSlice = createSlice({
   name: 'featured',
   initialState,

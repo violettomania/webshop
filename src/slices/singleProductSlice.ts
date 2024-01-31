@@ -32,7 +32,6 @@ const initialState: SingleProductState = {
   error: '',
 };
 
-// TODO: add loading state
 export const singleProductSlice = createSlice({
   name: 'single',
   initialState,
