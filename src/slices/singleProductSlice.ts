@@ -14,6 +14,8 @@ interface SingleProduct {
 
 interface SingleProductState {
   product: SingleProduct;
+  loading: boolean;
+  error?: string;
 }
 
 const initialState: SingleProductState = {
@@ -26,6 +28,8 @@ const initialState: SingleProductState = {
     price: '',
     colors: [],
   },
+  loading: false,
+  error: '',
 };
 
 // TODO: add loading state
@@ -36,29 +40,15 @@ export const singleProductSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchProduct.pending, (state) => {
-        state.product = {
-          id: '',
-          title: '',
-          company: '',
-          description: '',
-          image: '',
-          price: '',
-          colors: [],
-        };
+        state.loading = true;
       })
       .addCase(fetchProduct.fulfilled, (state, action) => {
         state.product = action.payload;
+        state.loading = false;
       })
       .addCase(fetchProduct.rejected, (state, action) => {
-        state.product = {
-          id: '',
-          title: '',
-          company: '',
-          description: '',
-          image: '',
-          price: '',
-          colors: [],
-        };
+        state.error = action.error.message;
+        state.loading = false;
       });
   },
 });
