@@ -23,7 +23,6 @@ interface ProductProps {
 //   style={{ backgroundColor: 'rgb(255, 255, 0)' }}
 // ></button>
 
-// TODO: possibly implement option array?
 export default function Product({
   id,
   title,
