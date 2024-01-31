@@ -15,7 +15,6 @@ interface Product {
 const url = 'https://strapi-store-server.onrender.com/api/products/';
 
 // TODO: enforce Product type (above)
-// NOTE: when navigating to http://localhost:3000/products/19, the fetch happens, but the data doesn't reach the Product component. same for ProductPage.
 export const fetchProduct = createAsyncThunk(
   'products/fetchProduct',
   async (id: string) => {
@@ -28,12 +27,17 @@ export const fetchProduct = createAsyncThunk(
           id,
           attributes: { title, company, description, image, price, colors },
         } = product;
-        const p = { id, title, company, description, image, price, colors };
-        console.log('p', p);
-        return p;
-        // return { id, title, company, description, image, price, colors };
+        return { id, title, company, description, image, price, colors };
       } else {
-        return {};
+        return {
+          id: '',
+          title: '',
+          company: '',
+          description: '',
+          image: '',
+          price: '',
+          colors: [],
+        };
       }
     } catch (error) {
       console.error(error);

@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
-import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
+import { fetchProduct } from '../actions/fetchProduct';
 
 interface SingleProduct {
   id: string;
@@ -35,8 +35,7 @@ export const singleProductSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchFeaturedProducts.pending, (state) => {
-        console.log('pending');
+      .addCase(fetchProduct.pending, (state) => {
         state.product = {
           id: '',
           title: '',
@@ -47,12 +46,10 @@ export const singleProductSlice = createSlice({
           colors: [],
         };
       })
-      .addCase(fetchFeaturedProducts.fulfilled, (state, action) => {
-        console.log('action.payload', action.payload);
+      .addCase(fetchProduct.fulfilled, (state, action) => {
         state.product = action.payload;
       })
-      .addCase(fetchFeaturedProducts.rejected, (state, action) => {
-        console.log('rejected');
+      .addCase(fetchProduct.rejected, (state, action) => {
         state.product = {
           id: '',
           title: '',
