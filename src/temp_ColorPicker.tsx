@@ -7,9 +7,8 @@ interface ColorPickerProps {
 }
 
 export default function ColorPicker({ colors }: ColorPickerProps) {
-  const [currentColor, setCurrentColor] = useState('');
+  const [currentColor, setCurrentColor] = useState(colors[0]);
 
-  // TODO: first button should be selected by default
   const handleClick = (event: React.MouseEvent, color: string) => {
     event.stopPropagation();
     setCurrentColor(color);
