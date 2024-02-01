@@ -1,11 +1,28 @@
+import { useEffect } from "react";
+import { fetchAllProducts } from "../actions/fetchAllProducts";
+import { RootState, useAppDispatch, useAppSelector } from "../store/store";
 import ProductsFilter from "./ProductsFilter";
+import FeaturedProduct from "./FeaturedProduct";
+import { FeaturedProductType } from "../slices/allProductsSlice";
 
 export default function Products() {
+  const dispatch = useAppDispatch();
+  const allProducts = useAppSelector(
+    (state: RootState) => state.featured.products
+  );
+  const loading = useAppSelector((state: RootState) => state.featured.loading);
+
+  useEffect(() => {
+    dispatch(fetchAllProducts());
+  }, [dispatch]);
+
+  // TODO: change svgs to icons
+  // TODO: bugfix: products are not displayed
   return (
     <section className='align-element py-20'>
       <ProductsFilter />
       <div className='flex justify-between items-center mt-8 border-b border-base-300 pb-5'>
-        <h4 className='font-medium text-md'>22 products</h4>
+        <h4 className='font-medium text-md'>{`${allProducts.length} products`}</h4>
         <div className='flex gap-x-2'>
           <button
             type='button'
@@ -46,60 +63,9 @@ export default function Products() {
       </div>
       <div>
         <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-          <a
-            className='card w-full shadow-xl hover:shadow-2xl transition duration-300'
-            href='/products/19'
-          >
-            <figure className='px-4 pt-4'>
-              <img
-                src='https://images.pexels.com/photos/943150/pexels-photo-943150.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600'
-                alt='avant-garde lamp'
-                className='rounded-xl h-64 md:h-48 w-full object-cover'
-              />
-            </figure>
-            <div className='card-body items-center text-center'>
-              <h2 className='card-title capitalize tracking-wider'>
-                avant-garde lamp
-              </h2>
-              <span className='text-secondary'>$179.99</span>
-            </div>
-          </a>
-          <a
-            className='card w-full shadow-xl hover:shadow-2xl transition duration-300'
-            href='/products/12'
-          >
-            <figure className='px-4 pt-4'>
-              <img
-                src='https://images.pexels.com/photos/5705090/pexels-photo-5705090.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1600'
-                alt='chic chair'
-                className='rounded-xl h-64 md:h-48 w-full object-cover'
-              />
-            </figure>
-            <div className='card-body items-center text-center'>
-              <h2 className='card-title capitalize tracking-wider'>
-                chic chair
-              </h2>
-              <span className='text-secondary'>$339.99</span>
-            </div>
-          </a>
-          <a
-            className='card w-full shadow-xl hover:shadow-2xl transition duration-300'
-            href='/products/6'
-          >
-            <figure className='px-4 pt-4'>
-              <img
-                src='https://images.pexels.com/photos/3679601/pexels-photo-3679601.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1260&amp;h=750&amp;dpr=2'
-                alt='coffee table'
-                className='rounded-xl h-64 md:h-48 w-full object-cover'
-              />
-            </figure>
-            <div className='card-body items-center text-center'>
-              <h2 className='card-title capitalize tracking-wider'>
-                coffee table
-              </h2>
-              <span className='text-secondary'>$179.99</span>
-            </div>
-          </a>
+          {allProducts.map((product: FeaturedProductType) => (
+            <FeaturedProduct key={product.id} {...product} />
+          ))}
         </div>
       </div>
       <div className='mt-16 flex justify-end'>
