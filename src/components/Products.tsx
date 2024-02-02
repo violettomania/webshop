@@ -16,7 +16,6 @@ export default function Products() {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
-  // TODO: bugfix: products are not displayed
   return loading ? (
     <Loading />
   ) : (
