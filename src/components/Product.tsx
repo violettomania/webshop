@@ -14,7 +14,6 @@ interface ProductProps {
 
 // TODO: implement color selection with classes
 export default function Product({
-  id,
   title,
   company,
   description,

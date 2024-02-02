@@ -8,6 +8,7 @@ interface FeaturedProductProps {
   price: string;
 }
 
+// TODO: FeaturedProduct and Product are almost identical, refactor
 export default function FeaturedProduct({
   id,
   title,

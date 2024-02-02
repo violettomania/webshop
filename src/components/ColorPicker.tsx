@@ -7,12 +7,11 @@ interface ColorPickerProps {
 }
 
 export default function ColorPicker({ colors }: ColorPickerProps) {
-  const [selected, setSelected] = useState(false);
+  const [currentColor, setCurrentColor] = useState(colors[0]);
 
-  // TODO: first button should be selected by default
-  // TODO: bugfix: both buttons get selected on click
-  const handleClick = () => {
-    setSelected(!selected);
+  const handleClick = (event: React.MouseEvent, color: string) => {
+    event.stopPropagation();
+    setCurrentColor(color);
   };
 
   return (
@@ -20,9 +19,9 @@ export default function ColorPicker({ colors }: ColorPickerProps) {
       {colors.map((color) => (
         <button
           type='button'
-          onClick={handleClick}
+          onClick={(e) => handleClick(e, color)}
           className={`badge w-6 h-6 mr-2 ${
-            selected ? colorSelectionClasses : ''
+            color === currentColor ? colorSelectionClasses : ''
           }`}
           style={{ backgroundColor: `${color}` }}
         ></button>

@@ -42,6 +42,7 @@ export const featuredProductSlice = createSlice({
   },
 });
 
-export const selectCart = (state: RootState) => state.featured.products;
+export const selectFeaturedProducts = (state: RootState) =>
+  state.featured.products;
 
 export default featuredProductSlice.reducer;
