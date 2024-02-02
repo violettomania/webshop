@@ -3,7 +3,7 @@ import type { RootState } from '../store/store';
 import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
 
 // TODO: this needs to be renamed and possibly moved to @types
-export interface FeaturedProductType {
+export interface ProductCardType {
   id: string;
   title: string;
   image: string;
@@ -11,7 +11,7 @@ export interface FeaturedProductType {
 }
 
 interface FeaturedProductState {
-  products: FeaturedProductType[];
+  products: ProductCardType[];
   loading: boolean;
   error?: string;
 }

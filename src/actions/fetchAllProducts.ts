@@ -28,7 +28,6 @@ export const fetchAllProducts = createAsyncThunk(
             id,
             attributes: { title, image, price },
           } = product;
-          console.log('product', product);
           return {
             id: id,
             title: title,

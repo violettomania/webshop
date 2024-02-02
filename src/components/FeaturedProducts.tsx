@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
-import FeaturedProduct from './FeaturedProduct';
-import { FeaturedProductType } from '../slices/featuredProductsSlice';
+import ProductCard from './ProductCard';
+import { ProductCardType as ProductCardType } from '../slices/featuredProductsSlice';
 import Loading from './Loading';
 
 export default function FeaturedProducts() {
   const dispatch = useAppDispatch();
-  const featuredProducts = useAppSelector(
+  const productCards = useAppSelector(
     (state: RootState) => state.featured.products
   );
   const loading = useAppSelector((state: RootState) => state.featured.loading);
@@ -27,8 +27,8 @@ export default function FeaturedProducts() {
         </h2>
       </div>
       <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-        {featuredProducts.map((product: FeaturedProductType) => (
-          <FeaturedProduct key={product.id} {...product} />
+        {productCards.map((product: ProductCardType) => (
+          <ProductCard key={product.id} {...product} />
         ))}
       </div>
     </div>

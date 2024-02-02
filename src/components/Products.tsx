@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { fetchAllProducts } from '../actions/fetchAllProducts';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
-import FeaturedProduct from './FeaturedProduct';
+import ProductCard from './ProductCard';
 import { FeaturedProductType } from '../slices/allProductsSlice';
 import Loading from './Loading';
 import { BsFillGridFill, BsList } from 'react-icons/bs';
@@ -42,7 +42,7 @@ export default function Products() {
       <div>
         <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
           {allProducts.map((product: FeaturedProductType) => (
-            <FeaturedProduct key={product.id} {...product} />
+            <ProductCard key={product.id} {...product} />
           ))}
         </div>
       </div>
