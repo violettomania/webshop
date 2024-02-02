@@ -15,13 +15,6 @@ interface FeaturedProduct {
 const url = 'https://strapi-store-server.onrender.com/api/products';
 const featuredQuery = '?featured=true';
 
-// example urls
-// const featuredItemsUrl =
-//   'https://strapi-store-server.onrender.com/api/products?featured=true';
-// const itemsUrl = 'https://strapi-store-server.onrender.com/api/products';
-// const itemUrl = 'https://strapi-store-server.onrender.com/api/products/12';
-
-// TODO: enforce type
 export const fetchFeaturedProducts = createAsyncThunk(
   'products/fetchFeaturedProducts',
   async () => {
