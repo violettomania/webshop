@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
 import ProductCard from './ProductCard';
-import { ProductCardType as ProductCardType } from '../slices/featuredProductsSlice';
+import { ProductCardType } from '../slices/featuredProductsSlice';
 import Loading from './Loading';
 
 export default function FeaturedProducts() {
