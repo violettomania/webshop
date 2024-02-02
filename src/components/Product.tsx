@@ -21,6 +21,13 @@ export default function Product({
   price,
   colors,
 }: ProductProps) {
+  if (!title || !company || !description || !image || !price || !colors) {
+    return (
+      <section className='align-element py-20'>
+        <h4 className='font-bold text-4xl'>There was an error...</h4>
+      </section>
+    );
+  }
   return (
     <section className='align-element py-20'>
       <section>
