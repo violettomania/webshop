@@ -3,9 +3,9 @@ import { fetchAllProducts } from '../actions/fetchAllProducts';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
 import ProductCard from './ProductCard';
-import { FeaturedProductType } from '../slices/allProductsSlice';
 import Loading from './Loading';
 import { BsFillGridFill, BsList } from 'react-icons/bs';
+import { ProductCardType } from '../slices/featuredProductsSlice';
 
 export default function Products() {
   const dispatch = useAppDispatch();
@@ -40,9 +40,14 @@ export default function Products() {
       </div>
       <div>
         <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-          {allProducts.map((product: FeaturedProductType) => (
+          {/* {allProducts.map((product: ProductCardType) => (
             <ProductCard key={product.id} {...product} />
-          ))}
+          ))} */}
+          {allProducts.map((product: ProductCardType) => {
+            // TODO: bugfix: products are not being displayed after clicking on card
+            console.log(product);
+            return <ProductCard key={product.id} {...product} />;
+          })}
         </div>
       </div>
       <div className='mt-16 flex justify-end'>
