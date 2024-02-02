@@ -2,7 +2,7 @@ import { Routes, Route, Outlet } from 'react-router-dom';
 import Header from './components/Header';
 import MainPage from './components/MainPage';
 import Navbar from './components/Navbar';
-import ErrorPage from './pages/ErrorPage';
+import PageNotFoundErrorPage from './pages/PageNotFoundErrorPage';
 import AboutPage from './pages/AboutPage';
 import ProductsPage from './pages/ProductsPage';
 import CartPage from './pages/CartPage';
@@ -24,7 +24,7 @@ export default function App() {
         <Route path='checkout' element={<CheckoutPage />} />
         <Route path='orders' element={<OrdersPage />} />
       </Route>
-      <Route path='*' element={<ErrorPage />} />
+      <Route path='*' element={<PageNotFoundErrorPage />} />
       <Route path='login' element={<LoginPage />} />
       <Route path='register' element={<RegisterPage />} />
     </Routes>
