@@ -4,6 +4,7 @@ import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
 import FeaturedProduct from './FeaturedProduct';
 import { FeaturedProductType } from '../slices/allProductsSlice';
+import Loading from './Loading';
 
 export default function Products() {
   const dispatch = useAppDispatch();
@@ -18,7 +19,9 @@ export default function Products() {
 
   // TODO: change svgs to icons
   // TODO: bugfix: products are not displayed
-  return (
+  return loading ? (
+    <Loading />
+  ) : (
     <section className='align-element py-20'>
       <ProductsFilter />
       <div className='flex justify-between items-center mt-8 border-b border-base-300 pb-5'>
