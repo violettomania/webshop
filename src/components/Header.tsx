@@ -1,14 +1,16 @@
+import { Link } from 'react-router-dom';
+
 export default function Header() {
   return (
     <header className='bg-neutral py-2 text-neutral-content'>
       <div className='align-element flex justify-center sm:justify-end'>
         <div className='flex gap-x-6 justify-center items-center'>
-          <a className='link link-hover text-xs sm:text-sm' href='/login'>
+          <Link className='link link-hover text-xs sm:text-sm' to='/login'>
             Sign in / Guest
-          </a>
-          <a className='link link-hover text-xs sm:text-sm' href='/register'>
+          </Link>
+          <Link className='link link-hover text-xs sm:text-sm' to='/register'>
             Create Account
-          </a>
+          </Link>
         </div>
       </div>
     </header>

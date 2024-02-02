@@ -1,18 +1,19 @@
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   return (
     <nav className='bg-base-200'>
       <div className='navbar align-element'>
         <div className='navbar-start'>
-          <a
+          <Link
             aria-current='page'
             className='hidden lg:flex btn btn-primary text-3xl items-center active'
-            href='/'
+            to='/'
           >
             C
-          </a>
+          </Link>
           <div className='dropdown'>
             <label tabIndex={0} className='btn btn-ghost lg:hidden'>
               <FaBarsStaggered className='h-6 w-6' />
@@ -22,24 +23,24 @@ export default function Navbar() {
               className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52'
             >
               <li>
-                <a aria-current='page' className='capitalize active' href='/'>
+                <Link aria-current='page' className='capitalize active' to='/'>
                   home
-                </a>
+                </Link>
               </li>
               <li>
-                <a className='capitalize' href='/about'>
+                <Link className='capitalize' to='/about'>
                   about
-                </a>
+                </Link>
               </li>
               <li>
-                <a className='capitalize' href='/products'>
+                <Link className='capitalize' to='/products'>
                   products
-                </a>
+                </Link>
               </li>
               <li>
-                <a className='capitalize' href='/cart'>
+                <Link className='capitalize' to='/cart'>
                   cart
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -47,24 +48,24 @@ export default function Navbar() {
         <div className='navbar-center hidden lg:flex'>
           <ul className='menu menu-horizontal'>
             <li>
-              <a aria-current='page' className='capitalize active' href='/'>
+              <Link aria-current='page' className='capitalize active' to='/'>
                 home
-              </a>
+              </Link>
             </li>
             <li>
-              <a className='capitalize' href='/about'>
+              <Link className='capitalize' to='/about'>
                 about
-              </a>
+              </Link>
             </li>
             <li>
-              <a className='capitalize' href='/products'>
+              <Link className='capitalize' to='/products'>
                 products
-              </a>
+              </Link>
             </li>
             <li>
-              <a className='capitalize' href='/cart'>
+              <Link className='capitalize' to='/cart'>
                 cart
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -74,14 +75,14 @@ export default function Navbar() {
             <BsSunFill className='swap-on h-4 w-4' />
             <BsMoonFill className='swap-off h-4 w-4' />
           </label>
-          <a className='btn btn-ghost btn-circle btn-md ml-4' href='/cart'>
+          <Link className='btn btn-ghost btn-circle btn-md ml-4' to='/cart'>
             <div className='indicator'>
               <BsCart3 />
               <span className='badge badge-sm badge-primary indicator-item'>
                 1
               </span>
             </div>
-          </a>
+          </Link>
         </div>
       </div>
     </nav>
