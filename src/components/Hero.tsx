@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import Carousel from './Carousel';
 
 export default function Hero() {
@@ -13,9 +14,9 @@ export default function Hero() {
           perferendis porro nobis.
         </p>
         <div className='mt-10'>
-          <a className='btn btn-primary' href='/products'>
+          <Link className='btn btn-primary' to='/products'>
             Our Products
-          </a>
+          </Link>
         </div>
       </div>
       <Carousel />
