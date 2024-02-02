@@ -9,10 +9,8 @@ import { BsFillGridFill, BsList } from 'react-icons/bs';
 
 export default function Products() {
   const dispatch = useAppDispatch();
-  const allProducts = useAppSelector(
-    (state: RootState) => state.featured.products
-  );
-  const loading = useAppSelector((state: RootState) => state.featured.loading);
+  const allProducts = useAppSelector((state: RootState) => state.all.products);
+  const loading = useAppSelector((state: RootState) => state.all.loading);
 
   useEffect(() => {
     dispatch(fetchAllProducts());

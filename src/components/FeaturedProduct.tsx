@@ -9,7 +9,6 @@ interface FeaturedProductProps {
 }
 
 // TODO: FeaturedProduct and Product are almost identical, refactor
-// TODO: handle error page
 export default function FeaturedProduct({
   id,
   title,
