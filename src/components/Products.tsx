@@ -7,6 +7,8 @@ import Loading from './Loading';
 import { ProductCardType } from '../slices/featuredProductsSlice';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
 
+// list: mt-12 grid gap-y-8, grid: pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3
+
 export default function Products() {
   const dispatch = useAppDispatch();
   const allProducts = useAppSelector((state: RootState) => state.all.products);
@@ -16,12 +18,17 @@ export default function Products() {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
+  const handleLayoutToggle = () => {};
+
   return loading ? (
     <Loading />
   ) : (
     <section className='align-element py-20'>
       <ProductsFilter />
-      <ProductsLayoutToggle productQuantity={allProducts.length} />
+      <ProductsLayoutToggle
+        productQuantity={allProducts.length}
+        onToggle={handleLayoutToggle}
+      />
       <div>
         <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
           {allProducts.map((product: ProductCardType) => (
