@@ -1,7 +1,7 @@
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const paths = ['/', '/about', '/products', '/cart'];
@@ -12,10 +12,21 @@ export default function Navbar() {
   // TODO: reuse paths from App.tsx
   const location = useLocation();
   const [selectedPath, setSelectedPath] = useState(location.pathname);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'winter');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'winter' ? 'dracula' : 'winter';
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+  }, [theme]);
 
   const renderNavbarLinks = () => {
     return paths.map((path, idx) => (
-      <li>
+      <li key={path}>
         <Link
           onClick={() => setSelectedPath(path)}
           className={`capitalize ${path === selectedPath ? 'active' : ''}`}
@@ -56,7 +67,7 @@ export default function Navbar() {
         </div>
         <div className='navbar-end'>
           <label className='swap swap-rotate'>
-            <input type='checkbox' />
+            <input type='checkbox' onSubmit={toggleTheme} />
             <BsSunFill className='swap-on h-4 w-4' />
             <BsMoonFill className='swap-off h-4 w-4' />
           </label>
