@@ -14,7 +14,7 @@ export default function Products() {
   const dispatch = useAppDispatch();
   const allProducts = useAppSelector((state: RootState) => state.all.products);
   const loading = useAppSelector((state: RootState) => state.all.loading);
-  const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API?
+  const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
 
   useEffect(() => {
     dispatch(fetchAllProducts());
