@@ -11,7 +11,6 @@ export default function Navbar() {
   // TODO: create hook reusing the same logic from color picker
   // TODO: reuse paths from App.tsx
   // TODO: tabindex for dropdown/navbar
-  // TODO: aria-current for active link
   const location = useLocation();
   const [selectedPath, setSelectedPath] = useState(location.pathname);
 
@@ -22,6 +21,7 @@ export default function Navbar() {
           onClick={() => setSelectedPath(path)}
           className={`capitalize ${path === selectedPath ? 'active' : ''}`}
           to={path}
+          aria-current={path === selectedPath ? 'page' : undefined}
         >
           {pages[idx]}
         </Link>
