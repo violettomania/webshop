@@ -10,6 +10,7 @@ const pages = ['home', 'about', 'products', 'cart'];
 export default function Navbar() {
   // TODO: create hook reusing the same logic from color picker
   // TODO: reuse paths from App.tsx
+  // TODO: move theme selection to userSlice, otherwise it will be lost on page refresh (and using the local storage doesn't make sense in this case, since the user should be able to change the theme without having to refresh the page to see the changes)
   const location = useLocation();
   const [selectedPath, setSelectedPath] = useState(location.pathname);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'winter');
@@ -18,10 +19,18 @@ export default function Navbar() {
     const newTheme = theme === 'winter' ? 'dracula' : 'winter';
     setTheme(newTheme);
     localStorage.setItem('theme', newTheme);
+    document.documentElement.setAttribute(
+      'data-theme',
+      localStorage.getItem('theme') || 'winter'
+    );
   };
 
   useEffect(() => {
     localStorage.setItem('theme', theme);
+    document.documentElement.setAttribute(
+      'data-theme',
+      localStorage.getItem('theme') || 'winter'
+    );
   }, [theme]);
 
   const renderNavbarLinks = () => {
