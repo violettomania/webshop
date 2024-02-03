@@ -40,14 +40,9 @@ export default function Products() {
       </div>
       <div>
         <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-          {/* {allProducts.map((product: ProductCardType) => (
+          {allProducts.map((product: ProductCardType) => (
             <ProductCard key={product.id} {...product} />
-          ))} */}
-          {allProducts.map((product: ProductCardType) => {
-            // TODO: bugfix: products are not being displayed after clicking on card
-            console.log(product);
-            return <ProductCard key={product.id} {...product} />;
-          })}
+          ))}
         </div>
       </div>
       <div className='mt-16 flex justify-end'>

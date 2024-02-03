@@ -17,7 +17,7 @@ export default function ProductCard({
   return (
     <Link
       className='card w-full shadow-xl hover:shadow-2xl transition duration-300'
-      to={`products/${id}`}
+      to={`/products/${id}`}
     >
       <figure className='px-4 pt-4'>
         <img
