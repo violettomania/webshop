@@ -17,16 +17,16 @@ export default function App() {
     <Routes>
       <Route path='/' element={<MainLayout />}>
         <Route path='/' element={<MainPage />} />
-        <Route path='about' element={<AboutPage />} />
-        <Route path='products' element={<ProductsPage />} />
-        <Route path='products/:id' element={<ProductPage />} />
-        <Route path='cart' element={<CartPage />} />
-        <Route path='checkout' element={<CheckoutPage />} />
-        <Route path='orders' element={<OrdersPage />} />
+        <Route path='/about' element={<AboutPage />} />
+        <Route path='/products' element={<ProductsPage />} />
+        <Route path='/products/:id' element={<ProductPage />} />
+        <Route path='/cart' element={<CartPage />} />
+        <Route path='/checkout' element={<CheckoutPage />} />
+        <Route path='/orders' element={<OrdersPage />} />
       </Route>
       <Route path='*' element={<PageNotFoundErrorPage />} />
-      <Route path='login' element={<LoginPage />} />
-      <Route path='register' element={<RegisterPage />} />
+      <Route path='/login' element={<LoginPage />} />
+      <Route path='/register' element={<RegisterPage />} />
     </Routes>
   );
 
