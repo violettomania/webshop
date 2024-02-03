@@ -10,7 +10,6 @@ const pages = ['home', 'about', 'products', 'cart'];
 export default function Navbar() {
   // TODO: create hook reusing the same logic from color picker
   // TODO: reuse paths from App.tsx
-  // TODO: tabindex for dropdown/navbar
   const location = useLocation();
   const [selectedPath, setSelectedPath] = useState(location.pathname);
 
