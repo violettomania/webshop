@@ -43,3 +43,12 @@ export default function App() {
 
 // TODO: add pages/index.js for easier imports
 // TODO: WCAG compliance
+
+/* TODO: features: 
+- filter component
+- cart component
+- pagination
+- change display (list or cards)
+- user management
+- extra menus for legged in users
+*/
