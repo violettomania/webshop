@@ -4,8 +4,8 @@ import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
 import ProductCard from './ProductCard';
 import Loading from './Loading';
-import { BsFillGridFill, BsList } from 'react-icons/bs';
 import { ProductCardType } from '../slices/featuredProductsSlice';
+import ProductsLayoutToggle from './ProductsLayoutToggle';
 
 export default function Products() {
   const dispatch = useAppDispatch();
@@ -21,23 +21,7 @@ export default function Products() {
   ) : (
     <section className='align-element py-20'>
       <ProductsFilter />
-      <div className='flex justify-between items-center mt-8 border-b border-base-300 pb-5'>
-        <h4 className='font-medium text-md'>{`${allProducts.length} products`}</h4>
-        <div className='flex gap-x-2'>
-          <button
-            type='button'
-            className='text-xl btn btn-circle btn-sm btn-primary text-primary-content'
-          >
-            <BsFillGridFill />
-          </button>
-          <button
-            type='button'
-            className='text-xl btn btn-circle btn-sm btn-ghost text-based-content'
-          >
-            <BsList />
-          </button>
-        </div>
-      </div>
+      <ProductsLayoutToggle productQuantity={allProducts.length} />
       <div>
         <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
           {allProducts.map((product: ProductCardType) => (
