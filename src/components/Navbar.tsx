@@ -67,7 +67,7 @@ export default function Navbar() {
         </div>
         <div className='navbar-end'>
           <label className='swap swap-rotate'>
-            <input type='checkbox' onSubmit={toggleTheme} />
+            <input type='checkbox' onClick={toggleTheme} />
             <BsSunFill className='swap-on h-4 w-4' />
             <BsMoonFill className='swap-off h-4 w-4' />
           </label>
