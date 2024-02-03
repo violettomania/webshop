@@ -2,19 +2,20 @@ import { FaBarsStaggered } from 'react-icons/fa6';
 import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 const paths = ['/', '/about', '/products', '/cart'];
 const pages = ['home', 'about', 'products', 'cart'];
 
 export default function Navbar() {
-  // TODO: get active path from router to keep selection on refresh
   // TODO: create hook reusing the same logic from color picker
   // TODO: reuse paths from App.tsx
   // TODO: tabindex for dropdown/navbar
   // TODO: aria-current for active link
-  const [selectedPath, setSelectedPath] = useState('/');
+  const location = useLocation();
+  const [selectedPath, setSelectedPath] = useState(location.pathname);
 
-  const renderNavbarItems = () => {
+  const renderNavbarLinks = () => {
     return paths.map((path, idx) => (
       <li>
         <Link
@@ -47,12 +48,12 @@ export default function Navbar() {
               tabIndex={0}
               className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52'
             >
-              {renderNavbarItems()}
+              {renderNavbarLinks()}
             </ul>
           </div>
         </div>
         <div className='navbar-center hidden lg:flex'>
-          <ul className='menu menu-horizontal'>{renderNavbarItems()}</ul>
+          <ul className='menu menu-horizontal'>{renderNavbarLinks()}</ul>
         </div>
         <div className='navbar-end'>
           <label className='swap swap-rotate'>
