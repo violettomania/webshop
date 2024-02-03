@@ -1,8 +1,16 @@
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+
+const paths = ['/', '/about', '/products', '/cart'];
+const pages = ['home', 'about', 'products', 'cart'];
 
 export default function Navbar() {
+  // TODO: create hook reusing the same logic from color picker
+  // TODO: reuse paths from App.tsx
+  const [selectedPath, setSelectedPath] = useState('/');
+
   return (
     <nav className='bg-base-200'>
       <div className='navbar align-element'>
@@ -22,26 +30,19 @@ export default function Navbar() {
               tabIndex={0}
               className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52'
             >
-              <li>
-                <Link aria-current='page' className='capitalize active' to='/'>
-                  home
-                </Link>
-              </li>
-              <li>
-                <Link className='capitalize' to='/about'>
-                  about
-                </Link>
-              </li>
-              <li>
-                <Link className='capitalize' to='/products'>
-                  products
-                </Link>
-              </li>
-              <li>
-                <Link className='capitalize' to='/cart'>
-                  cart
-                </Link>
-              </li>
+              {paths.map((path, idx) => (
+                <li>
+                  <Link
+                    onClick={() => setSelectedPath(path)}
+                    className={`capitalize ${
+                      path === selectedPath ? 'active' : ''
+                    }`}
+                    to={path}
+                  >
+                    {pages[idx]}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
