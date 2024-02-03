@@ -7,9 +7,26 @@ const paths = ['/', '/about', '/products', '/cart'];
 const pages = ['home', 'about', 'products', 'cart'];
 
 export default function Navbar() {
+  // TODO: get active path from router to keep selection on refresh
   // TODO: create hook reusing the same logic from color picker
   // TODO: reuse paths from App.tsx
+  // TODO: tabindex for dropdown/navbar
+  // TODO: aria-current for active link
   const [selectedPath, setSelectedPath] = useState('/');
+
+  const renderNavbarItems = () => {
+    return paths.map((path, idx) => (
+      <li>
+        <Link
+          onClick={() => setSelectedPath(path)}
+          className={`capitalize ${path === selectedPath ? 'active' : ''}`}
+          to={path}
+        >
+          {pages[idx]}
+        </Link>
+      </li>
+    ));
+  };
 
   return (
     <nav className='bg-base-200'>
@@ -30,45 +47,12 @@ export default function Navbar() {
               tabIndex={0}
               className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52'
             >
-              {paths.map((path, idx) => (
-                <li>
-                  <Link
-                    onClick={() => setSelectedPath(path)}
-                    className={`capitalize ${
-                      path === selectedPath ? 'active' : ''
-                    }`}
-                    to={path}
-                  >
-                    {pages[idx]}
-                  </Link>
-                </li>
-              ))}
+              {renderNavbarItems()}
             </ul>
           </div>
         </div>
         <div className='navbar-center hidden lg:flex'>
-          <ul className='menu menu-horizontal'>
-            <li>
-              <Link aria-current='page' className='capitalize active' to='/'>
-                home
-              </Link>
-            </li>
-            <li>
-              <Link className='capitalize' to='/about'>
-                about
-              </Link>
-            </li>
-            <li>
-              <Link className='capitalize' to='/products'>
-                products
-              </Link>
-            </li>
-            <li>
-              <Link className='capitalize' to='/cart'>
-                cart
-              </Link>
-            </li>
-          </ul>
+          <ul className='menu menu-horizontal'>{renderNavbarItems()}</ul>
         </div>
         <div className='navbar-end'>
           <label className='swap swap-rotate'>
