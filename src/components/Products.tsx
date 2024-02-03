@@ -14,7 +14,7 @@ export default function Products() {
   const dispatch = useAppDispatch();
   const allProducts = useAppSelector((state: RootState) => state.all.products);
   const loading = useAppSelector((state: RootState) => state.all.loading);
-  const [displayMode, setDisplayMode] = useState<DisplayMode>('grid');
+  const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API?
 
   useEffect(() => {
     dispatch(fetchAllProducts());
@@ -45,6 +45,7 @@ export default function Products() {
           }`}
         >
           {allProducts.map((product: ProductCardType) => (
+            // TODO: add grid and list view to cards
             <ProductCard key={product.id} {...product} />
           ))}
         </div>
