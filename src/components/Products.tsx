@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { fetchAllProducts } from '../actions/fetchAllProducts';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
@@ -7,18 +7,27 @@ import Loading from './Loading';
 import { ProductCardType } from '../slices/featuredProductsSlice';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
 
-// list: mt-12 grid gap-y-8, grid: pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3
+const gridDisplayClasses = 'pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3';
+const listDisplayClasses = 'mt-12 grid gap-y-8';
 
 export default function Products() {
   const dispatch = useAppDispatch();
   const allProducts = useAppSelector((state: RootState) => state.all.products);
   const loading = useAppSelector((state: RootState) => state.all.loading);
+  const [displayMode, setDisplayMode] = useState<DisplayMode>('grid');
 
   useEffect(() => {
     dispatch(fetchAllProducts());
   }, [dispatch]);
 
-  const handleLayoutToggle = () => {};
+  const handleLayoutToggle = (
+    event: React.MouseEvent,
+    display: DisplayMode
+  ) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setDisplayMode(display);
+  };
 
   return loading ? (
     <Loading />
@@ -27,10 +36,14 @@ export default function Products() {
       <ProductsFilter />
       <ProductsLayoutToggle
         productQuantity={allProducts.length}
-        onToggle={handleLayoutToggle}
+        onLayoutToggle={handleLayoutToggle}
       />
       <div>
-        <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
+        <div
+          className={`${
+            displayMode === 'grid' ? gridDisplayClasses : listDisplayClasses
+          }`}
+        >
           {allProducts.map((product: ProductCardType) => (
             <ProductCard key={product.id} {...product} />
           ))}

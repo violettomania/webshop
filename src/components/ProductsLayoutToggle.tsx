@@ -4,22 +4,20 @@ import { BsFillGridFill, BsList } from 'react-icons/bs';
 const selectedButtonClasses = 'btn-primary text-primary-content';
 const unselectedButtonClasses = 'btn-ghost text-based-content';
 
-type DisplayMode = 'list' | 'grid';
-
 interface ProductsLayoutToggleProps {
   productQuantity: number;
-  onToggle: () => void;
+  onLayoutToggle: (event: React.MouseEvent, display: DisplayMode) => void;
 }
 
 export default function ProductsLayoutToggle({
   productQuantity,
-  onToggle,
+  onLayoutToggle,
 }: ProductsLayoutToggleProps) {
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid');
 
-  const handleToggle = (display: DisplayMode) => {
+  const handleToggle = (event: React.MouseEvent, display: DisplayMode) => {
     setDisplayMode(display);
-    onToggle();
+    onLayoutToggle(event, display);
   };
 
   return (
@@ -27,7 +25,7 @@ export default function ProductsLayoutToggle({
       <h4 className='font-medium text-md'>{`${productQuantity} products`}</h4>
       <div className='flex gap-x-2'>
         <button
-          onClick={() => handleToggle('grid')}
+          onClick={(e) => handleToggle(e, 'grid')}
           type='button'
           className={`text-xl btn btn-circle btn-sm ${
             displayMode === 'grid'
@@ -38,7 +36,7 @@ export default function ProductsLayoutToggle({
           <BsFillGridFill />
         </button>
         <button
-          onClick={() => handleToggle('list')}
+          onClick={(e) => handleToggle(e, 'list')}
           type='button'
           className={`text-xl btn btn-circle btn-sm ${
             displayMode === 'list'

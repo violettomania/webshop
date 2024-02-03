@@ -1,1 +1,1 @@
-
+type DisplayMode = 'list' | 'grid';
