@@ -13,14 +13,13 @@ interface SingleProduct {
 
 // TODO: move this to a config file
 const url = 'https://strapi-store-server.onrender.com/api/products';
-const page = '?page=1';
 
 // TODO: enforce type
 export const fetchProducts = createAsyncThunk(
-  'products/fetchAllProducts',
-  async () => {
+  'products/fetchProducts',
+  async (page: number) => {
     try {
-      const response = await fetch(url + page);
+      const response = await fetch(`${url}?page=${page}`);
       const data = await response.json();
       const { data: products } = data;
       if (products) {

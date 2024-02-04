@@ -19,7 +19,7 @@ export default function Products() {
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
 
   useEffect(() => {
-    dispatch(fetchProducts());
+    dispatch(fetchProducts(1));
   }, [dispatch]);
 
   const handleLayoutToggle = (

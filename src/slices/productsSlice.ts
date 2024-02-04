@@ -23,7 +23,7 @@ const initialState: AllProductsState = {
 };
 
 export const allProductsSlice = createSlice({
-  name: 'all',
+  name: 'paginated',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
