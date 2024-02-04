@@ -38,14 +38,16 @@ export default function Products() {
   // TODO: pagination: prev and next should go around the max/min page number
   const handleNextPage = (event: React.MouseEvent) => {
     event.preventDefault();
-    dispatch(fetchProducts(currentPage + 1));
-    setCurrentPage(currentPage + 1);
+    const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
+    dispatch(fetchProducts(nextPage));
+    setCurrentPage(nextPage);
   };
 
   const handlePrevPage = (event: React.MouseEvent) => {
     event.preventDefault();
-    dispatch(fetchProducts(currentPage - 1));
-    setCurrentPage(currentPage - 1);
+    const prevPage = currentPage - 1 < pageCount ? pageCount : currentPage - 1;
+    dispatch(fetchProducts(prevPage));
+    setCurrentPage(prevPage);
   };
 
   const handleLayoutToggle = (
@@ -60,6 +62,7 @@ export default function Products() {
   // TODO: add pagination component
   // TODO: pagination component should not disappear during loading
   // TODO: pagination: add ... ?
+  // TODO: default selection for first pagination button
   return loading ? (
     <Loading />
   ) : (
