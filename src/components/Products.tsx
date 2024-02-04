@@ -24,10 +24,22 @@ export default function Products() {
     dispatch(fetchProducts(1));
   }, [dispatch]);
 
-  const handlePageChange = (event: React.MouseEvent, page: number) => {
+  const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();
     dispatch(fetchProducts(page));
     setCurrentPage(page);
+  };
+
+  const handleNextPage = (event: React.MouseEvent) => {
+    event.preventDefault();
+    dispatch(fetchProducts(currentPage + 1));
+    setCurrentPage(currentPage + 1);
+  };
+
+  const handlePrevPage = (event: React.MouseEvent) => {
+    event.preventDefault();
+    dispatch(fetchProducts(currentPage - 1));
+    setCurrentPage(currentPage - 1);
   };
 
   const handleLayoutToggle = (
@@ -41,6 +53,9 @@ export default function Products() {
 
   // TODO: add pagination component
   // TODO: pagination component should not disappear during loading
+  // TODO: pagination: add max page number
+  // TODO: pagination: prev and next should go around the max/min page number
+  // TODO: pagination: add ... ?
   return loading ? (
     <Loading />
   ) : (
@@ -64,9 +79,14 @@ export default function Products() {
       </div>
       <div className='mt-16 flex justify-end'>
         <div className='join'>
-          <button className='btn btn-xs sm:btn-md join-item'>Prev</button>
           <button
-            onClick={(e) => handlePageChange(e, 1)}
+            className='btn btn-xs sm:btn-md join-item'
+            onClick={handlePrevPage}
+          >
+            Prev
+          </button>
+          <button
+            onClick={(e) => handlePageNumberChange(e, 1)}
             className={`btn btn-xs sm:btn-md border-none join-item ${
               currentPage === 1 ? selectedPageButtonClasses : ''
             }`}
@@ -74,7 +94,7 @@ export default function Products() {
             1
           </button>
           <button
-            onClick={(e) => handlePageChange(e, 2)}
+            onClick={(e) => handlePageNumberChange(e, 2)}
             className={`btn btn-xs sm:btn-md border-none join-item ${
               currentPage === 2 ? selectedPageButtonClasses : ''
             }`}
@@ -82,14 +102,19 @@ export default function Products() {
             2
           </button>
           <button
-            onClick={(e) => handlePageChange(e, 3)}
+            onClick={(e) => handlePageNumberChange(e, 3)}
             className={`btn btn-xs sm:btn-md border-none join-item ${
               currentPage === 3 ? selectedPageButtonClasses : ''
             }`}
           >
             3
           </button>
-          <button className='btn btn-xs sm:btn-md join-item'>Next</button>
+          <button
+            className='btn btn-xs sm:btn-md join-item'
+            onClick={handleNextPage}
+          >
+            Next
+          </button>
         </div>
       </div>
     </section>
