@@ -13,10 +13,15 @@ const selectedPageButtonClasses = 'bg-base-300 border-base-300';
 
 export default function Products() {
   const dispatch = useAppDispatch();
+
   const pagedProducts = useAppSelector(
     (state: RootState) => state.paginated.products
   );
+  const pageCount = useAppSelector(
+    (state: RootState) => state.paginated.pageCount
+  );
   const loading = useAppSelector((state: RootState) => state.paginated.loading);
+
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
   const [currentPage, setCurrentPage] = useState(1);
 
