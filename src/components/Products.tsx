@@ -22,6 +22,11 @@ export default function Products() {
     dispatch(fetchProducts(1));
   }, [dispatch]);
 
+  const handlePageChange = (event: React.MouseEvent, page: number) => {
+    event.preventDefault();
+    dispatch(fetchProducts(page));
+  };
+
   const handleLayoutToggle = (
     event: React.MouseEvent,
     display: DisplayMode
@@ -55,13 +60,22 @@ export default function Products() {
       <div className='mt-16 flex justify-end'>
         <div className='join'>
           <button className='btn btn-xs sm:btn-md join-item'>Prev</button>
-          <button className='btn btn-xs sm:btn-md border-none join-item bg-base-300 border-base-300 '>
+          <button
+            onClick={(e) => handlePageChange(e, 1)}
+            className='btn btn-xs sm:btn-md border-none join-item bg-base-300 border-base-300 '
+          >
             1
           </button>
-          <button className='btn btn-xs sm:btn-md border-none join-item '>
+          <button
+            onClick={(e) => handlePageChange(e, 2)}
+            className='btn btn-xs sm:btn-md border-none join-item '
+          >
             2
           </button>
-          <button className='btn btn-xs sm:btn-md border-none join-item '>
+          <button
+            onClick={(e) => handlePageChange(e, 3)}
+            className='btn btn-xs sm:btn-md border-none join-item '
+          >
             3
           </button>
           <button className='btn btn-xs sm:btn-md join-item'>Next</button>
