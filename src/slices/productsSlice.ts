@@ -22,6 +22,7 @@ const initialState: ProductsState = {
   error: '',
 };
 
+// TODO: rename paginated to paged
 export const allProductsSlice = createSlice({
   name: 'paginated',
   initialState,
