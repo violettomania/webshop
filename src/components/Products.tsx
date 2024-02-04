@@ -9,6 +9,7 @@ import ProductsLayoutToggle from './ProductsLayoutToggle';
 
 const gridDisplayClasses = 'pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3';
 const listDisplayClasses = 'mt-12 grid gap-y-8';
+const selectedPageButtonClasses = 'bg-base-300 border-base-300';
 
 export default function Products() {
   const dispatch = useAppDispatch();
@@ -17,6 +18,7 @@ export default function Products() {
   );
   const loading = useAppSelector((state: RootState) => state.paginated.loading);
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     dispatch(fetchProducts(1));
@@ -25,6 +27,7 @@ export default function Products() {
   const handlePageChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();
     dispatch(fetchProducts(page));
+    setCurrentPage(page);
   };
 
   const handleLayoutToggle = (
@@ -62,19 +65,25 @@ export default function Products() {
           <button className='btn btn-xs sm:btn-md join-item'>Prev</button>
           <button
             onClick={(e) => handlePageChange(e, 1)}
-            className='btn btn-xs sm:btn-md border-none join-item bg-base-300 border-base-300 '
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === 1 ? selectedPageButtonClasses : ''
+            }`}
           >
             1
           </button>
           <button
             onClick={(e) => handlePageChange(e, 2)}
-            className='btn btn-xs sm:btn-md border-none join-item '
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === 2 ? selectedPageButtonClasses : ''
+            }`}
           >
             2
           </button>
           <button
             onClick={(e) => handlePageChange(e, 3)}
-            className='btn btn-xs sm:btn-md border-none join-item '
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === 3 ? selectedPageButtonClasses : ''
+            }`}
           >
             3
           </button>
