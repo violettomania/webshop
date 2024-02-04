@@ -21,9 +21,10 @@ export const fetchProducts = createAsyncThunk(
     try {
       const response = await fetch(`${url}?page=${page}`);
       const data = await response.json();
-      const { data: products } = data;
+      const { data: products, meta } = data;
+      let productsArray = [];
       if (products) {
-        return products.map((product: SingleProduct) => {
+        productsArray = products.map((product: SingleProduct) => {
           const {
             id,
             attributes: { title, image, price },
@@ -35,6 +36,10 @@ export const fetchProducts = createAsyncThunk(
             price: price,
           };
         });
+        const pageCount = meta.pagination.pageCount;
+        const p = { products: productsArray, pageCount };
+        console.log(p);
+        return p;
       } else {
         return [];
       }

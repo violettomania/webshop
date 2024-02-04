@@ -10,13 +10,13 @@ export interface FeaturedProductType {
   price: string;
 }
 
-interface AllProductsState {
+interface ProductsState {
   products: FeaturedProductType[];
   loading: boolean;
   error?: string;
 }
 
-const initialState: AllProductsState = {
+const initialState: ProductsState = {
   products: [],
   loading: false,
   error: '',
