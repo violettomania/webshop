@@ -13,7 +13,7 @@ const selectedPageButtonClasses = 'bg-base-300 border-base-300';
 
 export default function Products() {
   const dispatch = useAppDispatch();
-  const allProducts = useAppSelector(
+  const pagedProducts = useAppSelector(
     (state: RootState) => state.paginated.products
   );
   const loading = useAppSelector((state: RootState) => state.paginated.loading);
@@ -62,7 +62,7 @@ export default function Products() {
     <section className='align-element py-20'>
       <ProductsFilter />
       <ProductsLayoutToggle
-        productQuantity={allProducts.length}
+        productQuantity={pagedProducts.length}
         onLayoutToggle={handleLayoutToggle}
       />
       <div>
@@ -71,7 +71,7 @@ export default function Products() {
             displayMode === 'grid' ? gridDisplayClasses : listDisplayClasses
           }`}
         >
-          {allProducts.map((product: ProductCardType) => (
+          {pagedProducts.map((product: ProductCardType) => (
             // TODO: add grid and list view to cards
             <ProductCard key={product.id} {...product} />
           ))}
