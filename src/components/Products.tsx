@@ -90,30 +90,17 @@ export default function Products() {
           >
             Prev
           </button>
-          <button
-            onClick={(e) => handlePageNumberChange(e, 1)}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === 1 ? selectedPageButtonClasses : ''
-            }`}
-          >
-            1
-          </button>
-          <button
-            onClick={(e) => handlePageNumberChange(e, 2)}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === 2 ? selectedPageButtonClasses : ''
-            }`}
-          >
-            2
-          </button>
-          <button
-            onClick={(e) => handlePageNumberChange(e, 3)}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === 3 ? selectedPageButtonClasses : ''
-            }`}
-          >
-            3
-          </button>
+          {Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => (
+            <button
+              onClick={(e) => handlePageNumberChange(e, page)}
+              key={page}
+              className={`btn btn-xs sm:btn-md border-none join-item ${
+                currentPage === page ? selectedPageButtonClasses : ''
+              }`}
+            >
+              {page}
+            </button>
+          ))}
           <button
             className='btn btn-xs sm:btn-md join-item'
             onClick={handleNextPage}
