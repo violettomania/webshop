@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchAllProducts } from '../actions/fetchAllProducts';
+import { fetchProducts } from '../actions/fetchProducts';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
 import ProductCard from './ProductCard';
@@ -12,12 +12,14 @@ const listDisplayClasses = 'mt-12 grid gap-y-8';
 
 export default function Products() {
   const dispatch = useAppDispatch();
-  const allProducts = useAppSelector((state: RootState) => state.all.products);
-  const loading = useAppSelector((state: RootState) => state.all.loading);
+  const allProducts = useAppSelector(
+    (state: RootState) => state.paginated.products
+  );
+  const loading = useAppSelector((state: RootState) => state.paginated.loading);
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
 
   useEffect(() => {
-    dispatch(fetchAllProducts());
+    dispatch(fetchProducts());
   }, [dispatch]);
 
   const handleLayoutToggle = (

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import allProductsReducer from '../slices/allProductsSlice';
+import productsReducer from '../slices/productsSlice';
 import featuredProductsReducer from '../slices/featuredProductsSlice';
 import singleProductReducer from '../slices/singleProductSlice';
 import userReducer from '../slices/userSlice';
@@ -8,7 +8,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 // TODO: (possibly) find a better naming scheme / unify reducers?
 const store = configureStore({
   reducer: {
-    all: allProductsReducer,
+    paginated: productsReducer,
     featured: featuredProductsReducer,
     single: singleProductReducer,
     user: userReducer,
