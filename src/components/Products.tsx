@@ -35,6 +35,7 @@ export default function Products() {
     setCurrentPage(page);
   };
 
+  // TODO: pagination: prev and next should go around the max/min page number
   const handleNextPage = (event: React.MouseEvent) => {
     event.preventDefault();
     dispatch(fetchProducts(currentPage + 1));
@@ -58,8 +59,6 @@ export default function Products() {
 
   // TODO: add pagination component
   // TODO: pagination component should not disappear during loading
-  // TODO: pagination: add max page number
-  // TODO: pagination: prev and next should go around the max/min page number
   // TODO: pagination: add ... ?
   return loading ? (
     <Loading />
