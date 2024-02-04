@@ -39,6 +39,8 @@ export default function Products() {
     setDisplayMode(display);
   };
 
+  // TODO: add pagination component
+  // TODO: pagination component should not disappear during loading
   return loading ? (
     <Loading />
   ) : (
