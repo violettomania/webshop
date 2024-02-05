@@ -9,7 +9,11 @@ import ProductsLayoutToggle from './ProductsLayoutToggle';
 
 const gridDisplayClasses = 'pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3';
 const listDisplayClasses = 'mt-12 grid gap-y-8';
+const listCardDisplayClasses =
+  'p-8 rounded-lg flex flex-col sm:flex-row gap-y-4 flex-wrap  bg-base-100 shadow-xl hover:shadow-2xl duration-300 group';
 const selectedPageButtonClasses = 'bg-base-300 border-base-300';
+const gridCardDisplayClasses =
+  'card w-full shadow-xl hover:shadow-2xl transition duration-300';
 
 export default function Products() {
   const dispatch = useAppDispatch();
@@ -79,14 +83,21 @@ export default function Products() {
         onLayoutToggle={handleLayoutToggle}
       />
       <div>
-        <div
+        <div // TODO: bug: when changing page, the grid/list selector defaults to grid
           className={`${
             displayMode === 'grid' ? gridDisplayClasses : listDisplayClasses
           }`}
         >
           {pagedProducts.map((product: ProductCardType) => (
-            // TODO: add grid and list view to cards
-            <ProductCard key={product.id} {...product} />
+            <ProductCard
+              key={product.id}
+              classes={`${
+                displayMode === 'grid'
+                  ? gridCardDisplayClasses
+                  : listCardDisplayClasses
+              }`}
+              {...product}
+            />
           ))}
         </div>
       </div>

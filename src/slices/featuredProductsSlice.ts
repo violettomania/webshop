@@ -8,6 +8,7 @@ export interface ProductCardType {
   title: string;
   image: string;
   price: string;
+  classes?: string;
 }
 
 interface FeaturedProductState {

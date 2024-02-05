@@ -6,6 +6,7 @@ interface FeaturedProductProps {
   title: string;
   image: string;
   price: string;
+  classes?: string;
 }
 
 export default function ProductCard({
@@ -13,12 +14,11 @@ export default function ProductCard({
   title,
   image,
   price,
+  classes,
 }: FeaturedProductProps) {
+  // TODO: add mandatory classes
   return (
-    <Link
-      className='card w-full shadow-xl hover:shadow-2xl transition duration-300'
-      to={`/products/${id}`}
-    >
+    <Link className={classes} to={`/products/${id}`}>
       <figure className='px-4 pt-4'>
         <img
           src={image}
