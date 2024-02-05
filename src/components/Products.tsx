@@ -45,7 +45,10 @@ export default function Products() {
 
   const handlePrevPage = (event: React.MouseEvent) => {
     event.preventDefault();
-    const prevPage = currentPage - 1 < pageCount ? pageCount : currentPage - 1;
+    const prevPage =
+      currentPage - 1 < pageCount && currentPage - 1 > 0
+        ? currentPage - 1
+        : pageCount;
     dispatch(fetchProducts(prevPage));
     setCurrentPage(prevPage);
   };
