@@ -81,6 +81,7 @@ export default function Products() {
       <ProductsLayoutToggle
         productQuantity={pagedProducts.length}
         onLayoutToggle={handleLayoutToggle}
+        currentDisplayMode={displayMode}
       />
       <div>
         <div // TODO: bug: when changing page, the grid/list selector defaults to grid

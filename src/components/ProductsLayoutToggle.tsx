@@ -7,13 +7,17 @@ const unselectedButtonClasses = 'btn-ghost text-based-content';
 interface ProductsLayoutToggleProps {
   productQuantity: number;
   onLayoutToggle: (event: React.MouseEvent, display: DisplayMode) => void;
+  currentDisplayMode: DisplayMode;
 }
 
+// TODO: try to refactor this, maybe as a hook
 export default function ProductsLayoutToggle({
   productQuantity,
   onLayoutToggle,
+  currentDisplayMode,
 }: ProductsLayoutToggleProps) {
-  const [displayMode, setDisplayMode] = useState<DisplayMode>('grid');
+  const [displayMode, setDisplayMode] =
+    useState<DisplayMode>(currentDisplayMode);
 
   const handleToggle = (event: React.MouseEvent, display: DisplayMode) => {
     setDisplayMode(display);
