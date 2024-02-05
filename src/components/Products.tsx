@@ -68,7 +68,6 @@ export default function Products() {
   };
 
   // TODO: add pagination component
-  // TODO: pagination component should not disappear during loading
   // TODO: pagination: add ... ?
   return loading ? (
     <Loading />
