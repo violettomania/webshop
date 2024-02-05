@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Location, useLocation } from 'react-router-dom';
 import { fetchProducts } from '../actions/fetchProducts';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
@@ -32,6 +33,13 @@ export default function Products() {
     Number(localStorage.getItem('page')) || 1
   );
 
+  const location = useLocation();
+
+  // TODO: consider not using local storage for this
+  useEffect(() => {
+    localStorage.setItem('page', String(1));
+  }, [location]);
+
   useEffect(() => {
     dispatch(fetchProducts(currentPage));
   }, [dispatch, currentPage]);
@@ -40,7 +48,7 @@ export default function Products() {
     event.preventDefault();
     dispatch(fetchProducts(page));
     setCurrentPage(page);
-    localStorage.setItem('page', String(page));
+    localStorage.setItem('page', String(page)); // TODO: refactor: use a function
   };
 
   const handleNextPage = (event: React.MouseEvent) => {
@@ -84,7 +92,7 @@ export default function Products() {
         currentDisplayMode={displayMode}
       />
       <div>
-        <div // TODO: bug: when changing page, the grid/list selector defaults to grid
+        <div // TODO: bug: when changing to card, and navigating back, the grid/list selector defaults to grid
           className={`${
             displayMode === 'grid' ? gridDisplayClasses : listDisplayClasses
           }`}
