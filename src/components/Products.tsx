@@ -35,7 +35,6 @@ export default function Products() {
     setCurrentPage(page);
   };
 
-  // TODO: pagination: prev and next should go around the max/min page number
   const handleNextPage = (event: React.MouseEvent) => {
     event.preventDefault();
     const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
