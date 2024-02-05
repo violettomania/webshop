@@ -22,17 +22,21 @@ export default function Products() {
   );
   const loading = useAppSelector((state: RootState) => state.paginated.loading);
 
+  // TODO: reset page in local storage when user leaves the page
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(
+    Number(localStorage.getItem('page')) || 1
+  );
 
   useEffect(() => {
-    dispatch(fetchProducts(1));
-  }, [dispatch]);
+    dispatch(fetchProducts(currentPage));
+  }, [dispatch, currentPage]);
 
   const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();
     dispatch(fetchProducts(page));
     setCurrentPage(page);
+    localStorage.setItem('page', String(page));
   };
 
   const handleNextPage = (event: React.MouseEvent) => {
@@ -40,6 +44,7 @@ export default function Products() {
     const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
     dispatch(fetchProducts(nextPage));
     setCurrentPage(nextPage);
+    localStorage.setItem('page', String(nextPage));
   };
 
   const handlePrevPage = (event: React.MouseEvent) => {
@@ -50,6 +55,7 @@ export default function Products() {
         : pageCount;
     dispatch(fetchProducts(prevPage));
     setCurrentPage(prevPage);
+    localStorage.setItem('page', String(prevPage));
   };
 
   const handleLayoutToggle = (
@@ -64,7 +70,6 @@ export default function Products() {
   // TODO: add pagination component
   // TODO: pagination component should not disappear during loading
   // TODO: pagination: add ... ?
-  // TODO: default selection for first pagination button
   return loading ? (
     <Loading />
   ) : (
