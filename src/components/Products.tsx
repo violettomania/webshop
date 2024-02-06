@@ -7,10 +7,7 @@ import ProductCard from './ProductCard';
 import Loading from './Loading';
 import { ProductCardType } from '../slices/featuredProductsSlice';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
-import Pagination, {
-  getPageFromLocalStorage,
-  setPageToLocalStorage,
-} from './Pagination';
+import Pagination, { getPageFromLocalStorage } from './Pagination';
 
 const gridDisplayClasses = 'pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3';
 const listDisplayClasses = 'mt-12 grid gap-y-8';
@@ -30,9 +27,10 @@ export default function Products() {
   );
   const loading = useAppSelector((state: RootState) => state.paginated.loading);
 
+  // TODO: bugfix: page sometimes loads twice, page never resets
   // TODO: reset page in local storage when user leaves the page
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
-  // TODO: it's used in Pagination as well, consider moving it to a hook
+  // TODO: it's used in Pagination, consider moving it to a hook
   const [currentPage, setCurrentPage] = useState(
     getPageFromLocalStorage() || 1
   );
@@ -40,8 +38,9 @@ export default function Products() {
   const location = useLocation();
 
   // TODO: consider not using local storage for this
+  // TODO: bugfix: it's not working when navigating back
   useEffect(() => {
-    setPageToLocalStorage(1);
+    setCurrentPage(1);
   }, [location]);
 
   useEffect(() => {
