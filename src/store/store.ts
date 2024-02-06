@@ -8,7 +8,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 // TODO: (possibly) find a better naming scheme / unify reducers?
 const store = configureStore({
   reducer: {
-    paginated: productsReducer,
+    paged: productsReducer,
     featured: featuredProductsReducer,
     single: singleProductReducer,
     user: userReducer,

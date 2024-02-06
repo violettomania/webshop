@@ -20,13 +20,11 @@ export default function Products() {
   const dispatch = useAppDispatch();
 
   const pagedProducts = useAppSelector(
-    (state: RootState) => state.paginated.products
+    (state: RootState) => state.paged.products
   );
-  const pageCount = useAppSelector(
-    (state: RootState) => state.paginated.pageCount
-  );
-  const total = useAppSelector((state: RootState) => state.paginated.total);
-  const loading = useAppSelector((state: RootState) => state.paginated.loading);
+  const pageCount = useAppSelector((state: RootState) => state.paged.pageCount);
+  const total = useAppSelector((state: RootState) => state.paged.total);
+  const loading = useAppSelector((state: RootState) => state.paged.loading);
 
   // TODO: bugfix: page sometimes loads twice, page never resets
   // TODO: reset page in local storage when user leaves the page
