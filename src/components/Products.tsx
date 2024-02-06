@@ -90,10 +90,12 @@ export default function Products() {
           ))}
         </div>
       </div>
-      <Pagination
-        pageCount={pageCount}
-        onPageNumberChange={handlePageNumberChange}
-      />
+      {pagedProducts.length > 0 && (
+        <Pagination
+          pageCount={pageCount}
+          onPageNumberChange={handlePageNumberChange}
+        />
+      )}
     </section>
   );
 }
