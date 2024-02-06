@@ -11,8 +11,6 @@ interface SingleProduct {
   };
 }
 
-// https://strapi-store-server.onrender.com/api/products?search=lamp&category=all&company=all&order=a-z&price=100000
-
 // TODO: move this to a config file
 const url = 'https://strapi-store-server.onrender.com/api/products';
 
