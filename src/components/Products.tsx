@@ -112,7 +112,7 @@ export default function Products() {
           </div>
         )}
       </div>
-      {pagedProducts.length > 0 && (
+      {pageCount > 1 && (
         <Pagination
           pageCount={pageCount}
           onPageNumberChange={handlePageNumberChange}

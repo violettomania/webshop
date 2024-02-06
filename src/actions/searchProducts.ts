@@ -18,6 +18,7 @@ export interface SearchParams {
   order: string;
   price: number;
   shipping: boolean;
+  page?: number;
 }
 
 // TODO: move this to a config file
@@ -34,12 +35,13 @@ export const searchProducts = createAsyncThunk(
     order,
     price,
     shipping,
+    page,
   }: SearchParams) => {
     try {
       const response = await fetch(
         `${url}?search=${search}&category=${category}&company=${company}&order=${order}&price=${price}&shipping=${
           shipping ? 'on' : ''
-        }`
+        }&page=${page ? page : ''}`
       );
       const data = await response.json();
       const { data: products, meta } = data;
