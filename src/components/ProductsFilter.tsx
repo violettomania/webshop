@@ -1,16 +1,41 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { SearchParams } from '../actions/searchProducts';
 
 interface ProductsFilterProps {
+  onSearch: (searchParams: SearchParams) => void;
   categories: string[];
   companies: string[];
 }
 
+// TODO: filter should not disappear while loading, just disable it
 export default function ProductsFilter({
+  onSearch,
   categories,
   companies,
 }: ProductsFilterProps) {
+  const [productName, setProductName] = useState('');
+  const [category, setCategory] = useState('all');
+  const [company, setCompany] = useState('all');
+  const [sortBy, setSortBy] = useState('a-z');
+  const [freeShipping, setFreeShipping] = useState(false);
+
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const searchParams = {
+      search: productName,
+      category,
+      company,
+      order: sortBy,
+      price: 100000,
+      shipping: freeShipping ? 'on' : 'off',
+    };
+    onSearch(searchParams);
+  };
+
   return (
     <form
+      onSubmit={handleSearch}
       method='get'
       action='/products'
       className='bg-base-200 rounded-md px-8 py-4 grid gap-x-4  gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center'
@@ -23,7 +48,8 @@ export default function ProductsFilter({
           type='search'
           name='search'
           className='input input-bordered input-sm'
-          value=''
+          value={productName}
+          onChange={(e) => setProductName(e.target.value)}
         />
       </div>
       <div className='form-control'>
@@ -34,9 +60,13 @@ export default function ProductsFilter({
           name='category'
           id='category'
           className='select select-bordered select-sm'
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
         >
           {categories.map((category) => (
-            <option value={category}>{category}</option>
+            <option key={category} value={category}>
+              {category}
+            </option>
           ))}
         </select>
       </div>
@@ -48,9 +78,13 @@ export default function ProductsFilter({
           name='company'
           id='company'
           className='select select-bordered select-sm'
+          value={company}
+          onChange={(e) => setCompany(e.target.value)}
         >
           {companies.map((company) => (
-            <option value={company}>{company}</option>
+            <option key={company} value={company}>
+              {company}
+            </option>
           ))}
         </select>
       </div>
@@ -62,6 +96,8 @@ export default function ProductsFilter({
           name='order'
           id='order'
           className='select select-bordered select-sm'
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
         >
           <option value='a-z'>a-z</option>
           <option value='z-a'>z-a</option>
@@ -96,6 +132,8 @@ export default function ProductsFilter({
           type='checkbox'
           name='shipping'
           className='checkbox checkbox-primary checkbox-sm'
+          checked={freeShipping}
+          onChange={(e) => setFreeShipping(e.target.checked)}
         />
       </div>
       <button type='submit' className='btn btn-primary btn-sm'>

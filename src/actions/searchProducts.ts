@@ -11,6 +11,15 @@ interface SingleProduct {
   };
 }
 
+export interface SearchParams {
+  search: string;
+  category: string;
+  company: string;
+  order: string;
+  price: number;
+  shipping: string;
+}
+
 // TODO: move this to a config file
 const url = 'https://strapi-store-server.onrender.com/api/products';
 
@@ -25,14 +34,7 @@ export const searchProducts = createAsyncThunk(
     order,
     price,
     shipping,
-  }: {
-    search: string;
-    category: string;
-    company: string;
-    order: string;
-    price: number;
-    shipping: string;
-  }) => {
+  }: SearchParams) => {
     try {
       const response = await fetch(
         `${url}?search=${search}?category=${category}?company=${company}?order=${order}?price=${price}?shipping=${shipping}`

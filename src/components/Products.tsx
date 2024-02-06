@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchProducts } from '../actions/fetchProducts';
-import { searchProducts } from '../actions/searchProducts';
+import { SearchParams, searchProducts } from '../actions/searchProducts';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
 import ProductCard from './ProductCard';
@@ -27,6 +27,10 @@ export default function Products() {
   const pageCount = useAppSelector((state: RootState) => state.paged.pageCount);
   const total = useAppSelector((state: RootState) => state.paged.total);
   const loading = useAppSelector((state: RootState) => state.paged.loading);
+  const categories = useAppSelector(
+    (state: RootState) => state.paged.categories
+  );
+  const companies = useAppSelector((state: RootState) => state.paged.companies);
 
   // TODO: bugfix: page sometimes loads twice, page never resets
   // TODO: reset page in local storage when user leaves the page
@@ -49,9 +53,8 @@ export default function Products() {
     dispatch(fetchProducts(currentPage));
   }, [dispatch, currentPage]);
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    // TODO: get info from form and dispatch search action
+  const handleSearch = (searchParams: SearchParams) => {
+    dispatch(searchProducts(searchParams));
   };
 
   const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
@@ -69,36 +72,45 @@ export default function Products() {
     setDisplayMode(display);
   };
 
-  // TODO: add pagination component
   // TODO: pagination: add ... ?
   return loading ? (
     <Loading />
   ) : (
     <section className='align-element py-20'>
-      <ProductsFilter />
+      <ProductsFilter
+        onSearch={handleSearch}
+        categories={categories}
+        companies={companies}
+      />
       <ProductsLayoutToggle
         productQuantity={total}
         onLayoutToggle={handleLayoutToggle}
         currentDisplayMode={displayMode}
       />
       <div>
-        <div // TODO: bug: when changing to card, and navigating back, the grid/list selector defaults to grid
-          className={`${
-            displayMode === 'grid' ? gridDisplayClasses : listDisplayClasses
-          }`}
-        >
-          {pagedProducts.map((product: ProductCardType) => (
-            <ProductCard
-              key={product.id}
-              classes={`${
-                displayMode === 'grid'
-                  ? gridCardDisplayClasses
-                  : listCardDisplayClasses
-              }`}
-              {...product}
-            />
-          ))}
-        </div>
+        {pagedProducts.length === 0 ? (
+          <h5 className='text-2xl mt-16'>
+            Sorry, no products matched your search...
+          </h5>
+        ) : (
+          <div // TODO: bug: when changing to card, and navigating back, the grid/list selector defaults to grid
+            className={`${
+              displayMode === 'grid' ? gridDisplayClasses : listDisplayClasses
+            }`}
+          >
+            {pagedProducts.map((product: ProductCardType) => (
+              <ProductCard
+                key={product.id}
+                classes={`${
+                  displayMode === 'grid'
+                    ? gridCardDisplayClasses
+                    : listCardDisplayClasses
+                }`}
+                {...product}
+              />
+            ))}
+          </div>
+        )}
       </div>
       {pagedProducts.length > 0 && (
         <Pagination
