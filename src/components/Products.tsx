@@ -17,6 +17,7 @@ const listCardDisplayClasses =
 const gridCardDisplayClasses =
   'card w-full shadow-xl hover:shadow-2xl transition duration-300';
 
+// TODO: rename to ProductsContainer, add Products component
 export default function Products() {
   const dispatch = useAppDispatch();
 
