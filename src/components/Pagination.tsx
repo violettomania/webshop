@@ -25,7 +25,6 @@ export default function Pagination({
   );
 
   const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
-    event.preventDefault();
     onPageNumberChange(event, page);
     setCurrentPage(page);
     setPageToLocalStorage(page);
