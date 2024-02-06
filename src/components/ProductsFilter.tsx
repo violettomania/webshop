@@ -29,7 +29,7 @@ export default function ProductsFilter({
       category,
       company,
       order: sortBy,
-      price: 100000,
+      price,
       shipping: freeShipping ? 'on' : 'off',
     };
     onSearch(searchParams);
