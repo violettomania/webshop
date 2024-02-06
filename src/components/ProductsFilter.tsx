@@ -30,7 +30,7 @@ export default function ProductsFilter({
       company,
       order: sortBy,
       price,
-      shipping: freeShipping ? 'on' : 'off',
+      shipping: freeShipping,
     };
     onSearch(searchParams);
   };
