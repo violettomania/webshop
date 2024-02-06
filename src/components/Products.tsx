@@ -7,7 +7,10 @@ import ProductCard from './ProductCard';
 import Loading from './Loading';
 import { ProductCardType } from '../slices/featuredProductsSlice';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
-import Pagination from './Pagination';
+import Pagination, {
+  getPageFromLocalStorage,
+  setPageToLocalStorage,
+} from './Pagination';
 
 const gridDisplayClasses = 'pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3';
 const listDisplayClasses = 'mt-12 grid gap-y-8';
@@ -30,14 +33,14 @@ export default function Products() {
   // TODO: reset page in local storage when user leaves the page
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
   const [currentPage, setCurrentPage] = useState(
-    Number(localStorage.getItem('page')) || 1
+    getPageFromLocalStorage() || 1
   );
 
   const location = useLocation();
 
   // TODO: consider not using local storage for this
   useEffect(() => {
-    localStorage.setItem('page', String(1));
+    setPageToLocalStorage(1);
   }, [location]);
 
   useEffect(() => {

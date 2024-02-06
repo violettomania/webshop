@@ -7,19 +7,28 @@ interface PaginationProps {
 
 const selectedPageButtonClasses = 'bg-base-300 border-base-300';
 
+// TODO: consider moving these to helper functions
+export const getPageFromLocalStorage = () => {
+  return Number(localStorage.getItem('page'));
+};
+
+export const setPageToLocalStorage = (page: number) => {
+  localStorage.setItem('page', String(page));
+};
+
 export default function Pagination({
   pageCount,
   onPageNumberChange,
 }: PaginationProps) {
   const [currentPage, setCurrentPage] = useState(
-    Number(localStorage.getItem('page')) || 1
+    getPageFromLocalStorage() || 1
   );
 
   const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();
     onPageNumberChange(event, page);
     setCurrentPage(page);
-    localStorage.setItem('page', String(page)); // TODO: refactor: use a function
+    setPageToLocalStorage(page);
   };
 
   const handleNextPage = (event: React.MouseEvent) => {
@@ -27,7 +36,7 @@ export default function Pagination({
     const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
     onPageNumberChange(event, nextPage);
     setCurrentPage(nextPage);
-    localStorage.setItem('page', String(nextPage));
+    setPageToLocalStorage(nextPage);
   };
 
   const handlePrevPage = (event: React.MouseEvent) => {
@@ -38,7 +47,7 @@ export default function Pagination({
         : pageCount;
     onPageNumberChange(event, prevPage);
     setCurrentPage(prevPage);
-    localStorage.setItem('page', String(prevPage));
+    setPageToLocalStorage(prevPage);
   };
 
   return (
