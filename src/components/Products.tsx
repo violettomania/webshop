@@ -32,6 +32,7 @@ export default function Products() {
 
   // TODO: reset page in local storage when user leaves the page
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
+  // TODO: it's used in Pagination as well, consider moving it to a hook
   const [currentPage, setCurrentPage] = useState(
     getPageFromLocalStorage() || 1
   );
