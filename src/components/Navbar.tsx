@@ -3,6 +3,7 @@ import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import path from 'path';
 
 const paths = ['/', '/about', '/products', '/cart'];
 const pages = ['home', 'about', 'products', 'cart'];
@@ -54,6 +55,7 @@ export default function Navbar() {
       <div className='navbar align-element'>
         <div className='navbar-start'>
           <Link
+            onClick={() => setSelectedPath(paths[0])}
             aria-current='page'
             className='hidden lg:flex btn btn-primary text-3xl items-center active'
             to='/'
