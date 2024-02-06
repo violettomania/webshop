@@ -55,9 +55,23 @@ export const searchProducts = createAsyncThunk(
         });
         const pageCount = meta.pagination.pageCount;
         const total = meta.pagination.total;
-        return { products: productsArray, pageCount, total };
+        const categories = meta.categories;
+        const companies = meta.companies;
+        return {
+          products: productsArray,
+          pageCount,
+          total,
+          categories,
+          companies,
+        };
       } else {
-        return { products: [], pageCount: 0, total: 0 };
+        return {
+          products: [],
+          pageCount: 0,
+          total: 0,
+          categories: [],
+          companies: [],
+        };
       }
     } catch (error) {
       console.error(error);
