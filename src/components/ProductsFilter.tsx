@@ -9,6 +9,7 @@ interface ProductsFilterProps {
 }
 
 // TODO: filter should not disappear while loading, just disable it
+// TODO: search input should remain after search
 export default function ProductsFilter({
   onSearch,
   categories,
@@ -18,6 +19,7 @@ export default function ProductsFilter({
   const [category, setCategory] = useState('all');
   const [company, setCompany] = useState('all');
   const [sortBy, setSortBy] = useState('a-z');
+  const [price, setPrice] = useState(100000);
   const [freeShipping, setFreeShipping] = useState(false);
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
@@ -117,7 +119,8 @@ export default function ProductsFilter({
           max='100000'
           className='range range-primary range-sm'
           step='1000'
-          value='100000'
+          value={price}
+          onChange={(e) => setPrice(Number(e.target.value))}
         />
         <div className='w-full flex justify-between text-xs px-2 mt-2'>
           <span className='font-bold text-md'>0</span>
