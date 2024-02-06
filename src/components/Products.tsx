@@ -40,6 +40,9 @@ export default function Products() {
   const [currentPage, setCurrentPage] = useState(
     getPageFromLocalStorage() || 1
   );
+  const [lastSearchParams, setLastSearchParams] = useState<SearchParams | null>(
+    null
+  );
 
   const location = useLocation();
 
@@ -56,12 +59,16 @@ export default function Products() {
 
   const handleSearch = (searchParams: SearchParams) => {
     dispatch(searchProducts(searchParams));
+    setLastSearchParams(searchParams);
   };
 
   const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();
     setCurrentPage(page);
-    dispatch(fetchProducts(page));
+    // TODO: it's not an ideal solution
+    lastSearchParams
+      ? dispatch(searchProducts({ ...lastSearchParams, page }))
+      : dispatch(fetchProducts(page));
   };
 
   const handleLayoutToggle = (
