@@ -37,9 +37,10 @@ export const fetchProducts = createAsyncThunk(
           };
         });
         const pageCount = meta.pagination.pageCount;
-        return { products: productsArray, pageCount };
+        const total = meta.pagination.total;
+        return { products: productsArray, pageCount, total };
       } else {
-        return { products: [], pageCount: 0 };
+        return { products: [], pageCount: 0, total: 0 };
       }
     } catch (error) {
       console.error(error);

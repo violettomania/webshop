@@ -25,6 +25,7 @@ export default function Products() {
   const pageCount = useAppSelector(
     (state: RootState) => state.paginated.pageCount
   );
+  const total = useAppSelector((state: RootState) => state.paginated.total);
   const loading = useAppSelector((state: RootState) => state.paginated.loading);
 
   // TODO: bugfix: page sometimes loads twice, page never resets
@@ -70,7 +71,7 @@ export default function Products() {
     <section className='align-element py-20'>
       <ProductsFilter />
       <ProductsLayoutToggle
-        productQuantity={pagedProducts.length}
+        productQuantity={total}
         onLayoutToggle={handleLayoutToggle}
         currentDisplayMode={displayMode}
       />
