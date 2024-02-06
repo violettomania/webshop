@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchProducts } from '../actions/fetchProducts';
+import { searchProducts } from '../actions/searchProducts';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
 import ProductCard from './ProductCard';
@@ -19,6 +20,7 @@ const gridCardDisplayClasses =
 export default function Products() {
   const dispatch = useAppDispatch();
 
+  // TODO: rename to allProducts?
   const pagedProducts = useAppSelector(
     (state: RootState) => state.paged.products
   );
@@ -42,9 +44,15 @@ export default function Products() {
     setCurrentPage(1);
   }, [location]);
 
+  // TODO: probably: have a search state var set by the filter, and use it to decide which action to fire
   useEffect(() => {
     dispatch(fetchProducts(currentPage));
   }, [dispatch, currentPage]);
+
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    // TODO: get info from form and dispatch search action
+  };
 
   const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();

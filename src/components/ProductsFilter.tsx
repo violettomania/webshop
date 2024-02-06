@@ -1,6 +1,14 @@
 import { Link } from 'react-router-dom';
 
-export default function ProductsFilter() {
+interface ProductsFilterProps {
+  categories: string[];
+  companies: string[];
+}
+
+export default function ProductsFilter({
+  categories,
+  companies,
+}: ProductsFilterProps) {
   return (
     <form
       method='get'
@@ -27,12 +35,9 @@ export default function ProductsFilter() {
           id='category'
           className='select select-bordered select-sm'
         >
-          <option value='all'>all</option>
-          <option value='Tables'>Tables</option>
-          <option value='Chairs'>Chairs</option>
-          <option value='Kids'>Kids</option>
-          <option value='Sofas'>Sofas</option>
-          <option value='Beds'>Beds</option>
+          {categories.map((category) => (
+            <option value={category}>{category}</option>
+          ))}
         </select>
       </div>
       <div className='form-control'>
@@ -44,12 +49,9 @@ export default function ProductsFilter() {
           id='company'
           className='select select-bordered select-sm'
         >
-          <option value='all'>all</option>
-          <option value='Modenza'>Modenza</option>
-          <option value='Luxora'>Luxora</option>
-          <option value='Artifex'>Artifex</option>
-          <option value='Comfora'>Comfora</option>
-          <option value='Homestead'>Homestead</option>
+          {companies.map((company) => (
+            <option value={company}>{company}</option>
+          ))}
         </select>
       </div>
       <div className='form-control'>

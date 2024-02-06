@@ -15,6 +15,8 @@ interface ProductsState {
   products: FeaturedProductType[];
   total: number;
   pageCount: number;
+  categories: string[];
+  companies: string[];
   loading: boolean;
   error?: string;
 }
@@ -23,6 +25,8 @@ const initialState: ProductsState = {
   products: [],
   total: 0,
   pageCount: 0,
+  categories: [],
+  companies: [],
   loading: false,
   error: '',
 };
@@ -41,6 +45,8 @@ export const allProductsSlice = createSlice({
         state.products = action.payload.products;
         state.total = action.payload.total;
         state.pageCount = action.payload.pageCount;
+        state.categories = action.payload.categories;
+        state.companies = action.payload.companies;
         state.loading = false;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
@@ -54,6 +60,8 @@ export const allProductsSlice = createSlice({
         state.products = action.payload.products;
         state.total = action.payload.total;
         state.pageCount = action.payload.pageCount;
+        state.categories = action.payload.categories;
+        state.companies = action.payload.companies;
         state.loading = false;
       })
       .addCase(searchProducts.rejected, (state, action) => {
