@@ -34,6 +34,7 @@ export default function Navbar() {
     );
   }, [theme]);
 
+  // TODO: bugfix: clicking on navbar item doesn't refresh the page
   const renderNavbarLinks = () => {
     return paths.map((path, idx) => (
       <li key={path}>
