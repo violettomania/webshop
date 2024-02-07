@@ -1,5 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
+//       const params = `?search=${search}&category=${category}&company=${company}&order=${order}&price=${price}&shipping=${
+//         shipping ? 'on' : ''
+//       }&page=${page ? page : ''}`;
+
 // TODO: make this a generic type?
 // TODO: replace FeatureProductProps
 interface SingleProduct {
@@ -24,23 +28,27 @@ export interface SearchParams {
 // TODO: move this to a config file
 const url = 'https://strapi-store-server.onrender.com/api/products';
 
+// function that takes SearchParams, and returns a string, excluding query parameters if the corresponding value is empty
+const buildUrl = (params: SearchParams) => {
+  const search = params.search ? `search=${params.search}` : '';
+  const category = params.category ? `category=${params.category}` : '';
+  const company = params.company ? `company=${params.company}` : '';
+  const order = params.order ? `order=${params.order}` : '';
+  const price = params.price ? `price=${params.price}` : '';
+  const shipping = params.shipping ? 'shipping=on' : '';
+  const page = params.page ? `page=${params.page}` : '';
+  const queryParams = [search, category, company, order, price, shipping, page];
+  const queryString = queryParams.filter((param) => param).join('&');
+  return `?${queryString}`;
+};
+
 // TODO: enforce type
 // TODO: stricter types for categories etc.
 export const searchProducts = createAsyncThunk(
   'products/searchProducts',
-  async ({
-    search,
-    category,
-    company,
-    order,
-    price,
-    shipping,
-    page,
-  }: SearchParams) => {
+  async (searchParams: SearchParams) => {
     try {
-      const params = `?search=${search}&category=${category}&company=${company}&order=${order}&price=${price}&shipping=${
-        shipping ? 'on' : ''
-      }&page=${page ? page : ''}`;
+      const params = buildUrl(searchParams);
       const fullUrl = `${url}${params}`;
       const response = await fetch(fullUrl);
       const data = await response.json();
