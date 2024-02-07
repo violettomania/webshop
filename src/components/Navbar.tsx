@@ -34,7 +34,8 @@ export default function Navbar() {
     );
   }, [theme]);
 
-  // TODO: bugfix: clicking on navbar item doesn't refresh the page
+  // TODO: page should refresh when clicking on the button and the url changed
+  // hacky, but possibly should fire a search event from here
   const renderNavbarLinks = () => {
     return paths.map((path, idx) => (
       <li key={path}>

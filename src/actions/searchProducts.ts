@@ -38,11 +38,11 @@ export const searchProducts = createAsyncThunk(
     page,
   }: SearchParams) => {
     try {
-      const response = await fetch(
-        `${url}?search=${search}&category=${category}&company=${company}&order=${order}&price=${price}&shipping=${
-          shipping ? 'on' : ''
-        }&page=${page ? page : ''}`
-      );
+      const params = `?search=${search}&category=${category}&company=${company}&order=${order}&price=${price}&shipping=${
+        shipping ? 'on' : ''
+      }&page=${page ? page : ''}`;
+      const fullUrl = `${url}${params}`;
+      const response = await fetch(fullUrl);
       const data = await response.json();
       const { data: products, meta } = data;
       let productsArray = [];
@@ -69,6 +69,7 @@ export const searchProducts = createAsyncThunk(
           total,
           categories,
           companies,
+          url: params,
         };
       } else {
         return {
@@ -77,6 +78,7 @@ export const searchProducts = createAsyncThunk(
           total: 0,
           categories: [],
           companies: [],
+          url: '',
         };
       }
     } catch (error) {

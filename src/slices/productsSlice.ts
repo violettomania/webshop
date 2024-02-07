@@ -19,6 +19,7 @@ interface ProductsState {
   companies: string[];
   loading: boolean;
   error?: string;
+  url?: string;
 }
 
 const initialState: ProductsState = {
@@ -29,9 +30,9 @@ const initialState: ProductsState = {
   companies: [],
   loading: false,
   error: '',
+  url: '',
 };
 
-// TODO: rename paginated to paged
 export const allProductsSlice = createSlice({
   name: 'paged',
   initialState,
@@ -62,6 +63,7 @@ export const allProductsSlice = createSlice({
         state.pageCount = action.payload.pageCount;
         state.categories = action.payload.categories;
         state.companies = action.payload.companies;
+        state.url = action.payload.url;
         state.loading = false;
       })
       .addCase(searchProducts.rejected, (state, action) => {

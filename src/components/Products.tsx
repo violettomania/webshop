@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchProducts } from '../actions/fetchProducts';
 import { SearchParams, searchProducts } from '../actions/searchProducts';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
@@ -32,6 +32,7 @@ export default function Products() {
     (state: RootState) => state.paged.categories
   );
   const companies = useAppSelector((state: RootState) => state.paged.companies);
+  const url = useAppSelector((state: RootState) => state.paged.url);
 
   // TODO: bugfix: page sometimes loads twice, page never resets
   // TODO: reset page in local storage when user leaves the page
@@ -45,6 +46,7 @@ export default function Products() {
   );
 
   const location = useLocation();
+  const navigate = useNavigate();
 
   // TODO: consider not using local storage for this
   // TODO: bugfix: it's not working when navigating back
@@ -56,6 +58,10 @@ export default function Products() {
   useEffect(() => {
     dispatch(fetchProducts(currentPage));
   }, [dispatch, currentPage]);
+
+  useEffect(() => {
+    if (url) navigate(url);
+  }, [navigate, url]);
 
   const handleSearch = (searchParams: SearchParams) => {
     dispatch(searchProducts(searchParams));
@@ -70,6 +76,30 @@ export default function Products() {
       ? dispatch(searchProducts({ ...lastSearchParams, page }))
       : dispatch(fetchProducts(page));
   };
+
+  // TODO: find a better way to handle this
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const search = searchParams.get('search');
+    const category = searchParams.get('category');
+    const company = searchParams.get('company');
+    const order = searchParams.get('order');
+    const price = searchParams.get('price');
+    const shipping = searchParams.get('shipping');
+    const page = searchParams.get('page');
+
+    const params: SearchParams = {
+      search: search || '',
+      category: category || 'all',
+      company: company || 'all',
+      order: order || 'a-z',
+      price: Number(price) || 100000,
+      shipping: 'on' === shipping,
+      page: Number(page) || 1,
+    };
+
+    dispatch(searchProducts(params));
+  }, [dispatch, location.search]);
 
   const handleLayoutToggle = (
     event: React.MouseEvent,
