@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { get } from 'http';
 
 //       const params = `?search=${search}&category=${category}&company=${company}&order=${order}&price=${price}&shipping=${
 //         shipping ? 'on' : ''
@@ -16,12 +17,12 @@ interface SingleProduct {
 }
 
 export interface SearchParams {
-  search: string;
-  category: string;
-  company: string;
-  order: string;
-  price: number;
-  shipping: boolean;
+  search?: string;
+  category?: string;
+  company?: string;
+  order?: string;
+  price?: number;
+  shipping?: boolean;
   page?: number;
 }
 
@@ -41,14 +42,41 @@ const buildSearchQuery = (params: SearchParams) => {
   return `?${queryString}`;
 };
 
+const hasPageOnly = (params: SearchParams) => {
+  const { search, category, company, order, price, shipping, page } = params;
+
+  if (
+    !search &&
+    !category &&
+    !company &&
+    !order &&
+    !price &&
+    !shipping &&
+    page
+  ) {
+    return true;
+  }
+
+  return false;
+};
+
 // TODO: enforce type
 // TODO: stricter types for categories etc.
 export const searchProducts = createAsyncThunk(
   'products/searchProducts',
   async (searchParams: SearchParams) => {
+    // TODO: remove this
+    // TODO: do we need to check for page only?
+    const params = buildSearchQuery(searchParams);
     try {
-      const params = buildSearchQuery(searchParams);
-      const fullUrl = `${url}${params}`;
+      let fullUrl = '';
+      if (hasPageOnly(searchParams)) {
+        const { page } = searchParams;
+        fullUrl = `${url}?page=${page}`;
+      } else {
+        const params = buildSearchQuery(searchParams);
+        fullUrl = `${url}${params}`;
+      }
       const response = await fetch(fullUrl);
       const data = await response.json();
       const { data: products, meta } = data;

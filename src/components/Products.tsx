@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { fetchProducts } from '../actions/fetchProducts';
 import { SearchParams, searchProducts } from '../actions/searchProducts';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
@@ -41,9 +40,6 @@ export default function Products() {
   const [currentPage, setCurrentPage] = useState(
     getPageFromLocalStorage() || 1
   );
-  const [lastSearchParams, setLastSearchParams] = useState<SearchParams | null>(
-    null
-  );
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -56,7 +52,7 @@ export default function Products() {
 
   // TODO: probably: have a search state var set by the filter, and use it to decide which action to fire
   useEffect(() => {
-    dispatch(fetchProducts(currentPage));
+    dispatch(searchProducts({ page: currentPage }));
   }, [dispatch, currentPage]);
 
   useEffect(() => {
@@ -65,41 +61,37 @@ export default function Products() {
 
   const handleSearch = (searchParams: SearchParams) => {
     dispatch(searchProducts(searchParams));
-    setLastSearchParams(searchParams);
   };
 
   const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();
     setCurrentPage(page);
-    // TODO: it's not an ideal solution
-    lastSearchParams
-      ? dispatch(searchProducts({ ...lastSearchParams, page }))
-      : dispatch(fetchProducts(page));
+    dispatch(searchProducts({ page: currentPage }));
   };
 
   // TODO: find a better way to handle this
-  useEffect(() => {
-    const searchParams = new URLSearchParams(location.search);
-    const search = searchParams.get('search');
-    const category = searchParams.get('category');
-    const company = searchParams.get('company');
-    const order = searchParams.get('order');
-    const price = searchParams.get('price');
-    const shipping = searchParams.get('shipping');
-    const page = searchParams.get('page');
+  // useEffect(() => {
+  //   const searchParams = new URLSearchParams(location.search);
+  //   const search = searchParams.get('search');
+  //   const category = searchParams.get('category');
+  //   const company = searchParams.get('company');
+  //   const order = searchParams.get('order');
+  //   const price = searchParams.get('price');
+  //   const shipping = searchParams.get('shipping');
+  //   const page = searchParams.get('page');
 
-    const params: SearchParams = {
-      search: search || '',
-      category: category || 'all',
-      company: company || 'all',
-      order: order || 'a-z',
-      price: Number(price) || 100000,
-      shipping: 'on' === shipping,
-      page: Number(page) || 1,
-    };
+  //   const params: SearchParams = {
+  //     search: search || '',
+  //     category: category || 'all',
+  //     company: company || 'all',
+  //     order: order || 'a-z',
+  //     price: Number(price) || 100000,
+  //     shipping: 'on' === shipping,
+  //     page: Number(page) || 1,
+  //   };
 
-    dispatch(searchProducts(params));
-  }, [dispatch, location.search]);
+  //   dispatch(searchProducts(params));
+  // }, [dispatch, location.search]);
 
   const handleLayoutToggle = (
     event: React.MouseEvent,
