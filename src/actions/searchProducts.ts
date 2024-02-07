@@ -28,8 +28,7 @@ export interface SearchParams {
 // TODO: move this to a config file
 const url = 'https://strapi-store-server.onrender.com/api/products';
 
-// function that takes SearchParams, and returns a string, excluding query parameters if the corresponding value is empty
-const buildUrl = (params: SearchParams) => {
+const buildSearchQuery = (params: SearchParams) => {
   const search = params.search ? `search=${params.search}` : '';
   const category = params.category ? `category=${params.category}` : '';
   const company = params.company ? `company=${params.company}` : '';
@@ -48,7 +47,7 @@ export const searchProducts = createAsyncThunk(
   'products/searchProducts',
   async (searchParams: SearchParams) => {
     try {
-      const params = buildUrl(searchParams);
+      const params = buildSearchQuery(searchParams);
       const fullUrl = `${url}${params}`;
       const response = await fetch(fullUrl);
       const data = await response.json();
