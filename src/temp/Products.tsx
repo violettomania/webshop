@@ -8,6 +8,7 @@ import Loading from './Loading';
 import { ProductCardType } from '../slices/featuredProductsSlice';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
 import Pagination from './Pagination';
+import { setPage } from '../slices/productsSlice';
 
 const gridDisplayClasses = 'pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3';
 const listDisplayClasses = 'mt-12 grid gap-y-8';
@@ -31,6 +32,7 @@ export default function Products() {
   );
   const companies = useAppSelector((state: RootState) => state.paged.companies);
   const url = useAppSelector((state: RootState) => state.paged.url);
+  const currentPage = useAppSelector((state: RootState) => state.paged.currentPage);
 
   // TODO: bugfix: page sometimes loads twice, page never resets
   // TODO: reset page in local storage when user leaves the page
@@ -41,15 +43,14 @@ export default function Products() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // TODO: consider not using local storage for this
   // TODO: bugfix: it's not working when navigating back
   // useEffect(() => {
   //   setCurrentPage(1);
   // }, [location]);
 
-  // TODO: probably: have a search state var set by the filter, and use it to decide which action to fire
   useEffect(() => {
     dispatch(fetchProducts({ page: 1 }));
+    dispatch(setPage(1));
   }, [dispatch]);
 
   useEffect(() => {
@@ -60,8 +61,7 @@ export default function Products() {
     dispatch(fetchProducts(urlParams));
   };
 
-  const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
-    event.preventDefault();
+  const handlePageNumberChange = (page: number) => {
     dispatch(fetchProducts({ page }));
   };
 
