@@ -14,6 +14,7 @@ interface ProductsState {
   products: FeaturedProductType[];
   total: number;
   pageCount: number;
+  currentPage: number;
   categories: string[];
   companies: string[];
   loading: boolean;
@@ -25,6 +26,7 @@ const initialState: ProductsState = {
   products: [],
   total: 0,
   pageCount: 0,
+  currentPage: 1,
   categories: [],
   companies: [],
   loading: false,
@@ -35,7 +37,11 @@ const initialState: ProductsState = {
 export const allProductsSlice = createSlice({
   name: 'paged',
   initialState,
-  reducers: {},
+  reducers: {
+    setPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchProducts.pending, (state) => {
@@ -58,5 +64,6 @@ export const allProductsSlice = createSlice({
 });
 
 export const selectAllProducts = (state: RootState) => state.paged.products;
+export const setPage = allProductsSlice.actions.setPage;
 
 export default allProductsSlice.reducer;
