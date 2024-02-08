@@ -61,6 +61,10 @@ export default function Products() {
     dispatch(fetchProducts(urlParams));
   };
 
+  const handleReset = () => {
+    dispatch(fetchProducts({ page: 1 }));
+  };
+
   const handlePageNumberChange = (page: number) => {
     dispatch(fetchProducts({ page }));
   };
@@ -98,6 +102,8 @@ export default function Products() {
     setDisplayMode(display);
   };
 
+  useEffect(() => {console.log(location.pathname) }, [location.pathname]);
+
   // TODO: pagination: add ... ?
   return loading ? (
     <Loading />
@@ -105,8 +111,10 @@ export default function Products() {
     <section className='align-element py-20'>
       <ProductsFilter
         onSearch={handleSearch}
+        onReset={handleReset}
         categories={categories}
         companies={companies}
+        key={location.pathname}
       />
       <ProductsLayoutToggle
         productQuantity={total}
