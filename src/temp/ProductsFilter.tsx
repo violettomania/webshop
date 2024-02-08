@@ -38,6 +38,16 @@ export default function ProductsFilter({
     onSearch(searchParams);
   };
 
+  const handleReset = () => {
+    setProductName('');
+    setCategory('all');
+    setCompany('all');
+    setSortBy('a-z');
+    setPrice(100000);
+    setFreeShipping(false);
+    onReset();
+  }
+
   return (
     <form
       onSubmit={handleSearch}
@@ -145,7 +155,7 @@ export default function ProductsFilter({
       <button type='submit' className='btn btn-primary btn-sm'>
         search
       </button>
-      <Link className='btn btn-accent btn-sm' to='/products' onClick={onReset}>
+      <Link className='btn btn-accent btn-sm' to='/products' onClick={handleReset}>
         reset
       </Link>
     </form>
