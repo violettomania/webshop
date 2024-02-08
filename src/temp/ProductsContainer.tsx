@@ -19,7 +19,7 @@ export default function ProductsContainer() {
 
   // TODO: bugfix: page sometimes loads twice, page never resets
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
-  const [lastSearch, setLastSearch] = useState<URLParams | null>(null);
+  const [lastSearchParams, setLastSearchParams] = useState<URLParams | null>(null);
   
   const location = useLocation();
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export default function ProductsContainer() {
   useEffect(() => {
     dispatch(fetchProducts({ page: 1 }));
     dispatch(setPage(1));
-    setLastSearch(null);
+    setLastSearchParams(null);
   }, [dispatch]);
 
   useEffect(() => {
@@ -40,17 +40,18 @@ export default function ProductsContainer() {
   }, [navigate, url]);
 
   const handleSearch = (urlParams: URLParams) => {
-    setLastSearch(urlParams);
+    setLastSearchParams(urlParams);
     dispatch(fetchProducts(urlParams));
   };
 
+  // TODO: do not reload the page when the search is empty
   const handleReset = () => {
     dispatch(fetchProducts({ page: 1 }));
   };
 
   const handlePageNumberChange = (page: number) => {
-    if (lastSearch) {
-      dispatch(fetchProducts({...lastSearch, page}));
+    if (lastSearchParams) {
+      dispatch(fetchProducts({...lastSearchParams, page}));
     } else {
       dispatch(fetchProducts({ page }));
     }
