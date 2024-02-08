@@ -4,6 +4,7 @@ import { URLParams } from '../actions/fetchProducts';
 
 interface ProductsFilterProps {
   onSearch: (searchParams: URLParams) => void;
+  onReset: () => void;
   categories: string[];
   companies: string[];
 }
@@ -12,6 +13,7 @@ interface ProductsFilterProps {
 // TODO: search input should remain after search
 export default function ProductsFilter({
   onSearch,
+  onReset,
   categories,
   companies,
 }: ProductsFilterProps) {
@@ -142,7 +144,7 @@ export default function ProductsFilter({
       <button type='submit' className='btn btn-primary btn-sm'>
         search
       </button>
-      <Link className='btn btn-accent btn-sm' to='/products'>
+      <Link className='btn btn-accent btn-sm' to='/products' onClick={onReset}>
         reset
       </Link>
     </form>
