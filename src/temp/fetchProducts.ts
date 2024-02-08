@@ -11,7 +11,7 @@ interface SingleProduct {
   };
 }
 
-export interface SearchParams {
+export interface URLParams {
   search?: string;
   category?: string;
   company?: string;
@@ -24,7 +24,7 @@ export interface SearchParams {
 // TODO: move this to a config file
 const url = 'https://strapi-store-server.onrender.com/api/products';
 
-const buildSearchQuery = (params: SearchParams) => {
+const buildSearchQuery = (params: URLParams) => {
   const search = params.search ? `search=${params.search}` : '';
   const category = params.category ? `category=${params.category}` : '';
   const company = params.company ? `company=${params.company}` : '';
@@ -37,41 +37,14 @@ const buildSearchQuery = (params: SearchParams) => {
   return `?${queryString}`;
 };
 
-const hasPageOnly = (params: SearchParams) => {
-  const { search, category, company, order, price, shipping, page } = params;
-
-  if (
-    !search &&
-    !category &&
-    !company &&
-    !order &&
-    !price &&
-    !shipping &&
-    page
-  ) {
-    return true;
-  }
-
-  return false;
-};
-
 // TODO: enforce type
 // TODO: stricter types for categories etc.
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
-  async (searchParams: SearchParams) => {
-    // TODO: remove this
-    // TODO: do we need to check for page only?
-    const params = buildSearchQuery(searchParams);
+  async (urlParams: URLParams) => {
     try {
-      let fullUrl = '';
-      if (hasPageOnly(searchParams)) {
-        const { page } = searchParams;
-        fullUrl = `${url}?page=${page}`;
-      } else {
-        const params = buildSearchQuery(searchParams);
-        fullUrl = `${url}${params}`;
-      }
+      const params = buildSearchQuery(urlParams);
+      const fullUrl = `${url}${params}`;
       const response = await fetch(fullUrl);
       const data = await response.json();
       const { data: products, meta } = data;
