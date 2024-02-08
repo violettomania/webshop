@@ -2,7 +2,7 @@ import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import { setPage } from '../slices/productsSlice';
 
 interface PaginationProps {
-  onPageNumberChange: (e: React.MouseEvent, page: number) => void;
+  onPageNumberChange: (page: number) => void;
 }
 
 const selectedPageButtonClasses = 'bg-base-300 border-base-300';
@@ -16,14 +16,14 @@ export default function Pagination({
 
   const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();
-    onPageNumberChange(event, page);
+    onPageNumberChange(page);
     dispatch(setPage(page));
   };
 
   const handleNextPage = (event: React.MouseEvent) => {
     event.preventDefault();
     const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
-    onPageNumberChange(event, nextPage);
+    onPageNumberChange(nextPage);
     dispatch(setPage(nextPage));
   };
 
@@ -33,7 +33,7 @@ export default function Pagination({
       currentPage - 1 < pageCount && currentPage - 1 > 0
         ? currentPage - 1
         : pageCount;
-    onPageNumberChange(event, prevPage);
+    onPageNumberChange(prevPage);
     dispatch(setPage(prevPage));
   };
 
