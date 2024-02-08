@@ -32,14 +32,13 @@ export default function Products() {
   );
   const companies = useAppSelector((state: RootState) => state.paged.companies);
   const url = useAppSelector((state: RootState) => state.paged.url);
-  const currentPage = useAppSelector((state: RootState) => state.paged.currentPage);
 
   // TODO: bugfix: page sometimes loads twice, page never resets
   // TODO: reset page in local storage when user leaves the page
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
   // TODO: it's used in Pagination, consider moving it to a hook
-  // const [currentPage, setCurrentPage] = useState(1);
-
+  const [lastSearch, setLastSearch] = useState<URLParams | null>(null);
+  
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -51,6 +50,7 @@ export default function Products() {
   useEffect(() => {
     dispatch(fetchProducts({ page: 1 }));
     dispatch(setPage(1));
+    setLastSearch(null);
   }, [dispatch]);
 
   useEffect(() => {
@@ -58,6 +58,7 @@ export default function Products() {
   }, [navigate, url]);
 
   const handleSearch = (urlParams: URLParams) => {
+    setLastSearch(urlParams);
     dispatch(fetchProducts(urlParams));
   };
 
@@ -66,7 +67,11 @@ export default function Products() {
   };
 
   const handlePageNumberChange = (page: number) => {
-    dispatch(fetchProducts({ page }));
+    if (lastSearch) {
+      dispatch(fetchProducts({...lastSearch, page}));
+    } else {
+      dispatch(fetchProducts({ page }));
+    }
   };
 
   // TODO: find a better way to handle this
