@@ -9,6 +9,7 @@ interface ProductsFilterProps {
   companies: string[];
 }
 
+// TODO: add types to state vars, like a-z etc
 // TODO: filter should not disappear while loading, just disable it
 // TODO: search input should remain after search
 export default function ProductsFilter({
