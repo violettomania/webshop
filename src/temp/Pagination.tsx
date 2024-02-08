@@ -1,153 +1,70 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { URLParams } from '../actions/fetchProducts';
+import { RootState, useAppDispatch, useAppSelector } from '../store/store';
+import { setPage } from '../slices/productsSlice';
 
-interface ProductsFilterProps {
-  onSearch: (searchParams: URLParams) => void;
-  onReset: () => void;
-  categories: string[];
-  companies: string[];
+interface PaginationProps {
+  onPageNumberChange: (page: number) => void;
 }
 
-// TODO: add types to state vars, like a-z etc
-// TODO: filter should not disappear while loading, just disable it
-// TODO: search input should remain after search
-export default function ProductsFilter({
-  onSearch,
-  onReset,
-  categories,
-  companies,
-}: ProductsFilterProps) {
-  const [productName, setProductName] = useState('');
-  const [category, setCategory] = useState('all');
-  const [company, setCompany] = useState('all');
-  const [sortBy, setSortBy] = useState('a-z');
-  const [price, setPrice] = useState(100000);
-  const [freeShipping, setFreeShipping] = useState(false);
+const selectedPageButtonClasses = 'bg-base-300 border-base-300';
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
+export default function Pagination({
+  onPageNumberChange,
+}: PaginationProps) {
+  const dispatch = useAppDispatch();
+  const pageCount = useAppSelector((state: RootState) => state.paged.pageCount);
+  const currentPage = useAppSelector((state: RootState) => state.paged.currentPage);
+
+  const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();
-    const searchParams = {
-      search: productName,
-      category,
-      company,
-      order: sortBy,
-      price,
-      shipping: freeShipping,
-    };
-    onSearch(searchParams);
+    onPageNumberChange(page);
+    dispatch(setPage(page));
+  };
+
+  const handleNextPage = (event: React.MouseEvent) => {
+    event.preventDefault();
+    const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
+    onPageNumberChange(nextPage);
+    dispatch(setPage(nextPage));
+  };
+
+  const handlePrevPage = (event: React.MouseEvent) => {
+    event.preventDefault();
+    const prevPage =
+      currentPage - 1 < pageCount && currentPage - 1 > 0
+        ? currentPage - 1
+        : pageCount;
+    onPageNumberChange(prevPage);
+    dispatch(setPage(prevPage));
   };
 
   return (
-    <form
-      onSubmit={handleSearch}
-      method='get'
-      action='/products'
-      className='bg-base-200 rounded-md px-8 py-4 grid gap-x-4  gap-y-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 items-center'
-    >
-      <div className='form-control'>
-        <label htmlFor='search' className='label'>
-          <span className='label-text capitalize'>search product</span>
-        </label>
-        <input
-          type='search'
-          name='search'
-          className='input input-bordered input-sm'
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-        />
-      </div>
-      <div className='form-control'>
-        <label htmlFor='category' className='label'>
-          <span className='label-text capitalize'>select category</span>
-        </label>
-        <select
-          name='category'
-          id='category'
-          className='select select-bordered select-sm'
-          value={category}
-          onChange={(e) => setCategory(e.target.value)}
+    pageCount > 1 ? (
+    <div className='mt-16 flex justify-end'>
+      <div className='join'>
+        <button
+          className='btn btn-xs sm:btn-md join-item'
+          onClick={handlePrevPage}
         >
-          {categories.map((category) => (
-            <option key={category} value={category}>
-              {category}
-            </option>
-          ))}
-        </select>
-      </div>
-      <div className='form-control'>
-        <label htmlFor='company' className='label'>
-          <span className='label-text capitalize'>select company</span>
-        </label>
-        <select
-          name='company'
-          id='company'
-          className='select select-bordered select-sm'
-          value={company}
-          onChange={(e) => setCompany(e.target.value)}
+          Prev
+        </button>
+        {Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => (
+          <button
+            onClick={(e) => handlePageNumberChange(e, page)}
+            key={page}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === page ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {page}
+          </button>
+        ))}
+        <button
+          className='btn btn-xs sm:btn-md join-item'
+          onClick={handleNextPage}
         >
-          {companies.map((company) => (
-            <option key={company} value={company}>
-              {company}
-            </option>
-          ))}
-        </select>
+          Next
+        </button>
       </div>
-      <div className='form-control'>
-        <label htmlFor='order' className='label'>
-          <span className='label-text capitalize'>sort by</span>
-        </label>
-        <select
-          name='order'
-          id='order'
-          className='select select-bordered select-sm'
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-        >
-          <option value='a-z'>a-z</option>
-          <option value='z-a'>z-a</option>
-          <option value='high'>high</option>
-          <option value='low'>low</option>
-        </select>
-      </div>
-      <div className='form-control'>
-        <label htmlFor='price' className='label cursor-pointer'>
-          <span className='label-text capitalize'>select price</span>
-          <span>$1,000.00</span>
-        </label>
-        <input
-          type='range'
-          name='price'
-          min='0'
-          max='100000'
-          className='range range-primary range-sm'
-          step='1000'
-          value={price}
-          onChange={(e) => setPrice(Number(e.target.value))}
-        />
-        <div className='w-full flex justify-between text-xs px-2 mt-2'>
-          <span className='font-bold text-md'>0</span>
-          <span className='font-bold text-md'>Max : $1,000.00</span>
-        </div>
-      </div>
-      <div className='form-control items-center'>
-        <label htmlFor='shipping' className='label cursor-pointer'>
-          <span className='label-text capitalize'>free shipping</span>
-        </label>
-        <input
-          type='checkbox'
-          name='shipping'
-          className='checkbox checkbox-primary checkbox-sm'
-          checked={freeShipping}
-          onChange={(e) => setFreeShipping(e.target.checked)}
-        />
-      </div>
-      <button type='submit' className='btn btn-primary btn-sm'>
-        search
-      </button>
-      <Link className='btn btn-accent btn-sm' to='/products' onClick={onReset}>
-        reset
-      </Link>
-    </form>
-  );
+    </div>
+  ) : null);
 }
