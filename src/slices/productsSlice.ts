@@ -36,7 +36,7 @@ const initialState: ProductsState = {
   refresh: false,
 };
 
-export const allProductsSlice = createSlice({
+export const productsSlice = createSlice({
   name: 'paged',
   initialState,
   reducers: {
@@ -67,8 +67,8 @@ export const allProductsSlice = createSlice({
   },
 });
 
-export const selectAllProducts = (state: RootState) => state.paged.products;
-export const setPage = allProductsSlice.actions.setPage;
-export const refreshProductsPage = allProductsSlice.actions.refreshProductsPage;
+export const selectProducts = (state: RootState) => state.paged.products;
+export const setPage = productsSlice.actions.setPage;
+export const refreshProductsPage = productsSlice.actions.refreshProductsPage;
 
-export default allProductsSlice.reducer;
+export default productsSlice.reducer;
