@@ -19,8 +19,10 @@ export default function ProductsContainer() {
 
   // TODO: bugfix: page sometimes loads twice, page never resets
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
-  const [lastSearchParams, setLastSearchParams] = useState<URLParams | null>(null);
-  
+  const [lastSearchParams, setLastSearchParams] = useState<URLParams | null>(
+    null
+  );
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -51,7 +53,7 @@ export default function ProductsContainer() {
 
   const handlePageNumberChange = (page: number) => {
     if (lastSearchParams) {
-      dispatch(fetchProducts({...lastSearchParams, page}));
+      dispatch(fetchProducts({ ...lastSearchParams, page }));
     } else {
       dispatch(fetchProducts({ page }));
     }
@@ -90,7 +92,9 @@ export default function ProductsContainer() {
     setDisplayMode(display);
   };
 
-  useEffect(() => {console.log(location.pathname) }, [location.pathname]);
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location.pathname]);
 
   // TODO: pagination: add ... ?
   return (
@@ -106,10 +110,8 @@ export default function ProductsContainer() {
         onLayoutToggle={handleLayoutToggle}
         currentDisplayMode={displayMode}
       />
-      <Products displayMode={displayMode}/>
-      <Pagination
-        onPageNumberChange={handlePageNumberChange}
-      />
+      <Products displayMode={displayMode} />
+      <Pagination onPageNumberChange={handlePageNumberChange} />
     </section>
   );
 }

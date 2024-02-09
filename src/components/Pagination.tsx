@@ -1,42 +1,30 @@
-import { useState } from 'react';
+import { RootState, useAppDispatch, useAppSelector } from '../store/store';
+import { setPage } from '../slices/productsSlice';
 
 interface PaginationProps {
-  pageCount: number;
-  onPageNumberChange: (e: React.MouseEvent, page: number) => void;
+  onPageNumberChange: (page: number) => void;
 }
 
 const selectedPageButtonClasses = 'bg-base-300 border-base-300';
 
-// TODO: consider moving these to helper functions
-export const getPageFromLocalStorage = () => {
-  return Number(localStorage.getItem('page'));
-};
-
-export const setPageToLocalStorage = (page: number) => {
-  localStorage.setItem('page', String(page));
-};
-
 export default function Pagination({
-  pageCount,
   onPageNumberChange,
 }: PaginationProps) {
-  const [currentPage, setCurrentPage] = useState(
-    getPageFromLocalStorage() || 1
-  );
+  const dispatch = useAppDispatch();
+  const pageCount = useAppSelector((state: RootState) => state.paged.pageCount);
+  const currentPage = useAppSelector((state: RootState) => state.paged.currentPage);
 
   const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();
-    onPageNumberChange(event, page);
-    setCurrentPage(page);
-    setPageToLocalStorage(page);
+    onPageNumberChange(page);
+    dispatch(setPage(page));
   };
 
   const handleNextPage = (event: React.MouseEvent) => {
     event.preventDefault();
     const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
-    onPageNumberChange(event, nextPage);
-    setCurrentPage(nextPage);
-    setPageToLocalStorage(nextPage);
+    onPageNumberChange(nextPage);
+    dispatch(setPage(nextPage));
   };
 
   const handlePrevPage = (event: React.MouseEvent) => {
@@ -45,12 +33,12 @@ export default function Pagination({
       currentPage - 1 < pageCount && currentPage - 1 > 0
         ? currentPage - 1
         : pageCount;
-    onPageNumberChange(event, prevPage);
-    setCurrentPage(prevPage);
-    setPageToLocalStorage(prevPage);
+    onPageNumberChange(prevPage);
+    dispatch(setPage(prevPage));
   };
 
   return (
+    pageCount > 1 ? (
     <div className='mt-16 flex justify-end'>
       <div className='join'>
         <button
@@ -78,5 +66,5 @@ export default function Pagination({
         </button>
       </div>
     </div>
-  );
+  ) : null);
 }

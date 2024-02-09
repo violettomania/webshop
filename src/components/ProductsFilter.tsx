@@ -1,17 +1,20 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { SearchParams } from '../actions/searchProducts';
+import { URLParams } from '../actions/fetchProducts';
 
 interface ProductsFilterProps {
-  onSearch: (searchParams: SearchParams) => void;
+  onSearch: (searchParams: URLParams) => void;
+  onReset: () => void;
   categories: string[];
   companies: string[];
 }
 
+// TODO: add types to state vars, like a-z etc
 // TODO: filter should not disappear while loading, just disable it
 // TODO: search input should remain after search
 export default function ProductsFilter({
   onSearch,
+  onReset,
   categories,
   companies,
 }: ProductsFilterProps) {
@@ -34,6 +37,16 @@ export default function ProductsFilter({
     };
     onSearch(searchParams);
   };
+
+  const handleReset = () => {
+    setProductName('');
+    setCategory('all');
+    setCompany('all');
+    setSortBy('a-z');
+    setPrice(100000);
+    setFreeShipping(false);
+    onReset();
+  }
 
   return (
     <form
@@ -142,7 +155,7 @@ export default function ProductsFilter({
       <button type='submit' className='btn btn-primary btn-sm'>
         search
       </button>
-      <Link className='btn btn-accent btn-sm' to='/products'>
+      <Link className='btn btn-accent btn-sm' to='/products' onClick={handleReset}>
         reset
       </Link>
     </form>

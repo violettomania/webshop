@@ -18,6 +18,7 @@ export default function ColorPicker({ colors }: ColorPickerProps) {
     <div className='mt-2'>
       {colors.map((color) => (
         <button
+          key={color}
           type='button'
           onClick={(e) => handleClick(e, color)}
           className={`badge w-6 h-6 mr-2 ${

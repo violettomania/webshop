@@ -1,5 +1,5 @@
-import Products from '../components/Products';
+import ProductsContainer from '../components/ProductsContainer';
 
 export default function ProductsPage() {
-  return <Products />;
+  return <ProductsContainer />;
 }
