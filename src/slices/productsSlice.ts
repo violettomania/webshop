@@ -20,6 +20,7 @@ interface ProductsState {
   loading: boolean;
   error?: string;
   url?: string;
+  refresh: boolean;
 }
 
 const initialState: ProductsState = {
@@ -32,6 +33,7 @@ const initialState: ProductsState = {
   loading: false,
   error: '',
   url: '',
+  refresh: false,
 };
 
 export const allProductsSlice = createSlice({
@@ -40,6 +42,9 @@ export const allProductsSlice = createSlice({
   reducers: {
     setPage: (state, action) => {
       state.currentPage = action.payload;
+    },
+    refreshProductsPage: (state, action) => {
+      state.refresh = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -65,5 +70,6 @@ export const allProductsSlice = createSlice({
 
 export const selectAllProducts = (state: RootState) => state.paged.products;
 export const setPage = allProductsSlice.actions.setPage;
+export const refreshProductsPage = allProductsSlice.actions.refreshProductsPage;
 
 export default allProductsSlice.reducer;

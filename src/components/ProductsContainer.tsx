@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { URLParams, fetchProducts } from '../actions/fetchProducts';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import ProductsFilter from './ProductsFilter';
 import Products from './Products';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
 import Pagination from './Pagination';
-import { setPage } from '../slices/productsSlice';
+import { refreshProductsPage, setPage } from '../slices/productsSlice';
 
 export default function ProductsContainer() {
   const dispatch = useAppDispatch();
@@ -15,34 +14,29 @@ export default function ProductsContainer() {
     (state: RootState) => state.paged.categories
   );
   const companies = useAppSelector((state: RootState) => state.paged.companies);
-  const url = useAppSelector((state: RootState) => state.paged.url);
+  const refresh = useAppSelector((state: RootState) => state.paged.refresh);
 
-  // TODO: bugfix: page sometimes loads twice, page never resets
   // TODO: good candidate for Context API / hook / signal
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid');
   const [lastSearchParams, setLastSearchParams] = useState<URLParams | null>(
     null
   );
 
-  const location = useLocation();
-  const navigate = useNavigate();
-
   useEffect(() => {
     dispatch(fetchProducts({ page: 1 }));
     dispatch(setPage(1));
     setLastSearchParams(null);
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (url) navigate(url);
-  }, [navigate, url]);
+    if (refresh) {
+      dispatch(fetchProducts({ page: 1 }));
+      dispatch(refreshProductsPage(false));
+    }
+  }, [dispatch, refresh]);
 
   const handleSearch = (urlParams: URLParams) => {
     setLastSearchParams(urlParams);
     dispatch(fetchProducts(urlParams));
   };
 
-  // TODO: do not reload the page when the search is empty
   const handleReset = () => {
     dispatch(fetchProducts({ page: 1 }));
   };
@@ -63,10 +57,6 @@ export default function ProductsContainer() {
     event.stopPropagation();
     setDisplayMode(display);
   };
-
-  useEffect(() => {
-    console.log(location.pathname);
-  }, [location.pathname]);
 
   // TODO: pagination: add ... ?
   return (

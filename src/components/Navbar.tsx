@@ -3,6 +3,8 @@ import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import { refreshProductsPage } from '../slices/productsSlice';
+import { useAppDispatch } from '../store/store';
 
 const paths = ['/', '/about', '/products', '/cart'];
 const pages = ['home', 'about', 'products', 'cart'];
@@ -15,6 +17,7 @@ export default function Navbar() {
   const location = useLocation();
   const [selectedPath, setSelectedPath] = useState(location.pathname);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'winter');
+  const dispatch = useAppDispatch();
 
   const toggleTheme = () => {
     const newTheme = theme === 'winter' ? 'dracula' : 'winter';
@@ -34,13 +37,20 @@ export default function Navbar() {
     );
   }, [theme]);
 
+  const handleClick = (path: string) => {
+    setSelectedPath(path);
+    if (path === paths[2]) {
+      dispatch(refreshProductsPage(true));
+    }
+  };
+
   // TODO: page should refresh when clicking on the button and the url changed
   // hacky, but possibly should fire a search event from here
   const renderNavbarLinks = () => {
     return paths.map((path, idx) => (
       <li key={path}>
         <Link
-          onClick={() => setSelectedPath(path)}
+          onClick={() => handleClick(path)}
           className={`capitalize ${path === selectedPath ? 'active' : ''}`}
           to={path}
           aria-current={path === selectedPath ? 'page' : undefined}
