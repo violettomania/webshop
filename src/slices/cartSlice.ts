@@ -8,6 +8,7 @@ interface CartTotals {
   tax: number;
 }
 
+// TODO: what's cartID for?
 interface CartState {
   cartItems: {
     cartID: string;
@@ -79,5 +80,7 @@ export const cartSlice = createSlice({
     },
   },
 });
+
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;
