@@ -11,40 +11,42 @@ const gridCardDisplayClasses =
   'card w-full shadow-xl hover:shadow-2xl transition duration-300';
 
 interface ProductsProps {
-    displayMode: DisplayMode;
+  displayMode: DisplayMode;
 }
 
 export default function Products({ displayMode }: ProductsProps) {
-    const pagedProducts = useAppSelector(
-        (state: RootState) => state.paged.products
-    );
-    const loading = useAppSelector((state: RootState) => state.paged.loading);
+  const pagedProducts = useAppSelector(
+    (state: RootState) => state.paged.products
+  );
+  const loading = useAppSelector((state: RootState) => state.paged.loading);
 
-    return loading ? (
-        <Loading />
-      ) : (<div>
-        {pagedProducts.length === 0 ? (
-            <h5 className='text-2xl mt-16'>
-                Sorry, no products matched your search...
-            </h5>
-        ) : (
-            <div // TODO: bug: when changing to card, and navigating back, the grid/list selector defaults to grid
-                className={`${
-                displayMode === 'grid' ? gridDisplayClasses : listDisplayClasses
-                }`}
-            >
-                {pagedProducts.map((product: ProductCardType) => (
-                <ProductCard
-                    key={product.id}
-                    classes={`${
-                    displayMode === 'grid'
-                        ? gridCardDisplayClasses
-                        : listCardDisplayClasses
-                    }`}
-                    {...product}
-                />
-                ))}
+  return loading ? (
+    <Loading />
+  ) : (
+    <div>
+      {pagedProducts.length === 0 ? (
+        <h5 className='text-2xl mt-16'>
+          Sorry, no products matched your search...
+        </h5>
+      ) : (
+        <div
+          className={`${
+            displayMode === 'grid' ? gridDisplayClasses : listDisplayClasses
+          }`}
+        >
+          {pagedProducts.map((product: ProductCardType) => (
+            <ProductCard
+              key={product.id}
+              classes={`${
+                displayMode === 'grid'
+                  ? gridCardDisplayClasses
+                  : listCardDisplayClasses
+              }`}
+              {...product}
+            />
+          ))}
         </div>
-        )}
-    </div>)
+      )}
+    </div>
+  );
 }

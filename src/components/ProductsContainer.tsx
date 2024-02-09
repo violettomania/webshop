@@ -18,18 +18,14 @@ export default function ProductsContainer() {
   const url = useAppSelector((state: RootState) => state.paged.url);
 
   // TODO: bugfix: page sometimes loads twice, page never resets
-  const [displayMode, setDisplayMode] = useState<DisplayMode>('grid'); // TODO: good candidate for Context API / hook / signal
+  // TODO: good candidate for Context API / hook / signal
+  const [displayMode, setDisplayMode] = useState<DisplayMode>('grid');
   const [lastSearchParams, setLastSearchParams] = useState<URLParams | null>(
     null
   );
 
   const location = useLocation();
   const navigate = useNavigate();
-
-  // TODO: bugfix: it's not working when navigating back
-  // useEffect(() => {
-  //   setCurrentPage(1);
-  // }, [location]);
 
   useEffect(() => {
     dispatch(fetchProducts({ page: 1 }));
@@ -58,30 +54,6 @@ export default function ProductsContainer() {
       dispatch(fetchProducts({ page }));
     }
   };
-
-  // TODO: find a better way to handle this
-  // useEffect(() => {
-  //   const urlParams = new URLurlParams(location.search);
-  //   const search = urlParams.get('search');
-  //   const category = urlParams.get('category');
-  //   const company = urlParams.get('company');
-  //   const order = urlParams.get('order');
-  //   const price = urlParams.get('price');
-  //   const shipping = urlParams.get('shipping');
-  //   const page = urlParams.get('page');
-
-  //   const params: urlParams = {
-  //     search: search || '',
-  //     category: category || 'all',
-  //     company: company || 'all',
-  //     order: order || 'a-z',
-  //     price: Number(price) || 100000,
-  //     shipping: 'on' === shipping,
-  //     page: Number(page) || 1,
-  //   };
-
-  //   dispatch(fetchProducts(params));
-  // }, [dispatch, location.search]);
 
   const handleLayoutToggle = (
     event: React.MouseEvent,
