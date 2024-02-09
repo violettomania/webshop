@@ -4,6 +4,7 @@ import ColorPicker from './ColorPicker';
 import { useAppDispatch } from '../store/store';
 import { addToCart } from '../slices/cartSlice';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 interface ProductProps {
   id: string;
@@ -28,6 +29,24 @@ export default function Product({
   const [color, setColor] = useState(colors[0]);
 
   const dispatch = useAppDispatch();
+
+  const handleAddToCart = () => {
+    dispatch(
+      addToCart({
+        cartId: '1',
+        productID: Number(id),
+        image,
+        title,
+        price,
+        company,
+        productColor: color,
+        amount,
+      })
+    );
+    // TODO: bug: toast is too big
+    // TODO: implement toast color theme
+    toast.success('Item added to cart!');
+  };
 
   if (!title || !company || !description || !image || !price || !colors) {
     return (
@@ -90,20 +109,7 @@ export default function Product({
             <div className='mt-10'>
               <button
                 className='btn btn-secondary btn-md'
-                onClick={() =>
-                  dispatch(
-                    addToCart({
-                      cartId: '1',
-                      productID: Number(id),
-                      image,
-                      title,
-                      price,
-                      company,
-                      productColor: color,
-                      amount,
-                    })
-                  )
-                }
+                onClick={handleAddToCart}
               >
                 Add to bag
               </button>

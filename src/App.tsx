@@ -11,6 +11,7 @@ import OrdersPage from './pages/OrdersPage';
 import ProductPage from './pages/ProductPage';
 import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
+import Toast from './components/Toast';
 
 export default function App() {
   return (
@@ -35,6 +36,7 @@ export default function App() {
       <>
         <Header />
         <Navbar />
+        <Toast />
         <Outlet />
       </>
     );
