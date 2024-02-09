@@ -7,12 +7,12 @@ interface PaginationProps {
 
 const selectedPageButtonClasses = 'bg-base-300 border-base-300';
 
-export default function Pagination({
-  onPageNumberChange,
-}: PaginationProps) {
+export default function Pagination({ onPageNumberChange }: PaginationProps) {
   const dispatch = useAppDispatch();
   const pageCount = useAppSelector((state: RootState) => state.paged.pageCount);
-  const currentPage = useAppSelector((state: RootState) => state.paged.currentPage);
+  const currentPage = useAppSelector(
+    (state: RootState) => state.paged.currentPage
+  );
 
   const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
     event.preventDefault();
@@ -37,8 +37,7 @@ export default function Pagination({
     dispatch(setPage(prevPage));
   };
 
-  return (
-    pageCount > 1 ? (
+  return pageCount > 1 ? (
     <div className='mt-16 flex justify-end'>
       <div className='join'>
         <button
@@ -66,5 +65,5 @@ export default function Pagination({
         </button>
       </div>
     </div>
-  ) : null);
+  ) : null;
 }

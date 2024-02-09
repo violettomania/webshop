@@ -5,7 +5,7 @@ import singleProductReducer from '../slices/singleProductSlice';
 import userReducer from '../slices/userSlice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-// TODO: (possibly) find a better naming scheme / unify reducers?
+// TODO: (possibly) find a better naming scheme / unify reducers? maybe nested slices (products.paged, products.featured, products.single)?
 const store = configureStore({
   reducer: {
     paged: productsReducer,
