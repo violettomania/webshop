@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import productsReducer from '../slices/productsSlice';
 import featuredProductsReducer from '../slices/featuredProductsSlice';
 import singleProductReducer from '../slices/singleProductSlice';
+import cartReducer from '../slices/cartSlice';
 import userReducer from '../slices/userSlice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
@@ -11,6 +12,7 @@ const store = configureStore({
     paged: productsReducer,
     featured: featuredProductsReducer,
     single: singleProductReducer,
+    cart: cartReducer,
     user: userReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
