@@ -58,7 +58,6 @@ export const allProductsSlice = createSlice({
         state.pageCount = action.payload.pageCount;
         state.categories = action.payload.categories;
         state.companies = action.payload.companies;
-        state.url = action.payload.url;
         state.loading = false;
       })
       .addCase(fetchProducts.rejected, (state, action) => {

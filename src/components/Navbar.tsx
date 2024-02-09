@@ -44,8 +44,6 @@ export default function Navbar() {
     }
   };
 
-  // TODO: page should refresh when clicking on the button and the url changed
-  // hacky, but possibly should fire a search event from here
   const renderNavbarLinks = () => {
     return paths.map((path, idx) => (
       <li key={path}>

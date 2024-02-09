@@ -72,7 +72,6 @@ export const fetchProducts = createAsyncThunk(
           total,
           categories,
           companies,
-          url: params,
         };
       } else {
         return {
@@ -81,7 +80,6 @@ export const fetchProducts = createAsyncThunk(
           total: 0,
           categories: [],
           companies: [],
-          url: '',
         };
       }
     } catch (error) {
