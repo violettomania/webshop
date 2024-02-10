@@ -1,7 +1,7 @@
 import { FaBarsStaggered } from 'react-icons/fa6';
 import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { refreshProductsPage } from '../slices/productsSlice';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
@@ -16,11 +16,12 @@ export default function Navbar() {
   // TODO: refactor: clicking on logo must select Home navbar item
   // TODO: what about testability?
   const location = useLocation();
-  const [selectedPath, setSelectedPath] = useState(location.pathname);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'winter');
-
   const totals = useAppSelector((state: RootState) => state.cart.totals);
   const dispatch = useAppDispatch();
+
+  const [selectedPath, setSelectedPath] = useState(location.pathname);
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'winter');
+  const [navbarLinks, setNavbarLinks] = useState<JSX.Element[]>([]);
 
   const toggleTheme = () => {
     const newTheme = theme === 'winter' ? 'dracula' : 'winter';
@@ -40,15 +41,18 @@ export default function Navbar() {
     );
   }, [theme]);
 
-  const handleClick = (path: string) => {
-    setSelectedPath(path);
-    if (path === paths[2]) {
-      dispatch(refreshProductsPage(true));
-    }
-  };
+  const handleClick = useCallback(
+    (path: string) => {
+      setSelectedPath(path);
+      if (path === paths[2]) {
+        dispatch(refreshProductsPage(true));
+      }
+    },
+    [dispatch]
+  );
 
-  const renderNavbarLinks = () => {
-    return paths.map((path, idx) => (
+  const renderNavbarLinks = useCallback(() => {
+    const links = paths.map((path, idx) => (
       <li key={path}>
         <Link
           onClick={() => handleClick(path)}
@@ -60,7 +64,12 @@ export default function Navbar() {
         </Link>
       </li>
     ));
-  };
+    setNavbarLinks(links);
+  }, [handleClick, selectedPath]);
+
+  useEffect(() => {
+    renderNavbarLinks();
+  }, [renderNavbarLinks, selectedPath]);
 
   return (
     <nav className='bg-base-200'>
@@ -82,12 +91,12 @@ export default function Navbar() {
               tabIndex={0}
               className='menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-200 rounded-box w-52'
             >
-              {renderNavbarLinks()}
+              {navbarLinks}
             </ul>
           </div>
         </div>
         <div className='navbar-center hidden lg:flex'>
-          <ul className='menu menu-horizontal'>{renderNavbarLinks()}</ul>
+          <ul className='menu menu-horizontal'>{navbarLinks}</ul>
         </div>
         <div className='navbar-end'>
           <label className='swap swap-rotate'>
@@ -95,7 +104,11 @@ export default function Navbar() {
             <BsSunFill className='swap-on h-4 w-4' />
             <BsMoonFill className='swap-off h-4 w-4' />
           </label>
-          <Link className='btn btn-ghost btn-circle btn-md ml-4' to='/cart'>
+          <Link
+            className='btn btn-ghost btn-circle btn-md ml-4'
+            to='/cart'
+            onClick={() => setSelectedPath(paths[3])}
+          >
             <div className='indicator'>
               <BsCart3 />
               <span className='badge badge-sm badge-primary indicator-item'>
