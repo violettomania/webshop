@@ -7,6 +7,7 @@ interface CartTotalProps {
 
 export default function CartTotal({ totals }: CartTotalProps) {
   const { cartTotal, orderTotal, shipping, tax } = totals;
+
   return (
     <div className='lg:col-span-4 lg:pl-4'>
       <div className='card bg-base-200'>

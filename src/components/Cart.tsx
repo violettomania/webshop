@@ -1,4 +1,4 @@
-import { removeFromCart } from '../slices/cartSlice';
+import { changeAmountInCart, removeFromCart } from '../slices/cartSlice';
 import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import CartItems from './CartItems';
 import CartTotal from './CartTotal';
@@ -12,8 +12,8 @@ export default function Cart() {
 
   const dispatch = useAppDispatch();
 
-  const handleChangeItemAmount = (productID: number) => {
-    dispatch(removeFromCart(productID));
+  const handleChangeItemAmount = (productID: number, amount: number) => {
+    dispatch(changeAmountInCart({ productID, amount }));
   };
 
   const handleRemoveItem = (productID: number) => {

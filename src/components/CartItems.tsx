@@ -1,4 +1,3 @@
-import { onChange } from 'react-toastify/dist/core/store';
 import formatPrice from '../util/priceFormatter';
 
 interface CartItemType {
@@ -13,7 +12,7 @@ interface CartItemType {
 
 interface CartItemsProps {
   cartItems: CartItemType[];
-  onChangeItemAmount: (productID: number) => void;
+  onChangeItemAmount: (productID: number, amount: number) => void;
   onRemoveItem: (productID: number) => void;
 }
 
@@ -24,10 +23,11 @@ export default function CartItems({
 }: CartItemsProps) {
   const handleChangeItemAmount = (
     event: React.ChangeEvent<HTMLSelectElement>,
-    productID: number
+    productID: number,
+    amount: number
   ) => {
     event.preventDefault();
-    onChangeItemAmount(productID);
+    onChangeItemAmount(productID, amount);
   };
 
   const handleRemoveItem = (event: React.MouseEvent, productID: number) => {
@@ -71,7 +71,9 @@ export default function CartItems({
                   id='amount'
                   className='mt-2 select select-base select-bordered select-xs'
                   defaultValue={amount}
-                  onChange={(event) => handleChangeItemAmount(event, productID)}
+                  onChange={(e) =>
+                    handleChangeItemAmount(e, productID, Number(e.target.value))
+                  }
                 >
                   {Array.from({ length: 20 }, (_, i) => i + 1).map((number) => (
                     <option key={number} value={number}>

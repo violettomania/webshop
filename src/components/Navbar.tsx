@@ -14,6 +14,7 @@ export default function Navbar() {
   // TODO: reuse paths from App.tsx
   // TODO: move theme selection to userSlice, otherwise it will be lost on page refresh (and using the local storage doesn't make sense in this case, since the user should be able to change the theme without having to refresh the page to see the changes)
   // TODO: refactor: clicking on logo must select Home navbar item
+  // TODO: what about testability?
   const location = useLocation();
   const [selectedPath, setSelectedPath] = useState(location.pathname);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'winter');
