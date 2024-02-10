@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { refreshProductsPage } from '../slices/productsSlice';
-import { useAppDispatch } from '../store/store';
+import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 
 const paths = ['/', '/about', '/products', '/cart'];
 const pages = ['home', 'about', 'products', 'cart'];
@@ -17,6 +17,8 @@ export default function Navbar() {
   const location = useLocation();
   const [selectedPath, setSelectedPath] = useState(location.pathname);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'winter');
+
+  const totals = useAppSelector((state: RootState) => state.cart.totals);
   const dispatch = useAppDispatch();
 
   const toggleTheme = () => {
@@ -96,7 +98,7 @@ export default function Navbar() {
             <div className='indicator'>
               <BsCart3 />
               <span className='badge badge-sm badge-primary indicator-item'>
-                1
+                {totals.numItemsInCart}
               </span>
             </div>
           </Link>

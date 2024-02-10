@@ -3,6 +3,7 @@ import CartItems from './CartItems';
 import CartTotal from './CartTotal';
 
 // TODO: add clear cart button
+// TODO: would be a good idea to have cart item number separately since it's usd in multiple places
 // TODO: price should not be string
 export default function Cart() {
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
