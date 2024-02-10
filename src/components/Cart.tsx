@@ -12,6 +12,10 @@ export default function Cart() {
 
   const dispatch = useAppDispatch();
 
+  const handleChangeItemAmount = (productID: number) => {
+    dispatch(removeFromCart(productID));
+  };
+
   const handleRemoveItem = (productID: number) => {
     dispatch(removeFromCart(productID));
   };
@@ -32,7 +36,11 @@ export default function Cart() {
             </h2>
           </div>
           <div className='mt-8 grid gap-8 lg:grid-cols-12'>
-            <CartItems onRemoveItem={handleRemoveItem} cartItems={cartItems} />
+            <CartItems
+              onRemoveItem={handleRemoveItem}
+              onChangeItemAmount={handleChangeItemAmount}
+              cartItems={cartItems}
+            />
             <CartTotal totals={totals} />
           </div>
         </>
