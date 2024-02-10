@@ -2,6 +2,7 @@ import { RootState, useAppSelector } from '../store/store';
 import CartItems from './CartItems';
 
 // TODO: add clear cart button
+// TODO: price should not be string
 export default function Cart() {
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
 
@@ -21,7 +22,7 @@ export default function Cart() {
             </h2>
           </div>
           <div className='mt-8 grid gap-8 lg:grid-cols-12'>
-            <CartItems />
+            <CartItems cartItems={cartItems} />
             <div className='lg:col-span-4 lg:pl-4'>
               <div className='card bg-base-200'>
                 <div className='card-body'>

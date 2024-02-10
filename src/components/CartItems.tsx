@@ -1,9 +1,20 @@
-import { RootState, useAppSelector } from '../store/store';
 import formatPrice from '../util/priceFormatter';
 
-export default function CartItems() {
-  const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
+interface CartItemType {
+  productID: number;
+  image: string;
+  title: string;
+  price: string;
+  company: string;
+  productColor: string;
+  amount: number;
+}
 
+interface CartItemsProps {
+  cartItems: CartItemType[];
+}
+
+export default function CartItems({ cartItems }: CartItemsProps) {
   return (
     <div className='lg:col-span-8'>
       {cartItems.map(
@@ -52,7 +63,9 @@ export default function CartItems() {
                 remove
               </button>
             </div>
-            <p className='font-medium sm:ml-auto'>{`$${formatPrice(price)}`}</p>
+            <p className='font-medium sm:ml-auto'>{`$${formatPrice(
+              price.toString()
+            )}`}</p>
           </article>
         )
       )}
