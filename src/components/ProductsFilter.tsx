@@ -87,7 +87,7 @@ export default function ProductsFilter({
           id='category'
           className='select select-bordered select-sm'
           value={category}
-          onChange={(e) => setCategory(e.target.value)}
+          onChange={(e) => setCategory(e.target.value as Category)}
         >
           {categories.map((category) => (
             <option key={category} value={category}>
@@ -105,7 +105,7 @@ export default function ProductsFilter({
           id='company'
           className='select select-bordered select-sm'
           value={company}
-          onChange={(e) => setCompany(e.target.value)}
+          onChange={(e) => setCompany(e.target.value as Company)}
         >
           {companies.map((company) => (
             <option key={company} value={company}>
@@ -123,7 +123,7 @@ export default function ProductsFilter({
           id='order'
           className='select select-bordered select-sm'
           value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
+          onChange={(e) => setSortBy(e.target.value as SortCriteria)}
         >
           <option value='a-z'>a-z</option>
           <option value='z-a'>z-a</option>
