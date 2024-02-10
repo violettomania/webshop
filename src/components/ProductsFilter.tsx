@@ -2,6 +2,18 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { URLParams } from '../actions/fetchProducts';
 
+// TODO: probably move these to a shared file
+// TODO: add shipping type, unify its conversion (should probably do it here)
+type Category = 'all' | 'Tables' | 'Chairs' | 'Kids' | 'Sofas' | 'Beds';
+type Company =
+  | 'all'
+  | 'Modenza'
+  | 'Luxora'
+  | 'Artifex'
+  | 'Comfora'
+  | 'Homestead';
+type SortCriteria = 'a-z' | 'z-a' | 'high' | 'low';
+
 interface ProductsFilterProps {
   onSearch: (searchParams: URLParams) => void;
   onReset: () => void;
@@ -9,7 +21,6 @@ interface ProductsFilterProps {
   companies: string[];
 }
 
-// TODO: add types to state vars, like a-z etc
 // TODO: filter should not disappear while loading, just disable it
 // TODO: search input should remain after search
 export default function ProductsFilter({
@@ -19,9 +30,9 @@ export default function ProductsFilter({
   companies,
 }: ProductsFilterProps) {
   const [productName, setProductName] = useState('');
-  const [category, setCategory] = useState('all');
-  const [company, setCompany] = useState('all');
-  const [sortBy, setSortBy] = useState('a-z');
+  const [category, setCategory] = useState<Category>('all');
+  const [company, setCompany] = useState<Company>('all');
+  const [sortBy, setSortBy] = useState<SortCriteria>('a-z');
   const [price, setPrice] = useState(100000);
   const [freeShipping, setFreeShipping] = useState(false);
 
@@ -46,7 +57,7 @@ export default function ProductsFilter({
     setPrice(100000);
     setFreeShipping(false);
     onReset();
-  }
+  };
 
   return (
     <form
@@ -155,7 +166,11 @@ export default function ProductsFilter({
       <button type='submit' className='btn btn-primary btn-sm'>
         search
       </button>
-      <Link className='btn btn-accent btn-sm' to='/products' onClick={handleReset}>
+      <Link
+        className='btn btn-accent btn-sm'
+        to='/products'
+        onClick={handleReset}
+      >
         reset
       </Link>
     </form>
