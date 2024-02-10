@@ -1,4 +1,5 @@
-import { RootState, useAppSelector } from '../store/store';
+import { removeFromCart } from '../slices/cartSlice';
+import { RootState, useAppDispatch, useAppSelector } from '../store/store';
 import CartItems from './CartItems';
 import CartTotal from './CartTotal';
 
@@ -8,6 +9,12 @@ import CartTotal from './CartTotal';
 export default function Cart() {
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
   const totals = useAppSelector((state: RootState) => state.cart.totals);
+
+  const dispatch = useAppDispatch();
+
+  const handleRemoveItem = (productID: number) => {
+    dispatch(removeFromCart(productID));
+  };
 
   return (
     <section className='align-element py-20'>
@@ -25,7 +32,7 @@ export default function Cart() {
             </h2>
           </div>
           <div className='mt-8 grid gap-8 lg:grid-cols-12'>
-            <CartItems cartItems={cartItems} />
+            <CartItems onRemoveItem={handleRemoveItem} cartItems={cartItems} />
             <CartTotal totals={totals} />
           </div>
         </>

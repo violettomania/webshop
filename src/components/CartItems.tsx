@@ -12,9 +12,15 @@ interface CartItemType {
 
 interface CartItemsProps {
   cartItems: CartItemType[];
+  onRemoveItem: (productID: number) => void;
 }
 
-export default function CartItems({ cartItems }: CartItemsProps) {
+export default function CartItems({ cartItems, onRemoveItem }: CartItemsProps) {
+  const handleRemoveItem = (event: React.MouseEvent, productID: number) => {
+    event.preventDefault();
+    onRemoveItem(productID);
+  };
+
   return (
     <div className='lg:col-span-8'>
       {cartItems.map(
@@ -59,7 +65,10 @@ export default function CartItems({ cartItems }: CartItemsProps) {
                   ))}
                 </select>
               </div>
-              <button className='mt-2 link link-primary link-hover text-sm'>
+              <button
+                className='mt-2 link link-primary link-hover text-sm'
+                onClick={(event) => handleRemoveItem(event, productID)}
+              >
                 remove
               </button>
             </div>

@@ -71,7 +71,20 @@ export const cartSlice = createSlice({
     },
     removeFromCart: (state, action) => {
       const id = action.payload;
-      state.cartItems = state.cartItems.filter((item) => item.productID !== id);
+      const existingItem = state.cartItems.find(
+        (item) => item.productID === id
+      );
+
+      if (existingItem) {
+        existingItem.amount -= 1;
+
+        if (existingItem.amount === 0) {
+          state.cartItems = state.cartItems.filter(
+            (item) => item.productID !== id
+          );
+        }
+      }
+
       calculateTotals(state);
     },
     clearCart: (state) => {
