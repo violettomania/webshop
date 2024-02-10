@@ -88,13 +88,10 @@ export const cartSlice = createSlice({
       );
 
       if (existingItem) {
-        existingItem.amount -= 1;
-
-        if (existingItem.amount === 0) {
-          state.cartItems = state.cartItems.filter(
-            (item) => item.productID !== id
-          );
-        }
+        existingItem.amount = 0;
+        state.cartItems = state.cartItems.filter(
+          (item) => item.productID !== id
+        );
       }
 
       calculateTotals(state);
