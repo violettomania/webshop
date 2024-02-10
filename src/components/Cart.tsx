@@ -1,10 +1,12 @@
 import { RootState, useAppSelector } from '../store/store';
 import CartItems from './CartItems';
+import CartTotal from './CartTotal';
 
 // TODO: add clear cart button
 // TODO: price should not be string
 export default function Cart() {
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
+  const totals = useAppSelector((state: RootState) => state.cart.totals);
 
   return (
     <section className='align-element py-20'>
@@ -23,31 +25,7 @@ export default function Cart() {
           </div>
           <div className='mt-8 grid gap-8 lg:grid-cols-12'>
             <CartItems cartItems={cartItems} />
-            <div className='lg:col-span-4 lg:pl-4'>
-              <div className='card bg-base-200'>
-                <div className='card-body'>
-                  <p className='flex justify-between text-xs border-b border-base-300 pb-2'>
-                    <span>Subtotal</span>
-                    <span className='font-medium'>$179.99</span>
-                  </p>
-                  <p className='flex justify-between text-xs border-b border-base-300 pb-2'>
-                    <span>Shipping</span>
-                    <span className='font-medium'>$5.00</span>
-                  </p>
-                  <p className='flex justify-between text-xs border-b border-base-300 pb-2'>
-                    <span>Tax</span>
-                    <span className='font-medium'>$18.00</span>
-                  </p>
-                  <p className='flex justify-between text-sm mt-4 pb-2'>
-                    <span>Order Total</span>
-                    <span className='font-medium'>$202.99</span>
-                  </p>
-                </div>
-              </div>
-              <a className='btn btn-primary btn-block mt-8' href='/login'>
-                please login
-              </a>
-            </div>
+            <CartTotal totals={totals} />
           </div>
         </>
       )}

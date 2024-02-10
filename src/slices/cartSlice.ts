@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-interface CartTotals {
+export interface CartTotals {
   cartTotal: number;
   numItemsInCart: number;
   orderTotal: number;
