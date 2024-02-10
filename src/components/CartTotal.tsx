@@ -1,5 +1,6 @@
 import formatPrice from '../util/priceFormatter';
 import { CartTotals } from '../slices/cartSlice';
+import { Link } from 'react-router-dom';
 
 interface CartTotalProps {
   totals: CartTotals;
@@ -38,9 +39,11 @@ export default function CartTotal({ totals }: CartTotalProps) {
           </p>
         </div>
       </div>
-      <a className='btn btn-primary btn-block mt-8' href='/login'>
+      <Link className='btn btn-primary btn-block mt-8' to='/login'>
         please login
-      </a>
+      </Link>
     </div>
   );
 }
+
+// <Link class="btn btn-primary btn-block mt-8" to="/checkout">proceed to checkout</Link>
