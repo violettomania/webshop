@@ -1,4 +1,18 @@
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { RootState } from '../store/store';
+import { registerUser } from '../actions/registerUser';
+import { useState } from 'react';
+
 export default function Register() {
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useAppDispatch();
+
+  const user = useAppSelector((state: RootState) => state.user.registeredUser);
+  const loading = useAppSelector((state: RootState) => state.user.loading);
+
   return (
     <section className='h-screen grid place-items-center'>
       <form

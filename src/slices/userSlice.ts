@@ -1,30 +1,39 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
+import { RegisteredUser, registerUser } from '../actions/registerUser';
 
 interface UserState {
-  user: {
-    id: string;
-  };
+  registeredUser: RegisteredUser | null;
+  loading: boolean;
+  error?: string;
 }
 
 const initialState: UserState = {
-  user: {
-    id: '',
-  },
+  registeredUser: null,
+  loading: false,
+  error: '',
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    test: (state, action) => {
-      state.user = action.payload;
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(registerUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(registerUser.fulfilled, (state, action) => {
+        state.registeredUser = action.payload;
+        state.loading = false;
+      })
+      .addCase(registerUser.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      });
   },
 });
 
-export const { test } = userSlice.actions;
-
-export const selectUser = (state: RootState) => state.user;
+export const selectUser = (state: RootState) => state.user.registeredUser;
 
 export default userSlice.reducer;
