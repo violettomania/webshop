@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../store/store';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import Product from '../components/Product';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../store/store';

@@ -1,4 +1,5 @@
-import { RootState, useAppDispatch, useAppSelector } from '../store/store';
+import { RootState } from '../store/store';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { setPage } from '../slices/productsSlice';
 
 interface PaginationProps {

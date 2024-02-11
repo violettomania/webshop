@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { RootState, useAppDispatch, useAppSelector } from '../store/store';
+import { RootState } from '../store/store';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
 import ProductCard from './ProductCard';
 import { ProductCardType } from '../slices/featuredProductsSlice';

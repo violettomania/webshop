@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { refreshProductsPage } from '../slices/productsSlice';
-import { RootState, useAppDispatch, useAppSelector } from '../store/store';
+import { RootState } from '../store/store';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 
 const paths = ['/', '/about', '/products', '/cart'];
 const pages = ['home', 'about', 'products', 'cart'];

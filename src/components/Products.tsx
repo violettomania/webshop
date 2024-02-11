@@ -1,4 +1,5 @@
-import { RootState, useAppSelector } from '../store/store';
+import { RootState } from '../store/store';
+import { useAppSelector } from '../hooks/hooks';
 import ProductCard from './ProductCard';
 import Loading from './Loading';
 import { ProductCardType } from '../slices/featuredProductsSlice';

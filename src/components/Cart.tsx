@@ -1,5 +1,6 @@
 import { changeAmountInCart, removeFromCart } from '../slices/cartSlice';
-import { RootState, useAppDispatch, useAppSelector } from '../store/store';
+import { RootState } from '../store/store';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import CartItems from './CartItems';
 import CartTotal from './CartTotal';
 

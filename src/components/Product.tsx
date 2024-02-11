@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import formatPrice from '../util/priceFormatter';
 import ColorPicker from './ColorPicker';
-import { useAppDispatch } from '../store/store';
+import { useAppDispatch } from '../hooks/hooks';
 import { addToCart } from '../slices/cartSlice';
 import { useState } from 'react';
 import { toast } from 'react-toastify';

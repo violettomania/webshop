@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { URLParams, fetchProducts } from '../actions/fetchProducts';
-import { RootState, useAppDispatch, useAppSelector } from '../store/store';
+import { RootState } from '../store/store';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import ProductsFilter from './ProductsFilter';
 import Products from './Products';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
