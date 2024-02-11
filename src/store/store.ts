@@ -6,7 +6,29 @@ import cartReducer from '../slices/cartSlice';
 import userReducer from '../slices/userSlice';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
-// TODO: (possibly) find a better naming scheme / unify reducers? maybe nested slices (products.paged, products.featured, products.single)?
+const savedCartItems = localStorage.getItem('cartItems');
+const savedTotals = localStorage.getItem('totals');
+const preloadedState =
+  savedCartItems && savedTotals
+    ? {
+        cart: {
+          cartItems: JSON.parse(savedCartItems),
+          totals: JSON.parse(savedTotals),
+        },
+      }
+    : {
+        cart: {
+          cartItems: [],
+          totals: {
+            cartTotal: 0,
+            numItemsInCart: 0,
+            orderTotal: 0,
+            shipping: 0,
+            tax: 0,
+          },
+        },
+      };
+
 const store = configureStore({
   reducer: {
     paged: productsReducer,
@@ -15,7 +37,19 @@ const store = configureStore({
     cart: cartReducer,
     user: userReducer,
   },
+  preloadedState,
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
+});
+
+store.subscribe(() => {
+  localStorage.setItem(
+    'cartItems',
+    JSON.stringify(store.getState().cart.cartItems)
+  );
+  localStorage.setItem(
+    'totals',
+    JSON.stringify(store.getState().cart.cartItems)
+  );
 });
 
 export type AppDispatch = typeof store.dispatch;
