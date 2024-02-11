@@ -8,26 +8,41 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 
 const savedCartItems = localStorage.getItem('cartItems');
 const savedTotals = localStorage.getItem('totals');
-const preloadedState =
-  savedCartItems && savedTotals
-    ? {
-        cart: {
-          cartItems: JSON.parse(savedCartItems),
-          totals: JSON.parse(savedTotals),
-        },
-      }
-    : {
-        cart: {
-          cartItems: [],
-          totals: {
-            cartTotal: 0,
-            numItemsInCart: 0,
-            orderTotal: 0,
-            shipping: 0,
-            tax: 0,
-          },
-        },
-      };
+
+let totals = savedTotals ? JSON.parse(savedTotals) : null;
+if (
+  Array.isArray(totals) ||
+  !totals ||
+  !(
+    'cartTotal' in totals &&
+    'numItemsInCart' in totals &&
+    'orderTotal' in totals &&
+    'shipping' in totals &&
+    'tax' in totals
+  )
+) {
+  totals = {
+    cartTotal: 0,
+    numItemsInCart: 0,
+    orderTotal: 0,
+    shipping: 0,
+    tax: 0,
+  };
+}
+
+const preloadedState = savedCartItems
+  ? {
+      cart: {
+        cartItems: JSON.parse(savedCartItems),
+        totals: totals,
+      },
+    }
+  : {
+      cart: {
+        cartItems: [],
+        totals: totals,
+      },
+    };
 
 const store = configureStore({
   reducer: {
