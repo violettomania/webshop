@@ -46,10 +46,7 @@ store.subscribe(() => {
     'cartItems',
     JSON.stringify(store.getState().cart.cartItems)
   );
-  localStorage.setItem(
-    'totals',
-    JSON.stringify(store.getState().cart.cartItems)
-  );
+  localStorage.setItem('totals', JSON.stringify(store.getState().cart.totals));
 });
 
 export type AppDispatch = typeof store.dispatch;
