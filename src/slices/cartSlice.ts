@@ -62,17 +62,19 @@ export const cartSlice = createSlice({
       const existingItems = state.cartItems.find(
         (item) => item.productID === newItem.productID
       );
+
       if (existingItems) {
         existingItems.amount += 1;
       } else {
         state.cartItems.push(newItem);
       }
+
       calculateTotals(state);
     },
     changeAmountInCart: (state, action) => {
-      const { id, amount } = action.payload;
+      const { productID, amount } = action.payload;
       const existingItem = state.cartItems.find(
-        (item) => item.productID === id
+        (item) => item.productID === productID
       );
 
       if (existingItem && amount > 0) {
