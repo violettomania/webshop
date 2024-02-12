@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { config } from './config/config';
 
 interface Product {
   id: string;
@@ -12,7 +13,7 @@ interface Product {
   };
 }
 
-const url = 'https://strapi-store-server.onrender.com/api/products/';
+const url = `${config.productsUrl}/`;
 
 // TODO: enforce Product type (above)
 export const fetchProduct = createAsyncThunk(

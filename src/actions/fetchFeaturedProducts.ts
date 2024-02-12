@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { config } from './config/config';
 
 // TODO: make this a generic type?
 // TODO: replace FeatureProductProps
@@ -11,9 +12,8 @@ interface FeaturedProduct {
   };
 }
 
-// TODO: move this to a config file
-const url = 'https://strapi-store-server.onrender.com/api/products';
-const featuredQuery = '?featured=true';
+const url = config.productsUrl;
+const featuredQuery = config.featuredQuery;
 
 export const fetchFeaturedProducts = createAsyncThunk(
   'products/fetchFeaturedProducts',

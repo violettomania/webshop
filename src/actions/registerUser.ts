@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { config } from './config/config';
 
 interface User {
   id: number;
@@ -16,7 +17,7 @@ export interface RegisteredUser {
   user: User;
 }
 
-const url = 'https://strapi-store-server.onrender.com/api/auth/local/register';
+const url = config.registerUrl;
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',

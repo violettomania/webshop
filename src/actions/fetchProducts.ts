@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { config } from './config/config';
 
 // TODO: make this a generic type?
 // TODO: replace FeatureProductProps
@@ -21,8 +22,7 @@ export interface URLParams {
   page?: number;
 }
 
-// TODO: move this to a config file
-const url = 'https://strapi-store-server.onrender.com/api/products';
+const url = config.productsUrl;
 
 const buildSearchQuery = (params: URLParams) => {
   const search = params.search ? `search=${params.search}` : '';
