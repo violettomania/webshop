@@ -1,17 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
-import { RegisteredUser, registerUser } from '../actions/registerUser';
+import {
+  RegisteredUser,
+  RegistrationError,
+  registerUser,
+} from '../actions/registerUser';
 
 interface UserState {
   registeredUser: RegisteredUser | null;
   loading: boolean;
-  error?: string;
+  errors?: string[];
 }
 
 const initialState: UserState = {
   registeredUser: null,
   loading: false,
-  error: '',
+  errors: [],
 };
 
 export const userSlice = createSlice({
@@ -28,7 +32,12 @@ export const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.error = action.error.message;
+        if (action.error instanceof RegistrationError) {
+          state.errors = action.error.errorMessages;
+          console.log(action.error.errorMessages);
+        } else {
+          state.errors = [action.error.message!];
+        }
         state.loading = false;
       });
   },

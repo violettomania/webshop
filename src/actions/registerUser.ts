@@ -17,6 +17,33 @@ export interface RegisteredUser {
   user: User;
 }
 
+interface ErrorResponse {
+  message: string;
+  details: {
+    errors?: [{ message?: string }];
+  };
+}
+
+interface Response {
+  data: RegisteredUser;
+  error: ErrorResponse;
+}
+
+// TODO: move this to a separate file
+export class RegistrationError extends Error {
+  public errorMessages: string[];
+  constructor(public originalError: ErrorResponse) {
+    super(originalError.message);
+    if (originalError.details && originalError.details.errors) {
+      this.errorMessages = originalError.details.errors.map(
+        (error) => error.message || ''
+      );
+    } else {
+      this.errorMessages = [originalError.message];
+    }
+  }
+}
+
 const url = config.registerUrl;
 
 export const registerUser = createAsyncThunk(
@@ -30,8 +57,11 @@ export const registerUser = createAsyncThunk(
         },
         body: JSON.stringify(user),
       });
-      const data: RegisteredUser = await response.json();
-      return data;
+      const resp: Response = await response.json();
+      if (resp.error) {
+        throw new RegistrationError(resp.error);
+      }
+      return resp.data;
     } catch (error) {
       console.error(error);
       throw error;

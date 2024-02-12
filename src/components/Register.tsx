@@ -12,6 +12,15 @@ export default function Register() {
 
   const user = useAppSelector((state: RootState) => state.user.registeredUser);
   const loading = useAppSelector((state: RootState) => state.user.loading);
+  // TODO: handle errors
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    dispatch(registerUser({ username, email, password }));
+    setUsername('');
+    setEmail('');
+    setPassword('');
+  };
 
   return (
     <section className='h-screen grid place-items-center'>
@@ -19,6 +28,7 @@ export default function Register() {
         method='post'
         action='/register'
         className='card w-96 p-8 bg-base-100 shadow-lg flex flex-col gap-y-4'
+        onSubmit={handleSubmit}
       >
         <h4 className='text-center text-3xl font-bold'>Register</h4>
         <div className='form-control'>
@@ -29,7 +39,8 @@ export default function Register() {
             type='text'
             name='username'
             className='input input-bordered undefined'
-            value=''
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className='form-control'>
@@ -40,7 +51,8 @@ export default function Register() {
             type='email'
             name='email'
             className='input input-bordered undefined'
-            value=''
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className='form-control'>
@@ -51,7 +63,8 @@ export default function Register() {
             type='password'
             name='password'
             className='input input-bordered undefined'
-            value=''
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className='mt-4'>
