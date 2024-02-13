@@ -1,26 +1,27 @@
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { RootState } from '../store/store';
 import { registerUser } from '../actions/registerUser';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import SubmitButton from './SubmitButton';
 
 export default function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const dispatch = useAppDispatch();
-
-  const user = useAppSelector((state: RootState) => state.user.registeredUser);
   const loading = useAppSelector((state: RootState) => state.user.loading);
-  // TODO: handle errors
+  const errors = useAppSelector((state: RootState) => state.user.errors);
+  const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(registerUser({ username, email, password }));
-    setUsername('');
-    setEmail('');
-    setPassword('');
   };
+
+  useEffect(() => {
+    errors?.forEach((error) => toast.error(error));
+  }, [errors]);
 
   return (
     <section className='h-screen grid place-items-center'>
@@ -39,6 +40,7 @@ export default function Register() {
             type='text'
             name='username'
             className='input input-bordered undefined'
+            disabled={loading}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -51,6 +53,7 @@ export default function Register() {
             type='email'
             name='email'
             className='input input-bordered undefined'
+            disabled={loading}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -63,14 +66,13 @@ export default function Register() {
             type='password'
             name='password'
             className='input input-bordered undefined'
+            disabled={loading}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className='mt-4'>
-          <button type='submit' className='btn btn-primary btn-block'>
-            register
-          </button>
+          <SubmitButton loading={loading} text='register' />
         </div>
         <p className='text-center'>
           Already a member?
@@ -85,5 +87,3 @@ export default function Register() {
     </section>
   );
 }
-
-// TODO: connect this to a backend

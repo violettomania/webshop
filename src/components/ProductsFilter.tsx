@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { URLParams } from '../actions/fetchProducts';
+import { useAppSelector } from '../hooks/hooks';
+import { RootState } from '../store/store';
+import SubmitButton from './SubmitButton';
 
 // TODO: probably move these to a shared file
 // TODO: add shipping type, unify its conversion (should probably do it here)
@@ -21,8 +24,7 @@ interface ProductsFilterProps {
   companies: string[];
 }
 
-// TODO: filter should not disappear while loading, just disable it
-// TODO: search input should remain after search
+// TODO: use a modified submit button for searching with spinner etc.
 export default function ProductsFilter({
   onSearch,
   onReset,
@@ -35,6 +37,8 @@ export default function ProductsFilter({
   const [sortBy, setSortBy] = useState<SortCriteria>('a-z');
   const [price, setPrice] = useState(100000);
   const [freeShipping, setFreeShipping] = useState(false);
+
+  const loading = useAppSelector((state: RootState) => state.paged.loading);
 
   const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -74,6 +78,7 @@ export default function ProductsFilter({
           type='search'
           name='search'
           className='input input-bordered input-sm'
+          disabled={loading}
           value={productName}
           onChange={(e) => setProductName(e.target.value)}
         />
@@ -86,6 +91,7 @@ export default function ProductsFilter({
           name='category'
           id='category'
           className='select select-bordered select-sm'
+          disabled={loading}
           value={category}
           onChange={(e) => setCategory(e.target.value as Category)}
         >
@@ -104,6 +110,7 @@ export default function ProductsFilter({
           name='company'
           id='company'
           className='select select-bordered select-sm'
+          disabled={loading}
           value={company}
           onChange={(e) => setCompany(e.target.value as Company)}
         >
@@ -122,6 +129,7 @@ export default function ProductsFilter({
           name='order'
           id='order'
           className='select select-bordered select-sm'
+          disabled={loading}
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value as SortCriteria)}
         >
@@ -143,6 +151,7 @@ export default function ProductsFilter({
           max='100000'
           className='range range-primary range-sm'
           step='1000'
+          disabled={loading}
           value={price}
           onChange={(e) => setPrice(Number(e.target.value))}
         />
@@ -159,13 +168,15 @@ export default function ProductsFilter({
           type='checkbox'
           name='shipping'
           className='checkbox checkbox-primary checkbox-sm'
+          disabled={loading}
           checked={freeShipping}
           onChange={(e) => setFreeShipping(e.target.checked)}
         />
       </div>
-      <button type='submit' className='btn btn-primary btn-sm'>
+      {/* <button type='submit' className='btn btn-primary btn-sm'>
         search
-      </button>
+      </button> */}
+      <SubmitButton loading={loading} text='register' />
       <Link
         className='btn btn-accent btn-sm'
         to='/products'

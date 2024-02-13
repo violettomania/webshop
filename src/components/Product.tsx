@@ -43,7 +43,6 @@ export default function Product({
         amount,
       })
     );
-    // TODO: bug: toast is too big
     // TODO: implement toast color theme
     toast.success('Item added to cart!');
   };
