@@ -34,9 +34,8 @@ export const userSlice = createSlice({
       .addCase(registerUser.rejected, (state, action) => {
         if (action.error instanceof RegistrationError) {
           state.errors = action.error.errorMessages;
-          console.log(action.error.errorMessages);
         } else {
-          state.errors = [action.error.message!];
+          state.errors = action.error.message ? [action.error.message] : ['An error occurred'];
         }
         state.loading = false;
       });
