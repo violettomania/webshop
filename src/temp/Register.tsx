@@ -3,12 +3,14 @@ import { RootState } from '../store/store';
 import { registerUser } from '../actions/registerUser';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import SubmitButton from './SubmitButton';
 
 export default function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const loading = useAppSelector((state: RootState) => state.user.loading);
   const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
 
@@ -38,6 +40,7 @@ export default function Register() {
             type='text'
             name='username'
             className='input input-bordered undefined'
+            disabled={loading}
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
@@ -50,6 +53,7 @@ export default function Register() {
             type='email'
             name='email'
             className='input input-bordered undefined'
+            disabled={loading}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -62,14 +66,13 @@ export default function Register() {
             type='password'
             name='password'
             className='input input-bordered undefined'
+            disabled={loading}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className='mt-4'>
-          <button type='submit' className='btn btn-primary btn-block'>
-            register
-          </button>
+          <SubmitButton loading={loading} text='register' />
         </div>
         <p className='text-center'>
           Already a member?
@@ -84,5 +87,3 @@ export default function Register() {
     </section>
   );
 }
-
-// TODO: connect this to a backend
