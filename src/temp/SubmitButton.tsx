@@ -21,4 +21,5 @@ const SubmitButton = ({ text, loading }: SubmitButtonProps) => {
     </button>
   );
 };
+
 export default SubmitButton;
