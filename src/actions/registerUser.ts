@@ -26,7 +26,8 @@ export interface ErrorResponse {
 }
 
 interface Response {
-  data: RegisteredUser;
+  jwt: string;
+  user: User;
   error: ErrorResponse;
 }
 
@@ -47,7 +48,7 @@ export const registerUser = createAsyncThunk(
       if (resp.error) {
         throw new RegistrationError(resp.error);
       }
-      return resp.data;
+      return { jwt: resp.jwt, user: resp.user };
     } catch (error) {
       throw error;
     }

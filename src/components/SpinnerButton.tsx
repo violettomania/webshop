@@ -3,6 +3,7 @@ interface SpinnerButtonProps {
   loading: boolean;
 }
 
+// TODO: bugfix: despite the disabled attribute, the button is still clickable
 const SpinnerButton = ({ text, loading }: SpinnerButtonProps) => {
   return (
     <button type='submit' className='btn-block' disabled={loading}>

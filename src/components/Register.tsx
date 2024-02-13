@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { RootState } from '../store/store';
+import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../actions/registerUser';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -10,6 +11,11 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate = useNavigate();
+
+  const registeredUser = useAppSelector(
+    (state: RootState) => state.user.registeredUser
+  );
   const loading = useAppSelector((state: RootState) => state.user.loading);
   const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
@@ -18,6 +24,12 @@ export default function Register() {
     e.preventDefault();
     dispatch(registerUser({ username, email, password }));
   };
+
+  useEffect(() => {
+    if (registeredUser) {
+      navigate('/login');
+    }
+  }, [registeredUser, navigate]);
 
   useEffect(() => {
     errors?.forEach((error) => toast.error(error));
