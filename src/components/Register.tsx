@@ -3,7 +3,7 @@ import { RootState } from '../store/store';
 import { registerUser } from '../actions/registerUser';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import SubmitButton from './SubmitButton';
+import SpinnerButton from './SpinnerButton';
 
 export default function Register() {
   const [username, setUsername] = useState('');
@@ -71,8 +71,8 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className='mt-4'>
-          <SubmitButton loading={loading} text='register' />
+        <div className='mt-4 btn btn-primary'>
+          <SpinnerButton loading={loading} text='register' />
         </div>
         <p className='text-center'>
           Already a member?

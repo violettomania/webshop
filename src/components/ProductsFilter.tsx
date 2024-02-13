@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { URLParams } from '../actions/fetchProducts';
 import { useAppSelector } from '../hooks/hooks';
 import { RootState } from '../store/store';
-import SubmitButton from './SubmitButton';
+import SpinnerButton from './SpinnerButton';
 
 // TODO: probably move these to a shared file
 // TODO: add shipping type, unify its conversion (should probably do it here)
@@ -173,10 +173,9 @@ export default function ProductsFilter({
           onChange={(e) => setFreeShipping(e.target.checked)}
         />
       </div>
-      {/* <button type='submit' className='btn btn-primary btn-sm'>
-        search
-      </button> */}
-      <SubmitButton loading={loading} text='register' />
+      <div className='btn btn-primary btn-sm'>
+        <SpinnerButton loading={loading} text='search' />
+      </div>
       <Link
         className='btn btn-accent btn-sm'
         to='/products'
