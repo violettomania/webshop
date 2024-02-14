@@ -3,6 +3,7 @@ interface SpinnerButtonProps {
   loading: boolean;
 }
 
+// TODO: text should be children
 // TODO: bugfix: despite the disabled attribute, the button is still clickable
 const SpinnerButton = ({ text, loading }: SpinnerButtonProps) => {
   return (

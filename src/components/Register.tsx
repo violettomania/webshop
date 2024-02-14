@@ -25,6 +25,7 @@ export default function Register() {
     dispatch(registerUser({ username, email, password }));
   };
 
+  // TODO: move to hook
   useEffect(() => {
     if (registeredUser) {
       navigate('/login');
