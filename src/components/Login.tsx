@@ -7,7 +7,7 @@ import SpinnerButton from './SpinnerButton';
 import { toast } from 'react-toastify';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function Login() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(loginUser({ email, password }));
+    dispatch(loginUser({ identifier, password }));
   };
 
   useEffect(() => {
@@ -45,15 +45,15 @@ export default function Login() {
         <h4 className='text-center text-3xl font-bold'>Login</h4>
         <div className='form-control'>
           <label htmlFor='identifier' className='label'>
-            <span className='label-text capitalize'>email</span>
+            <span className='label-text capitalize'>identifier</span>
           </label>
           <input
-            type='email'
+            type='identifier'
             name='identifier'
             className='input input-bordered undefined'
             disabled={loading}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            value={identifier}
+            onChange={(e) => setIdentifier(e.target.value)}
           />
         </div>
         <div className='form-control'>

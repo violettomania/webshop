@@ -20,7 +20,7 @@ const url = config.loginUrl;
 
 export const loginUser = createAsyncThunk(
   'user/loginUser',
-  async (user: { email: string; password: string }) => {
+  async (user: { identifier: string; password: string }) => {
     try {
       const response = await fetch(url, {
         method: 'POST',
