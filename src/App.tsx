@@ -46,3 +46,4 @@ export default function App() {
 // TODO: add a HOC somewhere
 // TODO: translations
 // TODO: notifications to bottom right
+// TODO: logout after session expires

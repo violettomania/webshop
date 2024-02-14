@@ -6,6 +6,10 @@ import { loginUser } from '../actions/loginUser';
 import SpinnerButton from './SpinnerButton';
 import { toast } from 'react-toastify';
 
+/* TODO: implement guest user ({
+    "identifier": "test@test.com",
+    "password": "secret"
+})*/
 export default function Login() {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
@@ -88,5 +92,3 @@ export default function Login() {
     </section>
   );
 }
-
-// TODO: connect this to a backend
