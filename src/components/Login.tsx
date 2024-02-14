@@ -29,8 +29,11 @@ export default function Login() {
     dispatch(loginUser({ identifier: 'test@test.com', password: 'secret' }));
   };
 
+  // TODO NEXT: bugfix: when the user registers, it's redirected to the root, skipping the login page
+  // possible fix: add a logged in user check in the root page instead of just registeredUser
   useEffect(() => {
     if (registeredUser) {
+      console.log('navigate to root');
       navigate('/');
     }
   }, [registeredUser, navigate]);

@@ -26,8 +26,10 @@ export default function Register() {
   };
 
   // TODO: move to hook
+  // TODO: bugfix: the buttons are unresponsive
   useEffect(() => {
     if (registeredUser) {
+      console.log('registeredUser', registeredUser);
       navigate('/login');
     }
   }, [registeredUser, navigate]);

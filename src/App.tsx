@@ -50,3 +50,6 @@ export default function App() {
 // TODO: what happens when switching tabs
 // TODO: implement multi-tenancy
 // TODO: preventDefault?
+// TODO: register/login page could also use a header
+// TODO: oidc user
+// TODO: multifactor authentication?
