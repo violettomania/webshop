@@ -21,6 +21,7 @@ const url = config.loginUrl;
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (user: { identifier: string; password: string }) => {
+    console.log('user', user);
     try {
       const response = await fetch(url, {
         method: 'POST',

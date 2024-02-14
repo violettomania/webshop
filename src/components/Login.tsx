@@ -26,7 +26,7 @@ export default function Login() {
 
   useEffect(() => {
     if (registeredUser) {
-      navigate('/products?featured=true');
+      navigate('/');
     }
   }, [registeredUser, navigate]);
 
