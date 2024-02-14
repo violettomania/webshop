@@ -6,10 +6,6 @@ import { loginUser } from '../actions/loginUser';
 import SpinnerButton from './SpinnerButton';
 import { toast } from 'react-toastify';
 
-/* TODO: implement guest user ({
-    "identifier": "test@test.com",
-    "password": "secret"
-})*/
 export default function Login() {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
@@ -23,9 +19,14 @@ export default function Login() {
   const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     dispatch(loginUser({ identifier, password }));
+  };
+
+  const handleGuestUserClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    dispatch(loginUser({ identifier: 'test@test.com', password: 'secret' }));
   };
 
   useEffect(() => {
@@ -44,7 +45,6 @@ export default function Login() {
         method='post'
         action='/login'
         className='card w-96  p-8 bg-base-100 shadow-lg flex flex-col gap-y-4'
-        onSubmit={handleSubmit}
       >
         <h4 className='text-center text-3xl font-bold'>Login</h4>
         <div className='form-control'>
@@ -74,10 +74,18 @@ export default function Login() {
           />
         </div>
         <div className='mt-4 btn btn-primary'>
-          <SpinnerButton loading={loading} text='login' />
+          <SpinnerButton
+            loading={loading}
+            text='login'
+            onClick={handleLoginClick}
+          />
         </div>
         <div className='btn btn-secondary'>
-          <SpinnerButton loading={loading} text='guest user' />
+          <SpinnerButton
+            loading={loading}
+            text='guest user'
+            onClick={handleGuestUserClick}
+          />
         </div>
         <p className='text-center'>
           Not a member yet?{' '}
