@@ -1,26 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
 import { RegistrationError } from '../util/RegistrationError';
+import { User } from './registerUser';
 
-// TODO: move to common file
-export interface User {
-  id: number;
-  username: string;
-  email: string;
-  provider: string;
-  confirmed: boolean;
-  blocked: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface RegisteredUser {
-  jwt: string;
-  user: User;
-}
-
-// TODO: rename to RegistrationErrorResponse
-export interface ErrorResponse {
+export interface LoginErrorResponse {
   message: string;
   details: {
     errors?: [{ message?: string }];
@@ -30,14 +13,14 @@ export interface ErrorResponse {
 interface Response {
   jwt: string;
   user: User;
-  error: ErrorResponse;
+  error?: LoginErrorResponse;
 }
 
-const url = config.registerUrl;
+const url = config.loginUrl;
 
-export const registerUser = createAsyncThunk(
-  'user/registerUser',
-  async (user: { username: string; email: string; password: string }) => {
+export const loginUser = createAsyncThunk(
+  'user/loginUser',
+  async (user: { username: string; email: string }) => {
     try {
       const response = await fetch(url, {
         method: 'POST',

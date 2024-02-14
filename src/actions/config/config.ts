@@ -3,4 +3,5 @@ export const config = {
   featuredQuery: '?featured=true',
   registerUrl:
     'https://strapi-store-server.onrender.com/api/auth/local/register',
+  loginUrl: 'https://strapi-store-server.onrender.com/api/auth/local',
 };
