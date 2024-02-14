@@ -69,10 +69,8 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className='mt-4'>
-          <div className='btn btn-primary'>
-            <SpinnerButton loading={loading} text='login' />
-          </div>
+        <div className='mt-4 btn btn-primary'>
+          <SpinnerButton loading={loading} text='login' />
         </div>
         <div className='btn btn-secondary'>
           <SpinnerButton loading={loading} text='guest user' />

@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { RootState } from '../store/store';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../actions/registerUser';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -89,12 +89,12 @@ export default function Register() {
         </div>
         <p className='text-center'>
           Already a member?
-          <a
+          <Link
             className='ml-2 link link-hover link-primary capitalize'
-            href='/login'
+            to='/login'
           >
             login
-          </a>
+          </Link>
         </p>
       </form>
     </section>
