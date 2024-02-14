@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { Middleware } from '@reduxjs/toolkit';
 import productsReducer from '../slices/productsSlice';
 import featuredProductsReducer from '../slices/featuredProductsSlice';
 import singleProductReducer from '../slices/singleProductSlice';
 import cartReducer from '../slices/cartSlice';
 import userReducer from '../slices/userSlice';
 
+// TODO: create middleware.ts
 const savedCartItems = localStorage.getItem('cartItems');
 const savedTotals = localStorage.getItem('totals');
 
@@ -43,6 +45,30 @@ const preloadedState = savedCartItems
       },
     };
 
+const localStorageMiddleware: Middleware = (storeApi) => (next) => (action) => {
+  let result = next(action);
+  if (action.type === 'user/logoutUser') {
+    localStorage.removeItem('user');
+    localStorage.removeItem('cartItems');
+    localStorage.removeItem('totals');
+    storeApi.dispatch({ type: 'cart/clearCart' });
+  } else {
+    localStorage.setItem(
+      'user',
+      JSON.stringify(storeApi.getState().user.registeredUser)
+    );
+    localStorage.setItem(
+      'cartItems',
+      JSON.stringify(storeApi.getState().cart.cartItems)
+    );
+    localStorage.setItem(
+      'totals',
+      JSON.stringify(storeApi.getState().cart.totals)
+    );
+  }
+  return result;
+};
+
 const store = configureStore({
   reducer: {
     paged: productsReducer,
@@ -52,19 +78,8 @@ const store = configureStore({
     user: userReducer,
   },
   preloadedState,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-});
-
-store.subscribe(() => {
-  localStorage.setItem(
-    'cartItems',
-    JSON.stringify(store.getState().cart.cartItems)
-  );
-  localStorage.setItem('totals', JSON.stringify(store.getState().cart.totals));
-  localStorage.setItem(
-    'user',
-    JSON.stringify(store.getState().user.registeredUser)
-  );
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(localStorageMiddleware),
 });
 
 export type AppDispatch = typeof store.dispatch;

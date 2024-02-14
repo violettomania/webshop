@@ -35,6 +35,7 @@ interface Response {
 
 const url = config.registerUrl;
 
+// TODO: check options preflight
 export const registerUser = createAsyncThunk(
   'user/registerUser',
   async (user: { username: string; email: string; password: string }) => {
