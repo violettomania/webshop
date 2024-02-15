@@ -1,3 +1,5 @@
+import { RootState } from '../store/store';
+import { useAppSelector } from '../hooks/hooks';
 import formatPrice from '../util/priceFormatter';
 import { CartTotals } from '../slices/cartSlice';
 import { Link } from 'react-router-dom';
@@ -8,6 +10,10 @@ interface CartTotalProps {
 
 export default function CartTotal({ totals }: CartTotalProps) {
   const { cartTotal, orderTotal, shipping, tax } = totals;
+
+  const registeredUser = useAppSelector(
+    (state: RootState) => state.user.registeredUser
+  );
 
   return (
     <div className='lg:col-span-4 lg:pl-4'>
@@ -39,11 +45,15 @@ export default function CartTotal({ totals }: CartTotalProps) {
           </p>
         </div>
       </div>
-      <Link className='btn btn-primary btn-block mt-8' to='/login'>
-        please login
-      </Link>
+      {registeredUser ? (
+        <Link className='btn btn-primary btn-block mt-8' to='/checkout'>
+          proceed to checkout
+        </Link>
+      ) : (
+        <Link className='btn btn-primary btn-block mt-8' to='/login'>
+          please login
+        </Link>
+      )}
     </div>
   );
 }
-
-// <Link class="btn btn-primary btn-block mt-8" to="/checkout">proceed to checkout</Link>

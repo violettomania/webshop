@@ -53,3 +53,5 @@ export default function App() {
 // TODO: register/login page could also use a header
 // TODO: oidc user
 // TODO: multifactor authentication?
+// TODO: fix high memory usage
+// TODO: import order
