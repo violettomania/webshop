@@ -8,16 +8,16 @@ export default function CartNavigation() {
   );
 
   return (
-    <>
+    <div className='lg:col-span-4 lg:pl-4'>
       {registeredUser ? (
         <Link className='btn btn-primary btn-block mt-8' to='/checkout'>
-          proceed to checkout
+          PROCEED TO CHECKOUT
         </Link>
       ) : (
         <Link className='btn btn-primary btn-block mt-8' to='/login'>
-          please login
+          PLEASE LOGIN
         </Link>
       )}
-    </>
+    </div>
   );
 }

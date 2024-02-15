@@ -1,19 +1,14 @@
-import { RootState } from '../store/store';
-import { useAppSelector } from '../hooks/hooks';
 import formatPrice from '../util/priceFormatter';
 import { CartTotals } from '../slices/cartSlice';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 interface CartTotalProps {
   totals: CartTotals;
+  children?: React.ReactNode;
 }
 
-export default function CartTotal({ totals }: CartTotalProps) {
+export default function CartTotal({ totals, children }: CartTotalProps) {
   const { cartTotal, orderTotal, shipping, tax } = totals;
-
-  const registeredUser = useAppSelector(
-    (state: RootState) => state.user.registeredUser
-  );
 
   return (
     <div className='lg:col-span-4 lg:pl-4'>
@@ -45,6 +40,7 @@ export default function CartTotal({ totals }: CartTotalProps) {
           </p>
         </div>
       </div>
+      {children}
     </div>
   );
 }

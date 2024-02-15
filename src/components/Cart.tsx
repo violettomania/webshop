@@ -44,8 +44,9 @@ export default function Cart() {
               onChangeItemAmount={handleChangeItemAmount}
               cartItems={cartItems}
             />
-            <CartTotal totals={totals} />
-            <CartNavigation />
+            <CartTotal totals={totals}>
+              <CartNavigation />
+            </CartTotal>
           </div>
         </>
       )}
