@@ -1,19 +1,24 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
 
-export interface URLParams {
-    search?: string;
-    category?: string;
-    company?: string;
-    order?: string;
-    price?: number;
-    shipping?: boolean;
-    page?: number;
+export interface Order {
+    id: string;
+    attributes: {
+        address: string;
+        name: string;
+        orderTotal: string;
+        numItemsInCart: number;
+    };
+}
+
+interface OrdersResponse {
+    data: Order[];
 }
 
 const url = config.ordersUrl;
 
 // TODO: simplify fetch
+// TODO: fetch cleanup
 export const fetchOrders = createAsyncThunk(
     'user/fetchOrders',
     async (token: string) => {
@@ -25,8 +30,8 @@ export const fetchOrders = createAsyncThunk(
                     'Authorization': `Bearer ${token}`,
                 },
             });
-            const resp = await response.json();
-            return resp;
+            const resp: OrdersResponse = await response.json();
+            return resp.data;
         } catch (error) {
             throw error;
         }
