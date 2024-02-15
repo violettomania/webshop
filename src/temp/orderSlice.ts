@@ -1,14 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
-import { fetchOrders } from '../actions/fetchOrders';
+import { Order, fetchOrders } from '../actions/fetchOrders';
 
 // TODO: this needs to be renamed and possibly moved to @types
-export interface Order {
-    name: string;
-    address: string;
-    products: number;
-    cost: number;
-}
 
 interface OrdersState {
     orders: Order[];
@@ -22,6 +16,8 @@ const initialState: OrdersState = {
     error: '',
 };
 
+// TODO: naming: paged?
+// TODO: implement pagination
 export const ordersSlice = createSlice({
     name: 'orders',
     initialState,
@@ -32,7 +28,8 @@ export const ordersSlice = createSlice({
                 state.loading = true;
             })
             .addCase(fetchOrders.fulfilled, (state, action) => {
-                state.orders = action.payload.orders;
+                console.log('action.payload', action.payload);
+                state.orders = action.payload;
                 state.loading = false;
             })
             .addCase(fetchOrders.rejected, (state, action) => {
