@@ -7,8 +7,10 @@ import { refreshProductsPage } from '../slices/productsSlice';
 import { RootState } from '../store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 
-const paths = ['/', '/about', '/products', '/cart'];
-const pages = ['home', 'about', 'products', 'cart'];
+const defaultPaths = ['/', '/about', '/products', '/cart'];
+const defaultPages = ['home', 'about', 'products', 'cart'];
+const loggedInUserPaths = ['/checkout', '/orders'];
+const loggedInUserPages = ['checkout', 'orders'];
 
 export default function Navbar() {
   // TODO: create hook reusing the same logic from color picker
@@ -19,6 +21,9 @@ export default function Navbar() {
   const location = useLocation();
   const totals = useAppSelector((state: RootState) => state.cart.totals);
   const dispatch = useAppDispatch();
+  const registeredUser = useAppSelector(
+    (state: RootState) => state.user.registeredUser
+  );
 
   const [selectedPath, setSelectedPath] = useState(location.pathname);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'winter');
@@ -45,39 +50,67 @@ export default function Navbar() {
   const handleClick = useCallback(
     (path: string) => {
       setSelectedPath(path);
-      if (path === paths[2]) {
+      if (path === defaultPaths[2]) {
         dispatch(refreshProductsPage(true));
       }
     },
     [dispatch]
   );
 
-  const renderNavbarLinks = useCallback(() => {
-    const links = paths.map((path, idx) => (
-      <li key={path}>
-        <Link
-          onClick={() => handleClick(path)}
-          className={`capitalize ${path === selectedPath ? 'active' : ''}`}
-          to={path}
-          aria-current={path === selectedPath ? 'page' : undefined}
-        >
-          {pages[idx]}
-        </Link>
-      </li>
-    ));
-    setNavbarLinks(links);
-  }, [handleClick, selectedPath]);
+  const renderNavbarLink = useCallback(
+    (path: string, idx: number, pages: string[]) => {
+      return (
+        <li key={path}>
+          <Link
+            onClick={() => handleClick(path)}
+            className={`capitalize ${path === selectedPath ? 'active' : ''}`}
+            to={path}
+            aria-current={path === selectedPath ? 'page' : undefined}
+          >
+            {pages[idx]}
+          </Link>
+        </li>
+      );
+    },
+    [handleClick, selectedPath]
+  );
+
+  const renderDefaultNavbarLinks = useCallback(() => {
+    return defaultPaths.map((path, idx) =>
+      renderNavbarLink(path, idx, defaultPages)
+    );
+  }, [renderNavbarLink]);
+
+  const renderLoggedInUserNavbarLinks = useCallback(() => {
+    return loggedInUserPaths.map((path, idx) =>
+      renderNavbarLink(path, idx, loggedInUserPages)
+    );
+  }, [renderNavbarLink]);
 
   useEffect(() => {
-    renderNavbarLinks();
-  }, [renderNavbarLinks, selectedPath]);
+    if (!registeredUser) {
+      console.log('renderDefaultNavbarLinks()', renderDefaultNavbarLinks());
+      setNavbarLinks(renderDefaultNavbarLinks());
+    } else {
+      console.log('renderDefaultAndAdditionalNavbarLinks()');
+      setNavbarLinks([
+        ...renderDefaultNavbarLinks(),
+        ...renderLoggedInUserNavbarLinks(),
+      ]);
+    }
+  }, [
+    registeredUser,
+    renderDefaultNavbarLinks,
+    renderLoggedInUserNavbarLinks,
+    selectedPath,
+  ]);
 
   return (
     <nav className='bg-base-200'>
       <div className='navbar align-element'>
         <div className='navbar-start'>
           <Link
-            onClick={() => setSelectedPath(paths[0])}
+            onClick={() => setSelectedPath(defaultPaths[0])}
             aria-current='page'
             className='hidden lg:flex btn btn-primary text-3xl items-center active'
             to='/'
@@ -108,7 +141,7 @@ export default function Navbar() {
           <Link
             className='btn btn-ghost btn-circle btn-md ml-4'
             to='/cart'
-            onClick={() => setSelectedPath(paths[3])}
+            onClick={() => setSelectedPath(defaultPaths[3])}
           >
             <div className='indicator'>
               <BsCart3 />

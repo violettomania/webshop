@@ -53,7 +53,6 @@ const localStorageMiddleware: Middleware = (storeApi) => (next) => (action) => {
     localStorage.removeItem('totals');
     storeApi.dispatch({ type: 'cart/clearCart' });
   } else {
-    console.log('localStorageMiddleware', storeApi.getState());
     localStorage.setItem(
       'user',
       JSON.stringify(storeApi.getState().user.registeredUser)
