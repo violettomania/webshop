@@ -45,15 +45,6 @@ export default function CartTotal({ totals }: CartTotalProps) {
           </p>
         </div>
       </div>
-      {registeredUser ? (
-        <Link className='btn btn-primary btn-block mt-8' to='/checkout'>
-          proceed to checkout
-        </Link>
-      ) : (
-        <Link className='btn btn-primary btn-block mt-8' to='/login'>
-          please login
-        </Link>
-      )}
     </div>
   );
 }

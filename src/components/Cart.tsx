@@ -3,6 +3,7 @@ import { RootState } from '../store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import CartItems from './CartItems';
 import CartTotal from './CartTotal';
+import CartNavigation from './CartNavigation';
 
 // TODO: add clear cart button
 // TODO: would be a good idea to have cart item number separately since it's usd in multiple places
@@ -44,6 +45,7 @@ export default function Cart() {
               cartItems={cartItems}
             />
             <CartTotal totals={totals} />
+            <CartNavigation />
           </div>
         </>
       )}
