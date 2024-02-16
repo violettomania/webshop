@@ -1,6 +1,6 @@
 import { RootState } from '../state/store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { setPage } from '../state/slices/productsSlice';
+import { setPage } from '../state/slices/ordersSlice';
 
 // TODO: merge with Pagination.tsx (HOC?)
 interface PaginationProps {
@@ -28,7 +28,9 @@ export default function OrdersPagination({
 
   const handleNextPage = (event: React.MouseEvent) => {
     event.preventDefault();
+    console.log('currentPage', currentPage, 'pageCount', pageCount);
     const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
+    console.log('nextPage', nextPage);
     onPageNumberChange(nextPage);
     dispatch(setPage(nextPage));
   };
@@ -63,6 +65,7 @@ export default function OrdersPagination({
             {page}
           </button>
         ))}
+        <button className='join-item btn btn-xs sm:btn-md'>...</button>
         <button
           className='btn btn-xs sm:btn-md join-item'
           onClick={handleNextPage}
@@ -73,3 +76,17 @@ export default function OrdersPagination({
     </div>
   ) : null;
 }
+
+// <div className='mt-16 flex justify-end'>
+//   <div className='join'>
+//     <button className='btn btn-xs sm:btn-md join-item'>Prev</button>
+//     <button className='btn btn-xs sm:btn-md border-none join-item bg-base-300 border-base-300 '>
+//       1
+//     </button>
+//     <button className='join-item btn btn-xs sm:btn-md'>...</button>
+//     <button className='btn btn-xs sm:btn-md border-none join-item '>
+//       291
+//     </button>
+//     <button className='btn btn-xs sm:btn-md join-item'>Next</button>
+//   </div>
+// </div>;

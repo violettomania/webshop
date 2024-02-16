@@ -33,7 +33,6 @@ export default function Login() {
   // possible fix: add a logged in user check in the root page instead of just registeredUser
   useEffect(() => {
     if (registeredUser) {
-      console.log('navigate to root');
       navigate('/');
     }
   }, [registeredUser, navigate]);

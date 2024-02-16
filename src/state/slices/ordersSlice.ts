@@ -39,7 +39,6 @@ export const ordersSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchOrders.fulfilled, (state, action) => {
-        console.log('payload', action.payload);
         state.orders = action.payload.data;
         state.pageCount = action.payload.meta.pagination.pageCount;
         state.total = action.payload.meta.pagination.total;
@@ -53,5 +52,6 @@ export const ordersSlice = createSlice({
 });
 
 export const selectProducts = (state: RootState) => state.orders;
+export const setPage = ordersSlice.actions.setPage;
 
 export default ordersSlice.reducer;
