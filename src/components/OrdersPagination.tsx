@@ -44,6 +44,7 @@ export default function OrdersPagination({
     dispatch(setPage(prevPage));
   };
 
+  // TODO: next:
   // if current page number > 2, insert ... button after 1 and after currentPage
   const displayPageNumbers = () => {
     if (currentPage <= 2 || currentPage <= pageCount - 1) {
