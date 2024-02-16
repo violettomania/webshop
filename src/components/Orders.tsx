@@ -29,7 +29,8 @@ export default function Orders() {
   }, [error]);
 
   const handlePageNumberChange = (page: number) => {
-    console.log('page', page);
+    if (registeredUser)
+      dispatch(fetchOrders({ token: registeredUser?.jwt, page }));
   };
 
   return (

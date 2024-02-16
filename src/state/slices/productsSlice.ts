@@ -12,8 +12,8 @@ export interface FeaturedProductType {
 
 interface ProductsState {
   products: FeaturedProductType[];
-  total: number;
   pageCount: number;
+  total: number;
   currentPage: number;
   categories: string[];
   companies: string[];
@@ -25,8 +25,8 @@ interface ProductsState {
 
 const initialState: ProductsState = {
   products: [],
-  total: 0,
   pageCount: 0,
+  total: 0,
   currentPage: 1,
   categories: [],
   companies: [],
@@ -54,8 +54,8 @@ export const productsSlice = createSlice({
       })
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.products = action.payload.products;
-        state.total = action.payload.total;
         state.pageCount = action.payload.pageCount;
+        state.total = action.payload.total;
         state.categories = action.payload.categories;
         state.companies = action.payload.companies;
         state.loading = false;

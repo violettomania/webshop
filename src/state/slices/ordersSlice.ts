@@ -8,6 +8,7 @@ interface OrdersState {
   orders: Order[];
   pageCount: number;
   total: number;
+  currentPage: number;
   loading: boolean;
   error?: string;
 }
@@ -16,6 +17,7 @@ const initialState: OrdersState = {
   orders: [],
   pageCount: 0,
   total: 0,
+  currentPage: 1,
   loading: false,
   error: '',
 };
@@ -26,7 +28,11 @@ const initialState: OrdersState = {
 export const ordersSlice = createSlice({
   name: 'orders',
   initialState,
-  reducers: {},
+  reducers: {
+    setPage: (state, action) => {
+      state.currentPage = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchOrders.pending, (state) => {
