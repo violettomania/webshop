@@ -1,3 +1,5 @@
+import formatDate from '../util/dateFormatter';
+
 interface OrderProps {
   name: string;
   address: string;
@@ -13,16 +15,7 @@ export default function SingleOrder({
   orderTotal,
   createdAt,
 }: OrderProps) {
-  const date = new Date(createdAt);
-  const formattedDate = `${date.toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: true,
-  })} - ${date.toLocaleDateString('en-US', {
-    day: 'numeric',
-    month: 'short',
-    year: 'numeric',
-  })}`;
+  const date = formatDate(createdAt);
 
   return (
     <div className='mt-8'>
@@ -44,7 +37,7 @@ export default function SingleOrder({
               <td>{address}</td>
               <td>{numItemsInCart}</td>
               <td>{orderTotal}</td>
-              <td className='hidden sm:block'>{formattedDate}</td>
+              <td className='hidden sm:block'>{date}</td>
             </tr>
           </tbody>
         </table>
