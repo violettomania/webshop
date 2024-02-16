@@ -2,7 +2,7 @@ import { RootState } from '../state/store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { setPage } from '../state/slices/ordersSlice';
 
-// TODO: merge with Pagination.tsx (HOC?)
+// TODO: merge with Pagination.tsx (HOC?) OR replace the original one with this
 interface PaginationProps {
   onPageNumberChange: (page: number) => void;
 }
@@ -54,18 +54,25 @@ export default function OrdersPagination({
         >
           Prev
         </button>
-        {Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => (
-          <button
-            onClick={(e) => handlePageNumberChange(e, page)}
-            key={page}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === page ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {page}
-          </button>
-        ))}
+        <button
+          onClick={(e) => handlePageNumberChange(e, 1)}
+          key={1}
+          className={`btn btn-xs sm:btn-md border-none join-item ${
+            currentPage === 1 ? selectedPageButtonClasses : ''
+          }`}
+        >
+          {1}
+        </button>
         <button className='join-item btn btn-xs sm:btn-md'>...</button>
+        <button
+          onClick={(e) => handlePageNumberChange(e, pageCount)}
+          key={pageCount}
+          className={`btn btn-xs sm:btn-md border-none join-item ${
+            currentPage === pageCount ? selectedPageButtonClasses : ''
+          }`}
+        >
+          {pageCount}
+        </button>
         <button
           className='btn btn-xs sm:btn-md join-item'
           onClick={handleNextPage}
@@ -76,3 +83,17 @@ export default function OrdersPagination({
     </div>
   ) : null;
 }
+
+// {
+//   Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => (
+//     <button
+//       onClick={(e) => handlePageNumberChange(e, page)}
+//       key={page}
+//       className={`btn btn-xs sm:btn-md border-none join-item ${
+//         currentPage === page ? selectedPageButtonClasses : ''
+//       }`}
+//     >
+//       {page}
+//     </button>
+//   ));
+// }
