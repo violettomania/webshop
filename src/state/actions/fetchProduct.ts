@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
 
+// TODO: do I need this?
 interface Product {
   id: string;
   attributes: {

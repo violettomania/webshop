@@ -10,7 +10,9 @@ export default function Orders() {
   );
   // TODO: orders.orders is a horrible name
   const orders = useAppSelector((state: RootState) => state.orders.orders);
+  const total = useAppSelector((state: RootState) => state.orders.total);
   const loading = useAppSelector((state: RootState) => state.orders.loading);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -25,7 +27,7 @@ export default function Orders() {
         </h2>
       </div>
       <div className='mt-8'>
-        <h4 className='mb-4 capitalize'>total orders : 2907</h4>
+        <h4 className='mb-4 capitalize'>{`total orders : ${total}`}</h4>
         <div className='overflow-x-auto'>
           <table className='table table-zebra'>
             <thead>

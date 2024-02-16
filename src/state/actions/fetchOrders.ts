@@ -14,6 +14,11 @@ export interface Order {
 
 interface OrdersResponse {
   data: Order[];
+  meta: {
+    pagination: {
+      total: number;
+    };
+  };
 }
 
 const url = config.ordersUrl;
@@ -32,7 +37,7 @@ export const fetchOrders = createAsyncThunk(
         },
       });
       const resp: OrdersResponse = await response.json();
-      return resp.data;
+      return resp;
     } catch (error) {
       throw error;
     }

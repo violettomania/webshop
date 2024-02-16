@@ -6,18 +6,21 @@ import { Order, fetchOrders } from '../actions/fetchOrders';
 
 interface OrdersState {
   orders: Order[];
+  total: number;
   loading: boolean;
   error?: string;
 }
 
 const initialState: OrdersState = {
   orders: [],
+  total: 0,
   loading: false,
   error: '',
 };
 
 // TODO: naming: paged?
 // TODO: implement pagination
+// TODO: handle errors in all slices
 export const ordersSlice = createSlice({
   name: 'orders',
   initialState,
@@ -28,8 +31,9 @@ export const ordersSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchOrders.fulfilled, (state, action) => {
-        console.log('action.payload', action.payload);
-        state.orders = action.payload;
+        console.log('payload', action.payload);
+        state.orders = action.payload.data;
+        state.total = action.payload.meta.pagination.total;
         state.loading = false;
       })
       .addCase(fetchOrders.rejected, (state, action) => {
