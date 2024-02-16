@@ -3,7 +3,9 @@ import { RootState } from '../state/store/store';
 import { fetchOrders } from '../state/actions/fetchOrders';
 import { useEffect } from 'react';
 import SingleOrder from './Order';
+import Loading from './Loading';
 
+// TODO: orders table is sometimes empty on refresh
 export default function Orders() {
   const registeredUser = useAppSelector(
     (state: RootState) => state.user.registeredUser
@@ -26,27 +28,31 @@ export default function Orders() {
           Your Orders
         </h2>
       </div>
-      <div className='mt-8'>
-        <h4 className='mb-4 capitalize'>{`total orders : ${total}`}</h4>
-        <div className='overflow-x-auto'>
-          <table className='table table-zebra'>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Products</th>
-                <th>Cost</th>
-                <th className='hidden sm:block'>Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map(({ id, attributes }) => (
-                <SingleOrder key={id} {...attributes} />
-              ))}
-            </tbody>
-          </table>
+      {loading ? (
+        <Loading />
+      ) : (
+        <div className='mt-8'>
+          <h4 className='mb-4 capitalize'>{`total orders : ${total}`}</h4>
+          <div className='overflow-x-auto'>
+            <table className='table table-zebra'>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Products</th>
+                  <th>Cost</th>
+                  <th className='hidden sm:block'>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {orders.map(({ id, attributes }) => (
+                  <SingleOrder key={id} {...attributes} />
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
+      )}
       <div className='mt-16 flex justify-end'>
         <div className='join'>
           <button className='btn btn-xs sm:btn-md join-item'>Prev</button>
