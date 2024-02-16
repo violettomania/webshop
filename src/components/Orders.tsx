@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { RootState } from '../state/store/store';
 import { fetchOrders } from '../state/actions/fetchOrders';
 import { useEffect } from 'react';
+import SingleOrder from './Order';
 
 export default function Orders() {
   const registeredUser = useAppSelector(
@@ -37,28 +38,9 @@ export default function Orders() {
               </tr>
             </thead>
             <tbody>
-              {orders.map(({ id, attributes }) => {
-                const date = new Date(attributes.createdAt);
-                const formattedDate = `${date.toLocaleTimeString('en-US', {
-                  hour: '2-digit',
-                  minute: '2-digit',
-                  hour12: true,
-                })} - ${date.toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'short',
-                  year: 'numeric',
-                })}`;
-
-                return (
-                  <tr key={id}>
-                    <td>{attributes.name}</td>
-                    <td>{attributes.address}</td>
-                    <td>{attributes.numItemsInCart}</td>
-                    <td>{attributes.orderTotal}</td>
-                    <td className='hidden sm:block'>{formattedDate}</td>
-                  </tr>
-                );
-              })}
+              {orders.map(({ id, attributes }) => (
+                <SingleOrder key={id} {...attributes} />
+              ))}
             </tbody>
           </table>
         </div>
