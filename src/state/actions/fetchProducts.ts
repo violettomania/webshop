@@ -39,6 +39,7 @@ const buildSearchQuery = (params: URLParams) => {
 
 // TODO: enforce type
 // TODO: stricter types for categories etc.
+// TODO: unify pagination handling with ordersSlice.ts
 export const fetchProducts = createAsyncThunk(
   'products/fetchProducts',
   async (urlParams: URLParams) => {

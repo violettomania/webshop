@@ -6,6 +6,7 @@ import { Order, fetchOrders } from '../actions/fetchOrders';
 
 interface OrdersState {
   orders: Order[];
+  pageCount: number;
   total: number;
   loading: boolean;
   error?: string;
@@ -13,6 +14,7 @@ interface OrdersState {
 
 const initialState: OrdersState = {
   orders: [],
+  pageCount: 0,
   total: 0,
   loading: false,
   error: '',
@@ -33,6 +35,7 @@ export const ordersSlice = createSlice({
       .addCase(fetchOrders.fulfilled, (state, action) => {
         console.log('payload', action.payload);
         state.orders = action.payload.data;
+        state.pageCount = action.payload.meta.pagination.pageCount;
         state.total = action.payload.meta.pagination.total;
         state.loading = false;
       })

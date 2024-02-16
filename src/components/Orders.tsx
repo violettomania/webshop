@@ -5,6 +5,7 @@ import { fetchOrders } from '../state/actions/fetchOrders';
 import { useEffect } from 'react';
 import SingleOrder from './Order';
 import Loading from './Loading';
+import OrdersPagination from './OrdersPagination';
 
 // TODO: orders table is sometimes empty on refresh
 export default function Orders() {
@@ -20,12 +21,16 @@ export default function Orders() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (registeredUser) dispatch(fetchOrders(registeredUser?.jwt));
+    if (registeredUser) dispatch(fetchOrders({ token: registeredUser?.jwt }));
   }, [dispatch, registeredUser]);
 
   useEffect(() => {
     if (error) toast.error('There was an error fetching your orders');
   }, [error]);
+
+  const handlePageNumberChange = (page: number) => {
+    console.log('page', page);
+  };
 
   return (
     <section className='align-element py-20'>
@@ -59,19 +64,21 @@ export default function Orders() {
           </div>
         </div>
       )}
-      <div className='mt-16 flex justify-end'>
-        <div className='join'>
-          <button className='btn btn-xs sm:btn-md join-item'>Prev</button>
-          <button className='btn btn-xs sm:btn-md border-none join-item bg-base-300 border-base-300 '>
-            1
-          </button>
-          <button className='join-item btn btn-xs sm:btn-md'>...</button>
-          <button className='btn btn-xs sm:btn-md border-none join-item '>
-            291
-          </button>
-          <button className='btn btn-xs sm:btn-md join-item'>Next</button>
-        </div>
-      </div>
+      <OrdersPagination onPageNumberChange={handlePageNumberChange} />
     </section>
   );
 }
+
+// <div className='mt-16 flex justify-end'>
+//   <div className='join'>
+//     <button className='btn btn-xs sm:btn-md join-item'>Prev</button>
+//     <button className='btn btn-xs sm:btn-md border-none join-item bg-base-300 border-base-300 '>
+//       1
+//     </button>
+//     <button className='join-item btn btn-xs sm:btn-md'>...</button>
+//     <button className='btn btn-xs sm:btn-md border-none join-item '>
+//       291
+//     </button>
+//     <button className='btn btn-xs sm:btn-md join-item'>Next</button>
+//   </div>
+// </div>;

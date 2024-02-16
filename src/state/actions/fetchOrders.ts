@@ -16,9 +16,15 @@ interface OrdersResponse {
   data: Order[];
   meta: {
     pagination: {
+      pageCount: number;
       total: number;
     };
   };
+}
+
+interface URLParams {
+  token: string;
+  page?: number;
 }
 
 const url = config.ordersUrl;
@@ -27,9 +33,12 @@ const url = config.ordersUrl;
 // TODO: fetch cleanup
 export const fetchOrders = createAsyncThunk(
   'user/fetchOrders',
-  async (token: string) => {
+  async (urlParams: URLParams) => {
     try {
-      const response = await fetch(url, {
+      const { token, page } = urlParams;
+      const pageParam = page ? `?page=${page}` : '';
+      const fullUrl = `${url}${pageParam}`;
+      const response = await fetch(fullUrl, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
