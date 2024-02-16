@@ -47,7 +47,8 @@ export default function OrdersPagination({
   // TODO: next:
   // if current page number > 2, insert ... button after 1 and after currentPage
   const displayPageNumbers = () => {
-    if (currentPage <= 2 || currentPage <= pageCount - 1) {
+    console.log('currentPage', currentPage);
+    if (currentPage === 1 || currentPage === pageCount) {
       return (
         <>
           <button
@@ -71,7 +72,42 @@ export default function OrdersPagination({
           </button>
         </>
       );
+    } else if (currentPage <= 2 || currentPage <= pageCount - 1) {
+      // add a loop from 1 to 2 for the first 2 buttons
+      return (
+        <>
+          <button
+            onClick={(e) => handlePageNumberChange(e, 1)}
+            key={1}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === 1 ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {1}
+          </button>
+          <button
+            onClick={(e) => handlePageNumberChange(e, 2)}
+            key={2}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === 2 ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {2}
+          </button>
+          <button className='join-item btn btn-xs sm:btn-md'>...</button>
+          <button
+            onClick={(e) => handlePageNumberChange(e, pageCount)}
+            key={pageCount}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === pageCount ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {pageCount}
+          </button>
+        </>
+      );
     }
+    // TODO: handle the case when currentPage is > 2 or currentPage is < pageCount - 1
   };
 
   return pageCount > 1 ? (
