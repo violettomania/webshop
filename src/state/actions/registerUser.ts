@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
-import { RegistrationError } from '../util/RegistrationError';
+import { RegistrationError } from '../../util/RegistrationError';
 
 // TODO: move to common file
 export interface User {

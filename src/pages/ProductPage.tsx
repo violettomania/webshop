@@ -1,9 +1,9 @@
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import Product from '../components/Product';
 import { useParams } from 'react-router-dom';
-import { RootState } from '../store/store';
+import { RootState } from '../state/store/store';
 import { useEffect } from 'react';
-import { fetchProduct } from '../actions/fetchProduct';
+import { fetchProduct } from '../state/actions/fetchProduct';
 import Loading from '../components/Loading';
 
 export default function ProductPage() {

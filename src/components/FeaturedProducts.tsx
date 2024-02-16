@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { RootState } from '../store/store';
+import { RootState } from '../state/store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
+import { fetchFeaturedProducts } from '../state/actions/fetchFeaturedProducts';
 import ProductCard from './ProductCard';
-import { ProductCardType } from '../slices/featuredProductsSlice';
+import { ProductCardType } from '../state/slices/featuredProductsSlice';
 import Loading from './Loading';
 
 export default function FeaturedProducts() {

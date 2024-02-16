@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { URLParams } from '../actions/fetchProducts';
+import { URLParams } from '../state/actions/fetchProducts';
 import { useAppSelector } from '../hooks/hooks';
-import { RootState } from '../store/store';
+import { RootState } from '../state/store/store';
 import SpinnerButton from './SpinnerButton';
 
 // TODO: probably move these to a shared file

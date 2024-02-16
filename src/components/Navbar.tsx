@@ -3,8 +3,8 @@ import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { refreshProductsPage } from '../slices/productsSlice';
-import { RootState } from '../store/store';
+import { refreshProductsPage } from '../state/slices/productsSlice';
+import { RootState } from '../state/store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 
 const defaultPaths = ['/', '/about', '/products', '/cart'];

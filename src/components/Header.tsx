@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { RootState } from '../store/store';
-import { logoutUser } from '../slices/userSlice';
+import { RootState } from '../state/store/store';
+import { logoutUser } from '../state/slices/userSlice';
 
 export default function Header() {
   // TODO: should be user.username

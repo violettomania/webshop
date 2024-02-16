@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { RootState } from '../store/store';
+import { RootState } from '../state/store/store';
 import { Link, useNavigate } from 'react-router-dom';
-import { registerUser } from '../actions/registerUser';
+import { registerUser } from '../state/actions/registerUser';
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import SpinnerButton from './SpinnerButton';

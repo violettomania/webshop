@@ -1,8 +1,8 @@
-import { RootState } from '../store/store';
+import { RootState } from '../state/store/store';
 import { useAppSelector } from '../hooks/hooks';
 import ProductCard from './ProductCard';
 import Loading from './Loading';
-import { ProductCardType } from '../slices/featuredProductsSlice';
+import { ProductCardType } from '../state/slices/featuredProductsSlice';
 
 const gridDisplayClasses = 'pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3';
 const listDisplayClasses = 'mt-12 grid gap-y-8';

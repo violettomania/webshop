@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RootState } from '../store/store';
+import { RootState } from '../state/store/store';
 import { useAppSelector } from '../hooks/hooks';
 
 export default function CartNavigation() {

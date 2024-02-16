@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
-import { RootState } from '../store/store';
+import { RootState } from '../state/store/store';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../actions/loginUser';
+import { loginUser } from '../state/actions/loginUser';
 import SpinnerButton from './SpinnerButton';
 import { toast } from 'react-toastify';
 

@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { URLParams, fetchProducts } from '../actions/fetchProducts';
-import { RootState } from '../store/store';
+import { URLParams, fetchProducts } from '../state/actions/fetchProducts';
+import { RootState } from '../state/store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import ProductsFilter from './ProductsFilter';
 import Products from './Products';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
 import Pagination from './Pagination';
-import { refreshProductsPage, setPage } from '../slices/productsSlice';
+import { refreshProductsPage, setPage } from '../state/slices/productsSlice';
 
 export default function ProductsContainer() {
   const dispatch = useAppDispatch();
