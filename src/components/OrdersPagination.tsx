@@ -76,17 +76,3 @@ export default function OrdersPagination({
     </div>
   ) : null;
 }
-
-// <div className='mt-16 flex justify-end'>
-//   <div className='join'>
-//     <button className='btn btn-xs sm:btn-md join-item'>Prev</button>
-//     <button className='btn btn-xs sm:btn-md border-none join-item bg-base-300 border-base-300 '>
-//       1
-//     </button>
-//     <button className='join-item btn btn-xs sm:btn-md'>...</button>
-//     <button className='btn btn-xs sm:btn-md border-none join-item '>
-//       291
-//     </button>
-//     <button className='btn btn-xs sm:btn-md join-item'>Next</button>
-//   </div>
-// </div>;
