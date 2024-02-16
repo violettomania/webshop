@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { URLParams, fetchProducts } from '../state/actions/fetchProducts';
 import { RootState } from '../state/store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { toast } from 'react-toastify';
 import ProductsFilter from './ProductsFilter';
 import Products from './Products';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
@@ -16,6 +17,7 @@ export default function ProductsContainer() {
   );
   const companies = useAppSelector((state: RootState) => state.paged.companies);
   const refresh = useAppSelector((state: RootState) => state.paged.refresh);
+  const error = useAppSelector((state: RootState) => state.paged.error);
 
   // TODO: good candidate for Context API / hook / signal
   const [displayMode, setDisplayMode] = useState<DisplayMode>('grid');
@@ -32,6 +34,10 @@ export default function ProductsContainer() {
       dispatch(refreshProductsPage(false));
     }
   }, [dispatch, refresh]);
+
+  useEffect(() => {
+    if (error) toast.error('There was an error fetching the products');
+  }, [error]);
 
   const handleSearch = (urlParams: URLParams) => {
     setLastSearchParams(urlParams);

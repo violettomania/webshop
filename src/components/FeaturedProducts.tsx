@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { RootState } from '../state/store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { toast } from 'react-toastify';
 import { fetchFeaturedProducts } from '../state/actions/fetchFeaturedProducts';
 import ProductCard from './ProductCard';
 import { ProductCardType } from '../state/slices/featuredProductsSlice';
@@ -12,10 +13,15 @@ export default function FeaturedProducts() {
     (state: RootState) => state.featured.products
   );
   const loading = useAppSelector((state: RootState) => state.featured.loading);
+  const error = useAppSelector((state: RootState) => state.featured.error);
 
   useEffect(() => {
     dispatch(fetchFeaturedProducts());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (error) toast.error('There was an error fetching the products');
+  }, [error]);
 
   // TODO: use unified type instead of FeaturedProductProps (Partial, Omit?)
   return loading ? (
