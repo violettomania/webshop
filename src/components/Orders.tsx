@@ -1,4 +1,19 @@
+import { useAppDispatch, useAppSelector } from "../hooks/hooks";
+import { RootState } from "../store/store";
+import { fetchOrders } from "../actions/fetchOrders";
+import { useEffect } from "react";
+
 export default function Orders() {
+  const orders = useAppSelector(
+    (state: RootState) => state.orders
+  );
+  const loading = useAppSelector((state: RootState) => state.orders.loading);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchOrders('token'));
+  }, [dispatch]);
+
   return (
     <section className='align-element py-20'>
       <div className='border-b border-base-300 pb-5'>

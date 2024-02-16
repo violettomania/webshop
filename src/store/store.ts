@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Middleware } from '@reduxjs/toolkit';
 import productsReducer from '../slices/productsSlice';
 import featuredProductsReducer from '../slices/featuredProductsSlice';
+import ordersReducer from '../slices/ordersSlice';
 import singleProductReducer from '../slices/singleProductSlice';
 import cartReducer from '../slices/cartSlice';
 import userReducer from '../slices/userSlice';
@@ -73,6 +74,7 @@ const store = configureStore({
   reducer: {
     paged: productsReducer,
     featured: featuredProductsReducer,
+    orders: ordersReducer,
     single: singleProductReducer,
     cart: cartReducer,
     user: userReducer,

@@ -4,4 +4,5 @@ export const config = {
   registerUrl:
     'https://strapi-store-server.onrender.com/api/auth/local/register',
   loginUrl: 'https://strapi-store-server.onrender.com/api/auth/local',
+  ordersUrl: 'https://strapi-store-server.onrender.com/api/orders',
 };

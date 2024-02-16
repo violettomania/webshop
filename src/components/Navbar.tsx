@@ -89,10 +89,8 @@ export default function Navbar() {
 
   useEffect(() => {
     if (!registeredUser) {
-      console.log('renderDefaultNavbarLinks()', renderDefaultNavbarLinks());
       setNavbarLinks(renderDefaultNavbarLinks());
     } else {
-      console.log('renderDefaultAndAdditionalNavbarLinks()');
       setNavbarLinks([
         ...renderDefaultNavbarLinks(),
         ...renderLoggedInUserNavbarLinks(),
