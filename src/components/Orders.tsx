@@ -1,5 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { RootState } from '../state/store/store';
+import { toast } from 'react-toastify';
 import { fetchOrders } from '../state/actions/fetchOrders';
 import { useEffect } from 'react';
 import SingleOrder from './Order';
@@ -13,6 +14,7 @@ export default function Orders() {
   // TODO: orders.orders is a horrible name
   const orders = useAppSelector((state: RootState) => state.orders.orders);
   const total = useAppSelector((state: RootState) => state.orders.total);
+  const error = useAppSelector((state: RootState) => state.orders.error);
   const loading = useAppSelector((state: RootState) => state.orders.loading);
 
   const dispatch = useAppDispatch();
@@ -20,6 +22,10 @@ export default function Orders() {
   useEffect(() => {
     if (registeredUser) dispatch(fetchOrders(registeredUser?.jwt));
   }, [dispatch, registeredUser]);
+
+  useEffect(() => {
+    if (error) toast.error('There was an error fetching your orders');
+  }, [error]);
 
   return (
     <section className='align-element py-20'>
