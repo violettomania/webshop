@@ -3,6 +3,7 @@ import { Middleware } from '@reduxjs/toolkit';
 const savedCartItems = localStorage.getItem('cartItems');
 const savedTotals = localStorage.getItem('totals');
 
+// TODO: next: user is logged out on page refresh
 let totals = savedTotals ? JSON.parse(savedTotals) : null;
 if (
   Array.isArray(totals) ||

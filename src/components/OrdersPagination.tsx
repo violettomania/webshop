@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { setPage } from '../state/slices/ordersSlice';
 
 // TODO: merge with Pagination.tsx (HOC?) OR replace the original one with this
+// OR switch between them depending on the max number of pages
 interface PaginationProps {
   onPageNumberChange: (page: number) => void;
 }
@@ -28,9 +29,7 @@ export default function OrdersPagination({
 
   const handleNextPage = (event: React.MouseEvent) => {
     event.preventDefault();
-    console.log('currentPage', currentPage, 'pageCount', pageCount);
     const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
-    console.log('nextPage', nextPage);
     onPageNumberChange(nextPage);
     dispatch(setPage(nextPage));
   };
@@ -45,6 +44,35 @@ export default function OrdersPagination({
     dispatch(setPage(prevPage));
   };
 
+  // if current page number > 2, insert ... button after 1 and after currentPage
+  const displayPageNumbers = () => {
+    if (currentPage <= 2 || currentPage <= pageCount - 1) {
+      return (
+        <>
+          <button
+            onClick={(e) => handlePageNumberChange(e, 1)}
+            key={1}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === 1 ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {1}
+          </button>
+          <button className='join-item btn btn-xs sm:btn-md'>...</button>
+          <button
+            onClick={(e) => handlePageNumberChange(e, pageCount)}
+            key={pageCount}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === pageCount ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {pageCount}
+          </button>
+        </>
+      );
+    }
+  };
+
   return pageCount > 1 ? (
     <div className='mt-16 flex justify-end'>
       <div className='join'>
@@ -54,25 +82,7 @@ export default function OrdersPagination({
         >
           Prev
         </button>
-        <button
-          onClick={(e) => handlePageNumberChange(e, 1)}
-          key={1}
-          className={`btn btn-xs sm:btn-md border-none join-item ${
-            currentPage === 1 ? selectedPageButtonClasses : ''
-          }`}
-        >
-          {1}
-        </button>
-        <button className='join-item btn btn-xs sm:btn-md'>...</button>
-        <button
-          onClick={(e) => handlePageNumberChange(e, pageCount)}
-          key={pageCount}
-          className={`btn btn-xs sm:btn-md border-none join-item ${
-            currentPage === pageCount ? selectedPageButtonClasses : ''
-          }`}
-        >
-          {pageCount}
-        </button>
+        {displayPageNumbers()}
         <button
           className='btn btn-xs sm:btn-md join-item'
           onClick={handleNextPage}
@@ -96,4 +106,10 @@ export default function OrdersPagination({
 //       {page}
 //     </button>
 //   ));
+// }
+
+// {
+//   currentPage === 1 || currentPage === pageCount ? (
+//     <button className='join-item btn btn-xs sm:btn-md'>...</button>
+//   ) : null;
 // }
