@@ -4,13 +4,17 @@ import { fetchOrders } from '../state/actions/fetchOrders';
 import { useEffect } from 'react';
 
 export default function Orders() {
-  const orders = useAppSelector((state: RootState) => state.orders);
+  const registeredUser = useAppSelector(
+    (state: RootState) => state.user.registeredUser
+  );
+  // TODO: orders.orders is a horrible name
+  const orders = useAppSelector((state: RootState) => state.orders.orders);
   const loading = useAppSelector((state: RootState) => state.orders.loading);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchOrders('token'));
-  }, [dispatch]);
+    if (registeredUser) dispatch(fetchOrders(registeredUser?.jwt));
+  }, [dispatch, registeredUser]);
 
   return (
     <section className='align-element py-20'>
@@ -33,76 +37,15 @@ export default function Orders() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Cheerful Charlotte</td>
-                <td>Chuckling Circle, Quirkington</td>
-                <td>11</td>
-                <td>$2,182.88</td>
-                <td className='hidden sm:block'>12:47 pm - Jan 26th, 2024</td>
-              </tr>
-              <tr>
-                <td>Punny Penny</td>
-                <td>Giggle Alley, Humor Hollow</td>
-                <td>6</td>
-                <td>₹ 119293.4</td>
-                <td className='hidden sm:block'>09:32 am - Jan 26th, 2024</td>
-              </tr>
-              <tr>
-                <td>Silly Billy</td>
-                <td>Laugh Avenue, Chuckle Town</td>
-                <td>1</td>
-                <td>$378.99</td>
-                <td className='hidden sm:block'>07:33 am - Jan 26th, 2024</td>
-              </tr>
-              <tr>
-                <td>Giggle Gary</td>
-                <td>Wit Way, Snickerston</td>
-                <td>3</td>
-                <td>₹ 43396.7</td>
-                <td className='hidden sm:block'>07:18 am - Jan 26th, 2024</td>
-              </tr>
-              <tr>
-                <td>Riddle Rita</td>
-                <td>Giggle Lane, Chuckleberg</td>
-                <td>2</td>
-                <td>$576.98</td>
-                <td className='hidden sm:block'>07:14 am - Jan 26th, 2024</td>
-              </tr>
-              <tr>
-                <td>Chortle Thompson</td>
-                <td>Comedy Corner, Jestville</td>
-                <td>1</td>
-                <td>37,898</td>
-                <td className='hidden sm:block'>02:19 am - Jan 26th, 2024</td>
-              </tr>
-              <tr>
-                <td>Punmaster Pete</td>
-                <td>Joke Lane, Hahaville</td>
-                <td>1</td>
-                <td>$202.99</td>
-                <td className='hidden sm:block'>09:14 pm - Jan 25th, 2024</td>
-              </tr>
-              <tr>
-                <td>Riddle Rita</td>
-                <td>Giggle Lane, Chuckleberg</td>
-                <td>2</td>
-                <td>$554.98</td>
-                <td className='hidden sm:block'>02:44 pm - Jan 25th, 2024</td>
-              </tr>
-              <tr>
-                <td>Giggle Gene</td>
-                <td>Jest Street, Snortington</td>
-                <td>2</td>
-                <td>$576.98</td>
-                <td className='hidden sm:block'>02:43 pm - Jan 25th, 2024</td>
-              </tr>
-              <tr>
-                <td>Punmaster Pete</td>
-                <td>Joke Lane, Hahaville</td>
-                <td>3</td>
-                <td>$961.97</td>
-                <td className='hidden sm:block'>02:22 pm - Jan 25th, 2024</td>
-              </tr>
+              {orders.map(({ id, attributes }) => (
+                <tr key={id}>
+                  <td>{attributes.name}</td>
+                  <td>{attributes.address}</td>
+                  <td>{attributes.numItemsInCart}</td>
+                  <td>{attributes.orderTotal}</td>
+                  <td className='hidden sm:block'>12:47 pm - Jan 26th, 2024</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
