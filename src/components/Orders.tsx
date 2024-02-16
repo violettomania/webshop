@@ -37,15 +37,28 @@ export default function Orders() {
               </tr>
             </thead>
             <tbody>
-              {orders.map(({ id, attributes }) => (
-                <tr key={id}>
-                  <td>{attributes.name}</td>
-                  <td>{attributes.address}</td>
-                  <td>{attributes.numItemsInCart}</td>
-                  <td>{attributes.orderTotal}</td>
-                  <td className='hidden sm:block'>12:47 pm - Jan 26th, 2024</td>
-                </tr>
-              ))}
+              {orders.map(({ id, attributes }) => {
+                const date = new Date(attributes.createdAt);
+                const formattedDate = `${date.toLocaleTimeString('en-US', {
+                  hour: '2-digit',
+                  minute: '2-digit',
+                  hour12: true,
+                })} - ${date.toLocaleDateString('en-US', {
+                  day: 'numeric',
+                  month: 'short',
+                  year: 'numeric',
+                })}`;
+
+                return (
+                  <tr key={id}>
+                    <td>{attributes.name}</td>
+                    <td>{attributes.address}</td>
+                    <td>{attributes.numItemsInCart}</td>
+                    <td>{attributes.orderTotal}</td>
+                    <td className='hidden sm:block'>{formattedDate}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
