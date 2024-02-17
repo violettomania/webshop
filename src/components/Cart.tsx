@@ -23,6 +23,7 @@ export default function Cart() {
     dispatch(removeFromCart(productID));
   };
 
+  // TODO: empty cart header to be a separate component
   return (
     <section className='align-element py-20'>
       {cartItems.length === 0 ? (
