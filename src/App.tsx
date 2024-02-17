@@ -41,6 +41,8 @@ export default function App() {
   }
 }
 
+// TODO: login/register buttons are unresponsive
+// TODO: when user logs out, the restricted menus are still available, user is not redirected to login
 // TODO: add pages/index.js for easier imports
 // TODO: WCAG compliance
 // TODO: add a HOC somewhere
