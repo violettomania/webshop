@@ -44,6 +44,7 @@ export default function OrdersPagination({
     dispatch(setPage(prevPage));
   };
 
+  // TODO: move to a separate component
   const numberButton = (page: number) => (
     <button
       onClick={(e) => handlePageNumberChange(e, page)}
@@ -56,6 +57,7 @@ export default function OrdersPagination({
     </button>
   );
 
+  // TODO: move to a separate component
   const dividerButton = () => (
     <button className='join-item btn btn-xs sm:btn-md'>...</button>
   );
@@ -64,6 +66,7 @@ export default function OrdersPagination({
     const firstTwo = [1, 2];
     const lastTwo = [pageCount - 1, pageCount];
     if (currentPage === 1 || currentPage === pageCount) {
+      // [1][...][pageCount]
       return (
         <>
           {numberButton(1)}
@@ -73,6 +76,7 @@ export default function OrdersPagination({
       );
     }
     if (firstTwo.includes(currentPage)) {
+      // [1][2][...][pageCount]
       return (
         <>
           {numberButton(1)}
@@ -83,6 +87,7 @@ export default function OrdersPagination({
       );
     }
     if (lastTwo.includes(currentPage)) {
+      // [1][...][pageCount - 1][pageCount]
       return (
         <>
           {numberButton(1)}
@@ -92,6 +97,7 @@ export default function OrdersPagination({
         </>
       );
     } else {
+      // [1][...][currentPage][...][pageCount]
       return (
         <>
           {numberButton(1)}
