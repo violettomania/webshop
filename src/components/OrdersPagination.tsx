@@ -44,10 +44,9 @@ export default function OrdersPagination({
     dispatch(setPage(prevPage));
   };
 
-  // TODO: next:
-  // if current page number > 2, insert ... button after 1 and after currentPage
   const displayPageNumbers = () => {
-    console.log('currentPage', currentPage);
+    const firstTwo = [1, 2];
+    const lastTwo = [pageCount - 1, pageCount];
     if (currentPage === 1 || currentPage === pageCount) {
       return (
         <>
@@ -72,7 +71,8 @@ export default function OrdersPagination({
           </button>
         </>
       );
-    } else if (currentPage <= 2 || currentPage <= pageCount - 1) {
+    }
+    if (firstTwo.includes(currentPage)) {
       // add a loop from 1 to 2 for the first 2 buttons
       return (
         <>
@@ -93,6 +93,75 @@ export default function OrdersPagination({
             }`}
           >
             {2}
+          </button>
+          <button className='join-item btn btn-xs sm:btn-md'>...</button>
+          <button
+            onClick={(e) => handlePageNumberChange(e, pageCount)}
+            key={pageCount}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === pageCount ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {pageCount}
+          </button>
+        </>
+      );
+    }
+    if (lastTwo.includes(currentPage)) {
+      // add a loop from 1 to 2 for the first 2 buttons
+      return (
+        <>
+          <button
+            onClick={(e) => handlePageNumberChange(e, 1)}
+            key={1}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === 1 ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {1}
+          </button>
+          <button className='join-item btn btn-xs sm:btn-md'>...</button>
+          <button
+            onClick={(e) => handlePageNumberChange(e, pageCount - 1)}
+            key={pageCount - 1}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === pageCount ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {pageCount - 1}
+          </button>
+          <button
+            onClick={(e) => handlePageNumberChange(e, pageCount)}
+            key={pageCount}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === pageCount ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {pageCount}
+          </button>
+        </>
+      );
+    } else {
+      return (
+        <>
+          <button
+            onClick={(e) => handlePageNumberChange(e, 1)}
+            key={1}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === 1 ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {1}
+          </button>
+          <button className='join-item btn btn-xs sm:btn-md'>...</button>
+          <button
+            onClick={(e) => handlePageNumberChange(e, currentPage)}
+            key={currentPage}
+            className={`btn btn-xs sm:btn-md border-none join-item ${
+              currentPage === 2 ? selectedPageButtonClasses : ''
+            }`}
+          >
+            {currentPage}
           </button>
           <button className='join-item btn btn-xs sm:btn-md'>...</button>
           <button

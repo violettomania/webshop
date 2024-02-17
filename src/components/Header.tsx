@@ -11,6 +11,7 @@ export default function Header() {
 
   const dispatch = useAppDispatch();
 
+  // TODO: redirect to login page on logout
   return (
     <header className='bg-neutral py-2 text-neutral-content'>
       <div className='align-element flex justify-center sm:justify-end'>

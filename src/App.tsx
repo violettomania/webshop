@@ -56,3 +56,4 @@ export default function App() {
 // TODO: fix high memory usage
 // TODO: import order
 // TODO: test error states with devtools
+// TODO: bugfix: you must be logged in to view... if somebody uses the url directly
