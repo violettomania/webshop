@@ -1,8 +1,13 @@
 import { useAppSelector } from '../hooks/hooks';
 import { RootState } from '../state/store/store';
+import CartTotal from './CartTotal';
 
 export default function Checkout() {
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
+  const totals = useAppSelector((state: RootState) => state.cart.totals);
+
+  // TODO: notification if shipping information is not filled in
+  // TODO: bugfix: if a cart is emptied, the checkout still doesn't show it empty
 
   return (
     <section className='align-element py-20'>
@@ -56,26 +61,7 @@ export default function Checkout() {
                 </button>
               </div>
             </form>
-            <div className='card bg-base-200'>
-              <div className='card-body'>
-                <p className='flex justify-between text-xs border-b border-base-300 pb-2'>
-                  <span>Subtotal</span>
-                  <span className='font-medium'>$179.99</span>
-                </p>
-                <p className='flex justify-between text-xs border-b border-base-300 pb-2'>
-                  <span>Shipping</span>
-                  <span className='font-medium'>$5.00</span>
-                </p>
-                <p className='flex justify-between text-xs border-b border-base-300 pb-2'>
-                  <span>Tax</span>
-                  <span className='font-medium'>$18.00</span>
-                </p>
-                <p className='flex justify-between text-sm mt-4 pb-2'>
-                  <span>Order Total</span>
-                  <span className='font-medium'>$202.99</span>
-                </p>
-              </div>
-            </div>
+            <CartTotal totals={totals} />
           </div>
         </>
       )}

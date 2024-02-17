@@ -57,3 +57,9 @@ export default function App() {
 // TODO: import order
 // TODO: test error states with devtools
 // TODO: bugfix: you must be logged in to view... if somebody uses the url directly
+/*
+TODO: bugfix: 
+WARNING in [eslint]
+src/hooks/hooks.ts
+  Line 1:32:  'useDispatch' import from 'react-redux' is restricted. Use typed hooks `useAppDispatch` and `useAppSelector` instead  @typescript-eslint/no-restricted-imports
+  Line 1:45:  'useSelector' import from 'react-redux' is restricted. Use typed hooks `useAppDispatch` and `useAppSelector` instead  @typescript-eslint/no-restricted-imports*/

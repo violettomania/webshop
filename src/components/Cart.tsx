@@ -45,9 +45,11 @@ export default function Cart() {
               onChangeItemAmount={handleChangeItemAmount}
               cartItems={cartItems}
             />
-            <CartTotal totals={totals}>
-              <CartNavigation />
-            </CartTotal>
+            <div className='lg:col-span-4 lg:pl-4'>
+              <CartTotal totals={totals}>
+                <CartNavigation />
+              </CartTotal>
+            </div>
           </div>
         </>
       )}
