@@ -44,139 +44,64 @@ export default function OrdersPagination({
     dispatch(setPage(prevPage));
   };
 
+  const numberButton = (page: number) => (
+    <button
+      onClick={(e) => handlePageNumberChange(e, page)}
+      key={page}
+      className={`btn btn-xs sm:btn-md border-none join-item ${
+        currentPage === page ? selectedPageButtonClasses : ''
+      }`}
+    >
+      {page}
+    </button>
+  );
+
+  const dividerButton = () => (
+    <button className='join-item btn btn-xs sm:btn-md'>...</button>
+  );
+
   const displayPageNumbers = () => {
     const firstTwo = [1, 2];
     const lastTwo = [pageCount - 1, pageCount];
     if (currentPage === 1 || currentPage === pageCount) {
       return (
         <>
-          <button
-            onClick={(e) => handlePageNumberChange(e, 1)}
-            key={1}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === 1 ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {1}
-          </button>
-          <button className='join-item btn btn-xs sm:btn-md'>...</button>
-          <button
-            onClick={(e) => handlePageNumberChange(e, pageCount)}
-            key={pageCount}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === pageCount ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {pageCount}
-          </button>
+          {numberButton(1)}
+          {dividerButton()}
+          {numberButton(pageCount)}
         </>
       );
     }
     if (firstTwo.includes(currentPage)) {
-      // add a loop from 1 to 2 for the first 2 buttons
       return (
         <>
-          <button
-            onClick={(e) => handlePageNumberChange(e, 1)}
-            key={1}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === 1 ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {1}
-          </button>
-          <button
-            onClick={(e) => handlePageNumberChange(e, 2)}
-            key={2}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === 2 ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {2}
-          </button>
-          <button className='join-item btn btn-xs sm:btn-md'>...</button>
-          <button
-            onClick={(e) => handlePageNumberChange(e, pageCount)}
-            key={pageCount}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === pageCount ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {pageCount}
-          </button>
+          {numberButton(1)}
+          {numberButton(2)}
+          {dividerButton()}
+          {numberButton(pageCount)}
         </>
       );
     }
     if (lastTwo.includes(currentPage)) {
-      // add a loop from 1 to 2 for the first 2 buttons
       return (
         <>
-          <button
-            onClick={(e) => handlePageNumberChange(e, 1)}
-            key={1}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === 1 ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {1}
-          </button>
-          <button className='join-item btn btn-xs sm:btn-md'>...</button>
-          <button
-            onClick={(e) => handlePageNumberChange(e, pageCount - 1)}
-            key={pageCount - 1}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === pageCount ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {pageCount - 1}
-          </button>
-          <button
-            onClick={(e) => handlePageNumberChange(e, pageCount)}
-            key={pageCount}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === pageCount ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {pageCount}
-          </button>
+          {numberButton(1)}
+          {dividerButton()}
+          {numberButton(pageCount - 1)}
+          {numberButton(pageCount)}
         </>
       );
     } else {
       return (
         <>
-          <button
-            onClick={(e) => handlePageNumberChange(e, 1)}
-            key={1}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === 1 ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {1}
-          </button>
-          <button className='join-item btn btn-xs sm:btn-md'>...</button>
-          <button
-            onClick={(e) => handlePageNumberChange(e, currentPage)}
-            key={currentPage}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === 2 ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {currentPage}
-          </button>
-          <button className='join-item btn btn-xs sm:btn-md'>...</button>
-          <button
-            onClick={(e) => handlePageNumberChange(e, pageCount)}
-            key={pageCount}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === pageCount ? selectedPageButtonClasses : ''
-            }`}
-          >
-            {pageCount}
-          </button>
+          {numberButton(1)}
+          {dividerButton()}
+          {numberButton(currentPage)}
+          {dividerButton()}
+          {numberButton(pageCount)}
         </>
       );
     }
-    // TODO: handle the case when currentPage is > 2 or currentPage is < pageCount - 1
   };
 
   return pageCount > 1 ? (
@@ -199,23 +124,3 @@ export default function OrdersPagination({
     </div>
   ) : null;
 }
-
-// {
-//   Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => (
-//     <button
-//       onClick={(e) => handlePageNumberChange(e, page)}
-//       key={page}
-//       className={`btn btn-xs sm:btn-md border-none join-item ${
-//         currentPage === page ? selectedPageButtonClasses : ''
-//       }`}
-//     >
-//       {page}
-//     </button>
-//   ));
-// }
-
-// {
-//   currentPage === 1 || currentPage === pageCount ? (
-//     <button className='join-item btn btn-xs sm:btn-md'>...</button>
-//   ) : null;
-// }
