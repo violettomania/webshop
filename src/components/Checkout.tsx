@@ -30,6 +30,7 @@ export default function Checkout() {
       navigate('/orders');
       // TODO: send order to server, then empty cart, then redirect to orders
       // TODO: bugfix: Orders button isn't selected after navigation
+      toast.success('Order placed successfully');
     }
   };
 
