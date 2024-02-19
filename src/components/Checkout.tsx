@@ -7,6 +7,7 @@ import CartTotal from './CartTotal';
 import { OrderPlacement, sendOrder } from '../state/actions/sendOrder';
 import { clearCart } from '../state/slices/cartSlice';
 import formatPrice from '../util/priceFormatter';
+import SpinnerButton from './SpinnerButton';
 
 export default function Checkout() {
   const [firstName, setFirstName] = useState('');
@@ -19,6 +20,7 @@ export default function Checkout() {
     (state: RootState) => state.user.registeredUser
   );
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
+  const loading = useAppSelector((state: RootState) => state.orders.loading);
   const totals = useAppSelector((state: RootState) => state.cart.totals);
   const error = useAppSelector((state: RootState) => state.orders.error);
 
@@ -57,6 +59,8 @@ export default function Checkout() {
     }
   };
 
+  // TODO: spinner button
+  // TODO: what happens on error
   return (
     <section className='align-element py-20'>
       {cartItems.length === 0 ? (
@@ -106,11 +110,11 @@ export default function Checkout() {
                   onChange={(e) => setAddress(e.target.value)}
                 />
               </div>
-              <div className='mt-4'>
-                <button type='submit' className='btn btn-primary btn-block'>
-                  place your order
-                </button>
-              </div>
+              <SpinnerButton
+                loading={loading}
+                text='place your order'
+                className='btn-primary mt-4'
+              />
             </form>
             <CartTotal totals={totals} />
           </div>
