@@ -26,10 +26,22 @@ export interface OrderPlacement {
   token: string;
 }
 
+export interface OrderPlacementResponse {
+  id: number;
+  address: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt: string;
+  name: string;
+  orderTotal: string;
+  cartItems: CartItem[];
+  numItemsInCart: number;
+}
+
 const url = config.ordersUrl;
 
-export const placeOrder = createAsyncThunk(
-  'checkout/placeOrder',
+export const sendOrder = createAsyncThunk(
+  'checkout/sendOrder',
   async (order: OrderPlacement) => {
     try {
       const response = await fetch(url, {
@@ -40,7 +52,7 @@ export const placeOrder = createAsyncThunk(
         },
         body: JSON.stringify(order.payload),
       });
-      const resp = await response.json();
+      const resp: OrderPlacementResponse = await response.json();
       console.log('placed order', resp);
       return resp;
     } catch (error) {

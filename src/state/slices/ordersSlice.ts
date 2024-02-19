@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
 import { Order, fetchOrders } from '../actions/fetchOrders';
+import { OrderPlacementResponse, sendOrder } from '../actions/sendOrder';
 
 // TODO: this needs to be renamed and possibly moved to @types
-
 interface OrdersState {
   orders: Order[];
   pageCount: number;
@@ -11,6 +11,7 @@ interface OrdersState {
   currentPage: number;
   loading: boolean;
   error?: string;
+  placedOrder?: OrderPlacementResponse;
 }
 
 const initialState: OrdersState = {
@@ -20,6 +21,7 @@ const initialState: OrdersState = {
   currentPage: 1,
   loading: false,
   error: '',
+  placedOrder: undefined,
 };
 
 // TODO: naming: paged?
@@ -45,6 +47,17 @@ export const ordersSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchOrders.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      })
+      .addCase(sendOrder.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(sendOrder.fulfilled, (state, action) => {
+        state.placedOrder = action.payload;
+        state.loading = false;
+      })
+      .addCase(sendOrder.rejected, (state, action) => {
         state.error = action.error.message;
         state.loading = false;
       });
