@@ -27,7 +27,7 @@ export default function Header() {
           </div>
         ) : (
           <div className='flex gap-x-6 justify-center items-center'>
-            <Link className='link link-hover text-xs sm:text-sm' to='/login'>
+            <Link className='link link-hover text-xs sm:text-sm' to='login'>
               Sign in / Guest
             </Link>
             <Link className='link link-hover text-xs sm:text-sm' to='/register'>

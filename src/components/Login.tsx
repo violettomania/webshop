@@ -15,6 +15,9 @@ export default function Login() {
   const registeredUser = useAppSelector(
     (state: RootState) => state.user.registeredUser
   );
+  const userLoggedIn = useAppSelector(
+    (state: RootState) => state.user.userLoggedIn
+  );
   const loading = useAppSelector((state: RootState) => state.user.loading);
   const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
@@ -32,10 +35,11 @@ export default function Login() {
   // TODO NEXT: bugfix: when the user registers, it's redirected to the root, skipping the login page
   // possible fix: add a logged in user check in the root page instead of just registeredUser
   useEffect(() => {
-    if (registeredUser) {
+    console.log('userLoggedIn', userLoggedIn);
+    if (userLoggedIn && registeredUser) {
       navigate('/');
     }
-  }, [registeredUser, navigate]);
+  }, [navigate, registeredUser, userLoggedIn]);
 
   useEffect(() => {
     errors?.forEach((error) => toast.error(error));
