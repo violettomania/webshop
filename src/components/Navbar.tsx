@@ -47,7 +47,9 @@ export default function Navbar() {
   }, [theme]);
 
   useEffect(() => {
-    console.log('selectedPath', location.pathname, selectedPath);
+    if (location.pathname !== selectedPath) {
+      setSelectedPath(location.pathname);
+    }
   }, [location.pathname, selectedPath]);
 
   const handleClick = useCallback(
