@@ -173,9 +173,11 @@ export default function ProductsFilter({
           onChange={(e) => setFreeShipping(e.target.checked)}
         />
       </div>
-      <div className='btn btn-primary btn-sm'>
-        <SpinnerButton loading={loading} text='search' />
-      </div>
+      <SpinnerButton
+        loading={loading}
+        text='search'
+        className='btn-primary btn-sm'
+      />
       <Link
         className='btn btn-accent btn-sm'
         to='/products'

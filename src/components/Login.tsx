@@ -23,6 +23,7 @@ export default function Login() {
   const dispatch = useAppDispatch();
 
   const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log('Button clicked. Loading:', loading);
     e.preventDefault();
     dispatch(loginUser({ identifier, password }));
   };
@@ -78,20 +79,18 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className='mt-4 btn btn-primary'>
-          <SpinnerButton
-            loading={loading}
-            text='login'
-            onClick={handleLoginClick}
-          />
-        </div>
-        <div className='btn btn-secondary'>
-          <SpinnerButton
-            loading={loading}
-            text='guest user'
-            onClick={handleGuestUserClick}
-          />
-        </div>
+        <SpinnerButton
+          loading={loading}
+          text='login'
+          className='mt-4 btn-primary'
+          onClick={handleLoginClick}
+        />
+        <SpinnerButton
+          loading={loading}
+          text='guest user'
+          className='btn-secondary'
+          onClick={handleGuestUserClick}
+        />
         <p className='text-center'>
           Not a member yet?{' '}
           <Link
