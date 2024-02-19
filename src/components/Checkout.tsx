@@ -1,22 +1,27 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { RootState } from '../state/store/store';
 import CartTotal from './CartTotal';
+import { OrderPlacement, sendOrder } from '../state/actions/sendOrder';
+import formatPrice from '../util/priceFormatter';
 
 export default function Checkout() {
   const [firstName, setFirstName] = useState('');
   const [address, setAddress] = useState('');
 
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const registeredUser = useAppSelector(
+    (state: RootState) => state.user.registeredUser
+  );
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
   const totals = useAppSelector((state: RootState) => state.cart.totals);
 
   // TODO: notification if shipping information is not filled in
   // TODO: bugfix: if a cart is emptied, the checkout still doesn't show it empty
-
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!firstName) {
@@ -26,11 +31,26 @@ export default function Checkout() {
       toast.warning('Please fill in the address');
     }
     if (firstName && address) {
-      console.log('order sent');
+      const order: OrderPlacement = {
+        payload: {
+          data: {
+            name: firstName,
+            address,
+            chargeTotal: totals.orderTotal,
+            orderTotal: `$${formatPrice(totals.orderTotal.toString())}`,
+            cartItems,
+            numItemsInCart: totals.numItemsInCart,
+          },
+        },
+        token: registeredUser?.jwt || '',
+      };
+      dispatch(sendOrder(order));
       navigate('/orders');
       // TODO: send order to server, then empty cart, then redirect to orders
       // TODO: bugfix: Orders button isn't selected after navigation
       toast.success('Order placed successfully');
+      // TODO: empty cart in local storage
+      // TODO: empty cart
     }
   };
 

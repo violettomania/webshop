@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { CartItem } from '../actions/sendOrder';
 
 export interface CartTotals {
   cartTotal: number;
@@ -11,16 +12,7 @@ export interface CartTotals {
 // TODO: CartItem should be a separate type
 // TODO: what's cartID for?
 interface CartState {
-  cartItems: {
-    cartID: string;
-    productID: number;
-    image: string;
-    title: string;
-    price: string;
-    company: string;
-    productColor: string;
-    amount: number;
-  }[];
+  cartItems: CartItem[];
   totals: CartTotals;
 }
 
