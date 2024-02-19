@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import { RootState } from '../state/store/store';
 import CartTotal from './CartTotal';
 import { OrderPlacement, sendOrder } from '../state/actions/sendOrder';
+import { clearCart } from '../state/slices/cartSlice';
 import formatPrice from '../util/priceFormatter';
 
 export default function Checkout() {
@@ -19,6 +20,7 @@ export default function Checkout() {
   );
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
   const totals = useAppSelector((state: RootState) => state.cart.totals);
+  const error = useAppSelector((state: RootState) => state.orders.error);
 
   // TODO: notification if shipping information is not filled in
   // TODO: bugfix: if a cart is emptied, the checkout still doesn't show it empty
@@ -45,12 +47,14 @@ export default function Checkout() {
         token: registeredUser?.jwt || '',
       };
       dispatch(sendOrder(order));
-      navigate('/orders');
-      // TODO: send order to server, then empty cart, then redirect to orders
+      if (error) {
+        toast.error('Error placing order');
+      } else {
+        dispatch(clearCart());
+        navigate('/orders');
+      }
       // TODO: bugfix: Orders button isn't selected after navigation
       toast.success('Order placed successfully');
-      // TODO: empty cart in local storage
-      // TODO: empty cart
     }
   };
 

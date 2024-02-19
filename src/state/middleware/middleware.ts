@@ -1,4 +1,5 @@
 import { Middleware } from '@reduxjs/toolkit';
+import { clearCart } from '../slices/cartSlice';
 
 const savedCartItems = localStorage.getItem('cartItems');
 const savedTotals = localStorage.getItem('totals');
@@ -46,7 +47,7 @@ export const localStorageMiddleware: Middleware =
       localStorage.removeItem('user');
       localStorage.removeItem('cartItems');
       localStorage.removeItem('totals');
-      storeApi.dispatch({ type: 'cart/clearCart' });
+      storeApi.dispatch(clearCart());
     } else {
       localStorage.setItem(
         'user',
