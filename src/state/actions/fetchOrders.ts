@@ -32,7 +32,7 @@ const url = config.ordersUrl;
 // TODO: simplify fetch
 // TODO: fetch cleanup
 export const fetchOrders = createAsyncThunk(
-  'user/fetchOrders',
+  'orders/fetchOrders',
   async (urlParams: URLParams) => {
     try {
       const { token, page } = urlParams;

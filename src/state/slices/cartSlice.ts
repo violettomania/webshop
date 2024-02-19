@@ -8,6 +8,7 @@ export interface CartTotals {
   tax: number;
 }
 
+// TODO: CartItem should be a separate type
 // TODO: what's cartID for?
 interface CartState {
   cartItems: {

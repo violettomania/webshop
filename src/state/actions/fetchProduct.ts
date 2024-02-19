@@ -18,7 +18,7 @@ const url = `${config.productsUrl}/`;
 
 // TODO: enforce Product type (above)
 export const fetchProduct = createAsyncThunk(
-  'products/fetchProduct',
+  'product/fetchProduct',
   async (id: string) => {
     try {
       const response = await fetch(`${url}${id}`);
