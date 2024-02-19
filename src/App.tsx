@@ -47,7 +47,6 @@ export default function App() {
 // TODO: WCAG compliance
 // TODO: add a HOC somewhere
 // TODO: translations
-// TODO: notifications to bottom right
 // TODO: logout after session expires
 // TODO: what happens when switching tabs
 // TODO: implement multi-tenancy
