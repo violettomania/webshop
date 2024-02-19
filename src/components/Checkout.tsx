@@ -22,7 +22,6 @@ export default function Checkout() {
   const totals = useAppSelector((state: RootState) => state.cart.totals);
   const error = useAppSelector((state: RootState) => state.orders.error);
 
-  // TODO: notification if shipping information is not filled in
   // TODO: bugfix: if a cart is emptied, the checkout still doesn't show it empty
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

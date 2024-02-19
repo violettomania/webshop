@@ -52,9 +52,7 @@ export const sendOrder = createAsyncThunk(
         },
         body: JSON.stringify(order.payload),
       });
-      const resp: OrderPlacementResponse = await response.json();
-      console.log('placed order', resp);
-      return resp;
+      return await response.json();
     } catch (error) {
       throw error;
     }
