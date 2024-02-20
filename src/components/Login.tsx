@@ -23,7 +23,6 @@ export default function Login() {
   const dispatch = useAppDispatch();
 
   const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    console.log('Button clicked. Loading:', loading);
     e.preventDefault();
     dispatch(loginUser({ identifier, password }));
   };

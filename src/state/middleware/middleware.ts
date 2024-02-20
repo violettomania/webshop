@@ -1,8 +1,12 @@
 import { Middleware } from '@reduxjs/toolkit';
 import { clearCart } from '../slices/cartSlice';
+import { setUser } from '../slices/userSlice';
 
 const savedCartItems = localStorage.getItem('cartItems');
 const savedTotals = localStorage.getItem('totals');
+// const userLoggedIn = useAppSelector(
+//   (state: RootState) => state.user.userLoggedIn
+// );
 
 // TODO: next: user is logged out on page refresh
 let totals = savedTotals ? JSON.parse(savedTotals) : null;
@@ -49,18 +53,16 @@ export const localStorageMiddleware: Middleware =
       localStorage.removeItem('totals');
       storeApi.dispatch(clearCart());
     } else {
-      localStorage.setItem(
-        'user',
-        JSON.stringify(storeApi.getState().user.registeredUser)
-      );
-      localStorage.setItem(
-        'cartItems',
-        JSON.stringify(storeApi.getState().cart.cartItems)
-      );
-      localStorage.setItem(
-        'totals',
-        JSON.stringify(storeApi.getState().cart.totals)
-      );
+      const state = storeApi.getState();
+      if (!state.user.userLoggedIn && localStorage.getItem('user')) {
+        storeApi.dispatch(setUser(JSON.parse(localStorage.getItem('user')!)));
+        localStorage.setItem('user', JSON.stringify(state.user.registeredUser));
+      }
+      if (state.user.registeredUser) {
+        localStorage.setItem('user', JSON.stringify(state.user.registeredUser));
+      }
+      localStorage.setItem('cartItems', JSON.stringify(state.cart.cartItems));
+      localStorage.setItem('totals', JSON.stringify(state.cart.totals));
     }
     return result;
   };

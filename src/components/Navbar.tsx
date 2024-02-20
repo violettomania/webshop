@@ -23,6 +23,9 @@ export default function Navbar() {
   const registeredUser = useAppSelector(
     (state: RootState) => state.user.registeredUser
   );
+  const userLoggedIn = useAppSelector(
+    (state: RootState) => state.user.userLoggedIn
+  );
 
   const [selectedPath, setSelectedPath] = useState(location.pathname);
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'winter');
@@ -93,7 +96,8 @@ export default function Navbar() {
   }, [renderNavbarLink]);
 
   useEffect(() => {
-    if (!registeredUser) {
+    console.log('userLoggedIn:', userLoggedIn, 'user', registeredUser);
+    if (!userLoggedIn) {
       setNavbarLinks(renderDefaultNavbarLinks());
     } else {
       setNavbarLinks([
@@ -106,6 +110,7 @@ export default function Navbar() {
     renderDefaultNavbarLinks,
     renderLoggedInUserNavbarLinks,
     selectedPath,
+    userLoggedIn,
   ]);
 
   return (
