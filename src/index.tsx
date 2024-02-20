@@ -13,6 +13,7 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+// TODO: add a loading spinner
 root.render(
   <React.StrictMode>
     <BrowserRouter>
