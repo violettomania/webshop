@@ -34,8 +34,6 @@ export default function Login() {
   };
 
   // TODO: next: when logging in, error notifications appear
-  // TODO NEXT: bugfix: when the user registers, it's redirected to the root, skipping the login page
-  // possible fix: add a logged in user check in the root page instead of just registeredUser
   useEffect(() => {
     if (userLoggedIn && registeredUser) {
       navigate('/');
