@@ -82,16 +82,18 @@ export default function Login() {
         </div>
         <SpinnerButton
           loading={loading}
-          text='login'
           className='mt-4 btn-primary'
           onClick={handleLoginClick}
-        />
+        >
+          login
+        </SpinnerButton>
         <SpinnerButton
           loading={loading}
-          text='guest user'
           className='btn-secondary'
           onClick={handleGuestUserClick}
-        />
+        >
+          guest user
+        </SpinnerButton>
         <p className='text-center'>
           Not a member yet?{' '}
           <Link

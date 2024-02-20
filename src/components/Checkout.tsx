@@ -110,11 +110,9 @@ export default function Checkout() {
                   onChange={(e) => setAddress(e.target.value)}
                 />
               </div>
-              <SpinnerButton
-                loading={loading}
-                text='place your order'
-                className='btn-primary mt-4'
-              />
+              <SpinnerButton loading={loading} className='btn-primary mt-4'>
+                place your order
+              </SpinnerButton>
             </form>
             <CartTotal totals={totals} />
           </div>

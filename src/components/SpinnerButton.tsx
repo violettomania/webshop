@@ -1,13 +1,14 @@
+import React from 'react';
+
 interface SpinnerButtonProps {
-  text: string;
+  children: string;
   loading: boolean;
   className: string;
   onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-// TODO: text should be children
 const SpinnerButton = ({
-  text,
+  children,
   loading,
   onClick,
   className,
@@ -24,7 +25,7 @@ const SpinnerButton = ({
         onClick={handleClick}
         style={{ width: '100%', height: '100%', boxSizing: 'border-box' }}
       >
-        {loading ? <span className='loading loading-spinner'></span> : text}
+        {loading ? <span className='loading loading-spinner'></span> : children}
       </button>
     </div>
   );

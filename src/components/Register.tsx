@@ -85,11 +85,9 @@ export default function Register() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <SpinnerButton
-          loading={loading}
-          text='register'
-          className='mt-4 btn-primary'
-        />
+        <SpinnerButton loading={loading} className='mt-4 btn-primary'>
+          register
+        </SpinnerButton>
         <p className='text-center'>
           Already a member?
           <Link
