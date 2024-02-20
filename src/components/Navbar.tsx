@@ -96,7 +96,6 @@ export default function Navbar() {
   }, [renderNavbarLink]);
 
   useEffect(() => {
-    console.log('userLoggedIn:', userLoggedIn, 'user', registeredUser);
     if (!userLoggedIn) {
       setNavbarLinks(renderDefaultNavbarLinks());
     } else {

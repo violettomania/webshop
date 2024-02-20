@@ -41,6 +41,8 @@ export default function App() {
   }
 }
 
+// TODO: performance improvements
+// TODO: save token to cookies
 // TODO: bugfix: if the user deletes local storage, the app crashes on refresh
 // TODO: add error boundaries
 // TODO: login/register buttons are unresponsive
