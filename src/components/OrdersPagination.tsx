@@ -44,7 +44,6 @@ export default function OrdersPagination({
     dispatch(setPage(prevPage));
   };
 
-  // TODO: move to a separate component
   const numberButton = (page: number) => (
     <button
       onClick={(e) => handlePageNumberChange(e, page)}
@@ -57,7 +56,6 @@ export default function OrdersPagination({
     </button>
   );
 
-  // TODO: move to a separate component
   const dividerButton = () => (
     <button className='join-item btn btn-xs sm:btn-md'>...</button>
   );
