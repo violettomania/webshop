@@ -6,7 +6,6 @@ import CartTotal from './CartTotal';
 import CartNavigation from './CartNavigation';
 import EmptyCartHeader from './EmptyCartHeader';
 
-// TODO: add clear cart button
 // TODO: would be a good idea to have cart item number separately since it's usd in multiple places
 export default function Cart() {
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
@@ -42,6 +41,11 @@ export default function Cart() {
             <div className='lg:col-span-4 lg:pl-4'>
               <CartTotal totals={totals}>
                 <CartNavigation />
+                <div className='lg:col-span-4 lg:pl-4'>
+                  <button className='btn btn-secondary btn-block mt-4'>
+                    CLEAR CART
+                  </button>
+                </div>
               </CartTotal>
             </div>
           </div>
