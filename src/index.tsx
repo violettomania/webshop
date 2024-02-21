@@ -8,17 +8,17 @@ import { ToastContainer } from 'react-toastify';
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
 import store, { persistor } from './state/store/store';
+import Loading from './components/Loading';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
-// TODO: add a loading spinner
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
+        <PersistGate loading={<Loading />} persistor={persistor}>
           <App />
           <ToastContainer position='bottom-right' />
         </PersistGate>
