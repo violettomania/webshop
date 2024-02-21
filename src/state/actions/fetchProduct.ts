@@ -15,13 +15,11 @@ interface Product {
   };
 }
 
-const url = `${config.productsUrl}/`;
-
 // TODO: enforce Product type (above)
 export const fetchProduct = createAsyncThunk(
   'product/fetchProduct',
   async (productId: string) => {
-    const response = await axios.get(`${url}${productId}`);
+    const response = await axios.get(`${config.productsUrl}/${productId}`);
     const product = response.data.data || {
       id: '',
       title: '',

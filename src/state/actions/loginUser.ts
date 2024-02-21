@@ -17,14 +17,12 @@ interface Response {
   error?: LoginErrorResponse;
 }
 
-const url = config.loginUrl;
-
 export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (user: { identifier: string; password: string }) => {
     const {
       data: { jwt, user: userData, error },
-    }: { data: Response } = await axios.post(url, user);
+    }: { data: Response } = await axios.post(config.loginUrl, user);
     if (error) {
       throw new RegistrationError(error);
     }
