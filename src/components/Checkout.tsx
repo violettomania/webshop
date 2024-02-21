@@ -8,6 +8,7 @@ import { OrderPlacement, sendOrder } from '../state/actions/sendOrder';
 import { clearCart } from '../state/slices/cartSlice';
 import formatPrice from '../util/priceFormatter';
 import SpinnerButton from './SpinnerButton';
+import EmptyCartHeader from './EmptyCartHeader';
 
 export default function Checkout() {
   const [firstName, setFirstName] = useState('');
@@ -60,11 +61,7 @@ export default function Checkout() {
   return (
     <section className='align-element py-20'>
       {cartItems.length === 0 ? (
-        <div className='border-b border-base-300 pb-5'>
-          <h2 className='text-3xl font-medium tracking-wider capitalize'>
-            Your cart is empty
-          </h2>
-        </div>
+        <EmptyCartHeader />
       ) : (
         <>
           <div className='border-b border-base-300 pb-5'>
