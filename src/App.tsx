@@ -41,6 +41,7 @@ export default function App() {
   }
 }
 
+// TODO: package updates
 // TODO: what about testability?
 // TODO: performance improvements
 // TODO: save token to cookies
