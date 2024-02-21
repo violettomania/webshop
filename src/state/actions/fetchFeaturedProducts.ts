@@ -2,8 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
 import axios from 'axios';
 
-// TODO: make this a generic type?
-// TODO: replace FeatureProductProps
 interface FeaturedProduct {
   id: string;
   attributes: {

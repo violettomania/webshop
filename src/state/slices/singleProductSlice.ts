@@ -33,7 +33,7 @@ const initialState: SingleProductState = {
 };
 
 export const singleProductSlice = createSlice({
-  name: 'single',
+  name: 'singleProduct',
   initialState,
   reducers: {},
   extraReducers: (builder) => {

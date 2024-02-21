@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 import { RootState } from '../state/store/store';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { toast } from 'react-toastify';
 import { fetchFeaturedProducts } from '../state/actions/fetchFeaturedProducts';
 import ProductCard from './ProductCard';
-import { ProductCardType } from '../state/slices/featuredProductsSlice';
 import Loading from './Loading';
 
 export default function FeaturedProducts() {
@@ -34,7 +33,7 @@ export default function FeaturedProducts() {
         </h2>
       </div>
       <div className='pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
-        {productCards.map((product: ProductCardType) => (
+        {productCards.map((product: ProductCard) => (
           <ProductCard key={product.id} {...product} />
         ))}
       </div>

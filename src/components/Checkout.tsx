@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { RootState } from '../state/store/store';
 import CartTotal from './CartTotal';
-import { OrderPlacement, sendOrder } from '../state/actions/sendOrder';
+import { sendOrder } from '../state/actions/sendOrder';
 import { clearCart } from '../state/slices/cartSlice';
 import formatPrice from '../util/priceFormatter';
 import SpinnerButton from './SpinnerButton';

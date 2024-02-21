@@ -2,8 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
 import { fetchProducts } from '../actions/fetchProducts';
 
-// TODO: this needs to be renamed and possibly moved to @types
-export interface FeaturedProductType {
+interface FeaturedProductType {
   id: string;
   title: string;
   image: string;
@@ -37,7 +36,7 @@ const initialState: ProductsState = {
 };
 
 export const productsSlice = createSlice({
-  name: 'paged',
+  name: 'pagedProducts',
   initialState,
   reducers: {
     setPage: (state, action) => {

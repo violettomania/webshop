@@ -11,16 +11,6 @@ interface SingleProduct {
   };
 }
 
-export interface URLParams {
-  search?: string;
-  category?: string;
-  company?: string;
-  order?: string;
-  price?: number;
-  shipping?: boolean;
-  page?: number;
-}
-
 const buildSearchQuery = (params: URLParams) => {
   const queryParams = Object.entries(params)
     .map(([key, value]) => value && `${key}=${value}`)

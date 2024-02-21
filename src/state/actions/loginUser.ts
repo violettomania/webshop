@@ -1,10 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
 import { RegistrationError } from '../../util/RegistrationError';
-import { User } from './registerUser';
 import axios from 'axios';
 
-export interface LoginErrorResponse {
+interface LoginErrorResponse {
   message: string;
   details: {
     errors?: [{ message?: string }];

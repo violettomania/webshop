@@ -1,5 +1,5 @@
 import { RootState } from '../state/store/store';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { setPage } from '../state/slices/ordersSlice';
 
 // TODO: merge with Pagination.tsx (HOC?) OR replace the original one with this

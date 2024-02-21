@@ -1,8 +1,7 @@
 import { RootState } from '../state/store/store';
-import { useAppSelector } from '../hooks/hooks';
+import { useAppSelector } from '../hooks/reduxHooks';
 import ProductCard from './ProductCard';
 import Loading from './Loading';
-import { ProductCardType } from '../state/slices/featuredProductsSlice';
 
 const gridDisplayClasses = 'pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3';
 const listDisplayClasses = 'mt-12 grid gap-y-8';
@@ -35,7 +34,7 @@ export default function Products({ displayMode }: ProductsProps) {
             displayMode === 'grid' ? gridDisplayClasses : listDisplayClasses
           }`}
         >
-          {pagedProducts.map((product: ProductCardType) => (
+          {pagedProducts.map((product: ProductCard) => (
             <ProductCard
               key={product.id}
               classes={`${

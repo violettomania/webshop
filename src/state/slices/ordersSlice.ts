@@ -1,9 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
-import { Order, fetchOrders } from '../actions/fetchOrders';
-import { OrderPlacementResponse, sendOrder } from '../actions/sendOrder';
+import { fetchOrders } from '../actions/fetchOrders';
+import { sendOrder } from '../actions/sendOrder';
 
-// TODO: this needs to be renamed and possibly moved to @types
 interface OrdersState {
   orders: Order[];
   pageCount: number;
@@ -24,9 +23,8 @@ const initialState: OrdersState = {
   placedOrder: undefined,
 };
 
-// TODO: naming: paged?
 export const ordersSlice = createSlice({
-  name: 'orders',
+  name: 'pagedOrders',
   initialState,
   reducers: {
     setPage: (state, action) => {

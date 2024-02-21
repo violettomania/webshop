@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { refreshProductsPage } from '../state/slices/productsSlice';
 import { RootState } from '../state/store/store';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 
 const defaultPaths = ['/', '/about', '/products', '/cart'];
 const defaultPages = ['home', 'about', 'products', 'cart'];

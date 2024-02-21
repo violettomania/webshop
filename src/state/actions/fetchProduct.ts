@@ -2,20 +2,6 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
 import axios from 'axios';
 
-// TODO: do I need this?
-interface Product {
-  id: string;
-  attributes: {
-    title: string;
-    company: string;
-    description: string;
-    image: string;
-    price: string;
-    colors: string[];
-  };
-}
-
-// TODO: enforce Product type (above)
 export const fetchProduct = createAsyncThunk(
   'product/fetchProduct',
   async (productId: string) => {

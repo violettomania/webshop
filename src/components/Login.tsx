@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { RootState } from '../state/store/store';
 import { Link, useNavigate } from 'react-router-dom';
 import { loginUser } from '../state/actions/loginUser';

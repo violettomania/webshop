@@ -1,5 +1,4 @@
 import formatPrice from '../util/priceFormatter';
-import { CartTotals } from '../state/slices/cartSlice';
 import React from 'react';
 
 interface CartTotalProps {

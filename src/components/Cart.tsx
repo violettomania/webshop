@@ -4,7 +4,7 @@ import {
   removeFromCart,
 } from '../state/slices/cartSlice';
 import { RootState } from '../state/store/store';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import CartItems from './CartItems';
 import CartTotal from './CartTotal';
 import CartNavigation from './CartNavigation';

@@ -2,17 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
 import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
 
-// TODO: this needs to be renamed and possibly moved to @types
-export interface ProductCardType {
-  id: string;
-  title: string;
-  image: string;
-  price: string;
-  classes?: string;
-}
-
 interface FeaturedProductState {
-  products: ProductCardType[];
+  products: ProductCard[];
   loading: boolean;
   error?: string;
 }

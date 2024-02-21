@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { RootState } from '../state/store/store';
 import { toast } from 'react-toastify';
 import { fetchOrders } from '../state/actions/fetchOrders';

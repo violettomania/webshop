@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import Product from '../components/Product';
 import { useParams } from 'react-router-dom';
 import { RootState } from '../state/store/store';

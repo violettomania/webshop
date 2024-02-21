@@ -1,15 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CartItem } from '../actions/sendOrder';
 
-export interface CartTotals {
-  cartTotal: number;
-  numItemsInCart: number;
-  orderTotal: number;
-  shipping: number;
-  tax: number;
-}
-
-// TODO: CartItem should be a separate type
 interface CartState {
   cartItems: CartItem[];
   totals: CartTotals;

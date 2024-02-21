@@ -41,6 +41,7 @@ export default function App() {
   }
 }
 
+// what if I save a cart, logout, and then login again with a different user?
 // TODO: package updates
 // TODO: what about testability?
 // TODO: performance improvements
@@ -57,7 +58,6 @@ export default function App() {
 // TODO: what happens when switching tabs
 // TODO: implement multi-tenancy
 // TODO: preventDefault?
-// TODO: register/login page could also use a header
 // TODO: oidc user
 // TODO: multifactor authentication?
 // TODO: fix high memory usage

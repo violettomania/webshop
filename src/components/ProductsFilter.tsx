@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { URLParams } from '../state/actions/fetchProducts';
-import { useAppSelector } from '../hooks/hooks';
+import { useAppSelector } from '../hooks/reduxHooks';
 import { RootState } from '../state/store/store';
 import SpinnerButton from './SpinnerButton';
 
-// TODO: probably move these to a shared file
 type Category = 'all' | 'Tables' | 'Chairs' | 'Kids' | 'Sofas' | 'Beds';
 type Company =
   | 'all'

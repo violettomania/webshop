@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { URLParams, fetchProducts } from '../state/actions/fetchProducts';
+import { fetchProducts } from '../state/actions/fetchProducts';
 import { RootState } from '../state/store/store';
-import { useAppDispatch, useAppSelector } from '../hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { toast } from 'react-toastify';
 import ProductsFilter from './ProductsFilter';
 import Products from './Products';
