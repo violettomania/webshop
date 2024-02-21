@@ -66,7 +66,6 @@ export default function ProductsContainer() {
     setDisplayMode(display);
   };
 
-  // TODO: pagination: add ... ?
   return (
     <section className='align-element py-20'>
       <ProductsFilter

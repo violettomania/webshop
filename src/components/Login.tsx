@@ -32,7 +32,6 @@ export default function Login() {
     dispatch(loginUser({ identifier: 'test@test.com', password: 'secret' }));
   };
 
-  // TODO: next: when logging in, error notifications appear
   useEffect(() => {
     if (userLoggedIn && registeredUser) {
       navigate('/');

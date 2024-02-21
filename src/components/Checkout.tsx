@@ -24,7 +24,6 @@ export default function Checkout() {
   const totals = useAppSelector((state: RootState) => state.cart.totals);
   const error = useAppSelector((state: RootState) => state.orders.error);
 
-  // TODO: bugfix: if a cart is emptied, the checkout still doesn't show it empty
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!firstName) {
@@ -54,13 +53,10 @@ export default function Checkout() {
         dispatch(clearCart());
         navigate('/orders');
       }
-      // TODO: bugfix: Orders button isn't selected after navigation
       toast.success('Order placed successfully');
     }
   };
 
-  // TODO: spinner button
-  // TODO: what happens on error
   return (
     <section className='align-element py-20'>
       {cartItems.length === 0 ? (

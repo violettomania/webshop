@@ -41,6 +41,7 @@ export default function App() {
   }
 }
 
+// TODO: what about testability?
 // TODO: performance improvements
 // TODO: save token to cookies
 // TODO: bugfix: if the user deletes local storage, the app crashes on refresh

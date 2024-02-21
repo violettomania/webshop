@@ -16,7 +16,6 @@ export default function ProductCard({
   price,
   classes,
 }: FeaturedProductProps) {
-  // TODO: add mandatory classes
   return (
     <Link className={classes} to={`/products/${id}`}>
       <figure className='px-4 pt-4'>

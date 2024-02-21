@@ -10,7 +10,6 @@ export interface CartTotals {
 }
 
 // TODO: CartItem should be a separate type
-// TODO: what's cartID for?
 interface CartState {
   cartItems: CartItem[];
   totals: CartTotals;

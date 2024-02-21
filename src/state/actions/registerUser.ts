@@ -19,8 +19,7 @@ export interface RegisteredUser {
   user: User;
 }
 
-// TODO: rename to RegistrationErrorResponse
-export interface ErrorResponse {
+export interface RegistrationErrorResponse {
   message: string;
   details: {
     errors?: [{ message?: string }];
@@ -30,7 +29,7 @@ export interface ErrorResponse {
 interface Response {
   jwt: string;
   user: User;
-  error: ErrorResponse;
+  error: RegistrationErrorResponse;
 }
 
 const url = config.registerUrl;

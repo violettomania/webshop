@@ -7,7 +7,6 @@ import SingleOrder from './Order';
 import Loading from './Loading';
 import OrdersPagination from './OrdersPagination';
 
-// TODO: orders table is sometimes empty on refresh
 export default function Orders() {
   const registeredUser = useAppSelector(
     (state: RootState) => state.user.registeredUser

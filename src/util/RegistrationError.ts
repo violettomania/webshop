@@ -1,8 +1,8 @@
 import { SerializedError } from '@reduxjs/toolkit/dist/createAsyncThunk';
-import { ErrorResponse } from '../state/actions/registerUser';
+import { RegistrationErrorResponse } from '../state/actions/registerUser';
 
 export class RegistrationError extends Error implements SerializedError {
-  constructor(public originalError: ErrorResponse) {
+  constructor(public originalError: RegistrationErrorResponse) {
     super(
       JSON.stringify(
         originalError.details?.errors?.map((error) => error.message) || [

@@ -25,8 +25,6 @@ const initialState: OrdersState = {
 };
 
 // TODO: naming: paged?
-// TODO: implement pagination
-// TODO: handle errors in all slices
 export const ordersSlice = createSlice({
   name: 'orders',
   initialState,

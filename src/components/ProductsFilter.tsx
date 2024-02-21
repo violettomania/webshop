@@ -6,7 +6,6 @@ import { RootState } from '../state/store/store';
 import SpinnerButton from './SpinnerButton';
 
 // TODO: probably move these to a shared file
-// TODO: add shipping type, unify its conversion (should probably do it here)
 type Category = 'all' | 'Tables' | 'Chairs' | 'Kids' | 'Sofas' | 'Beds';
 type Company =
   | 'all'
@@ -24,7 +23,6 @@ interface ProductsFilterProps {
   companies: string[];
 }
 
-// TODO: use a modified submit button for searching with spinner etc.
 export default function ProductsFilter({
   onSearch,
   onReset,

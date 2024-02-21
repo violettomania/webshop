@@ -16,7 +16,6 @@ export default function Navbar() {
   // TODO: create hook reusing the same logic from color picker
   // TODO: reuse paths from App.tsx
   // TODO: move theme selection to userSlice, otherwise it will be lost on page refresh (and using the local storage doesn't make sense in this case, since the user should be able to change the theme without having to refresh the page to see the changes)
-  // TODO: what about testability?
   const location = useLocation();
   const totals = useAppSelector((state: RootState) => state.cart.totals);
   const dispatch = useAppDispatch();

@@ -7,8 +7,6 @@ import CartNavigation from './CartNavigation';
 
 // TODO: add clear cart button
 // TODO: would be a good idea to have cart item number separately since it's usd in multiple places
-// TODO: price should not be string
-// TODO: bugfix: refresh page after adding item to cart, the cart is empty
 export default function Cart() {
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
   const totals = useAppSelector((state: RootState) => state.cart.totals);
