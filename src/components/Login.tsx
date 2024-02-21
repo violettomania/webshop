@@ -33,7 +33,8 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if (userLoggedIn && registeredUser) {
+    console.log('user logged in', userLoggedIn);
+    if (userLoggedIn) {
       navigate('/');
     }
   }, [navigate, registeredUser, userLoggedIn]);
@@ -41,6 +42,10 @@ export default function Login() {
   useEffect(() => {
     errors?.forEach((error) => toast.error(error));
   }, [errors]);
+
+  useEffect(() => {
+    console.log('login loading', loading);
+  }, [loading]);
 
   return (
     <section className='h-screen grid place-items-center'>
