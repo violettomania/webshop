@@ -4,7 +4,7 @@ import { fetchOrders } from '../actions/fetchOrders';
 import { sendOrder } from '../actions/sendOrder';
 
 interface OrdersState {
-  orders: Order[];
+  pagedOrders: Order[];
   pageCount: number;
   total: number;
   currentPage: number;
@@ -14,7 +14,7 @@ interface OrdersState {
 }
 
 const initialState: OrdersState = {
-  orders: [],
+  pagedOrders: [],
   pageCount: 0,
   total: 0,
   currentPage: 1,
@@ -37,7 +37,7 @@ export const ordersSlice = createSlice({
         state.loading = true;
       })
       .addCase(fetchOrders.fulfilled, (state, action) => {
-        state.orders = action.payload.data;
+        state.pagedOrders = action.payload.data;
         state.pageCount = action.payload.meta.pagination.pageCount;
         state.total = action.payload.meta.pagination.total;
         state.loading = false;
@@ -60,7 +60,7 @@ export const ordersSlice = createSlice({
   },
 });
 
-export const selectProducts = (state: RootState) => state.orders;
+export const selectProducts = (state: RootState) => state.orders.pagedOrders;
 export const setPage = ordersSlice.actions.setPage;
 
 export default ordersSlice.reducer;

@@ -22,7 +22,6 @@ export default function FeaturedProducts() {
     if (error) toast.error('There was an error fetching the products');
   }, [error]);
 
-  // TODO: use unified type instead of FeaturedProductProps (Partial, Omit?)
   return loading ? (
     <Loading />
   ) : (

@@ -12,7 +12,7 @@ export default function Orders() {
     (state: RootState) => state.user.registeredUser
   );
   // TODO: orders.orders is a horrible name
-  const orders = useAppSelector((state: RootState) => state.orders.orders);
+  const orders = useAppSelector((state: RootState) => state.orders.pagedOrders);
   const total = useAppSelector((state: RootState) => state.orders.total);
   const error = useAppSelector((state: RootState) => state.orders.error);
   const loading = useAppSelector((state: RootState) => state.orders.loading);

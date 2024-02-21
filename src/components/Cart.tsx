@@ -10,7 +10,6 @@ import CartTotal from './CartTotal';
 import CartNavigation from './CartNavigation';
 import EmptyCartHeader from './EmptyCartHeader';
 
-// TODO: would be a good idea to have cart item number separately since it's usd in multiple places
 export default function Cart() {
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
   const totals = useAppSelector((state: RootState) => state.cart.totals);

@@ -4,14 +4,12 @@ import { RootState } from '../state/store/store';
 import { logoutUser } from '../state/slices/userSlice';
 
 export default function Header() {
-  // TODO: should be user.username
   const registeredUser = useAppSelector(
     (state: RootState) => state.user.registeredUser
   );
 
   const dispatch = useAppDispatch();
 
-  // TODO: remove restricted menus on logout, redirect to home
   return (
     <header className='bg-neutral py-2 text-neutral-content'>
       <div className='align-element flex justify-center sm:justify-end'>
