@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
 import { RegistrationError } from '../../util/RegistrationError';
+import axios from 'axios';
 
 // TODO: move to common file
 export interface User {
@@ -32,27 +33,16 @@ interface Response {
   error: RegistrationErrorResponse;
 }
 
-const url = config.registerUrl;
-
 // TODO: check options preflight
 export const registerUser = createAsyncThunk(
   'user/registerUser',
   async (user: { username: string; email: string; password: string }) => {
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(user),
-      });
-      const resp: Response = await response.json();
-      if (resp.error) {
-        throw new RegistrationError(resp.error);
-      }
-      return { jwt: resp.jwt, user: resp.user };
-    } catch (error) {
-      throw error;
+    const {
+      data: { jwt, user: userData, error },
+    }: { data: Response } = await axios.post(config.registerUrl, user);
+    if (error) {
+      throw new RegistrationError(error);
     }
+    return { jwt, user: userData };
   }
 );

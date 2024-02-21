@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
+import axios from 'axios';
 
 // TODO: do I need this?
 interface Product {
@@ -19,31 +20,23 @@ const url = `${config.productsUrl}/`;
 // TODO: enforce Product type (above)
 export const fetchProduct = createAsyncThunk(
   'product/fetchProduct',
-  async (id: string) => {
-    try {
-      const response = await fetch(`${url}${id}`);
-      const data = await response.json();
-      const { data: product } = data;
-      if (product) {
-        const {
-          id,
-          attributes: { title, company, description, image, price, colors },
-        } = product;
-        return { id, title, company, description, image, price, colors };
-      } else {
-        return {
-          id: '',
-          title: '',
-          company: '',
-          description: '',
-          image: '',
-          price: '',
-          colors: [],
-        };
-      }
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+  async (productId: string) => {
+    const response = await axios.get(`${url}${productId}`);
+    const product = response.data.data || {
+      id: '',
+      title: '',
+      company: '',
+      description: '',
+      image: '',
+      price: '',
+      colors: [],
+    };
+
+    const {
+      id,
+      attributes: { title, company, description, image, price, colors },
+    } = product;
+
+    return { id, title, company, description, image, price, colors };
   }
 );

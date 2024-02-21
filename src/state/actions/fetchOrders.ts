@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
+import axios from 'axios';
 
 export interface Order {
   id: string;
@@ -27,28 +28,16 @@ interface URLParams {
   page?: number;
 }
 
-const url = config.ordersUrl;
-
-// TODO: simplify fetch
-// TODO: fetch cleanup
 export const fetchOrders = createAsyncThunk(
   'orders/fetchOrders',
-  async (urlParams: URLParams) => {
-    try {
-      const { token, page } = urlParams;
-      const pageParam = page ? `?page=${page}` : '';
-      const fullUrl = `${url}${pageParam}`;
-      const response = await fetch(fullUrl, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const resp: OrdersResponse = await response.json();
-      return resp;
-    } catch (error) {
-      throw error;
-    }
+  async ({ token, page }: URLParams) => {
+    const pageParam = page ? `?page=${page}` : '';
+    const response = await axios.get(`${config.ordersUrl}${pageParam}`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data as OrdersResponse;
   }
 );

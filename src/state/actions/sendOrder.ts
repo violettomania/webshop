@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { config } from './config/config';
+import axios from 'axios';
 
 export interface CartItem {
   cartID: string;
@@ -38,21 +39,17 @@ export interface OrderPlacementResponse {
   numItemsInCart: number;
 }
 
-const url = config.ordersUrl;
-
 export const sendOrder = createAsyncThunk(
   'checkout/sendOrder',
   async (order: OrderPlacement) => {
     try {
-      const response = await fetch(url, {
-        method: 'POST',
+      const { data } = await axios.post(config.ordersUrl, order.payload, {
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${order.token}`,
         },
-        body: JSON.stringify(order.payload),
       });
-      return await response.json();
+      return data;
     } catch (error) {
       throw error;
     }
