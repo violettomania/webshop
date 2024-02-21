@@ -1,4 +1,8 @@
-import { changeAmountInCart, removeFromCart } from '../state/slices/cartSlice';
+import {
+  changeAmountInCart,
+  clearCart,
+  removeFromCart,
+} from '../state/slices/cartSlice';
 import { RootState } from '../state/store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/hooks';
 import CartItems from './CartItems';
@@ -42,7 +46,10 @@ export default function Cart() {
               <CartTotal totals={totals}>
                 <CartNavigation />
                 <div className='lg:col-span-4 lg:pl-4'>
-                  <button className='btn btn-secondary btn-block mt-4'>
+                  <button
+                    className='btn btn-secondary btn-block mt-4'
+                    onClick={() => dispatch(clearCart())}
+                  >
                     CLEAR CART
                   </button>
                 </div>
