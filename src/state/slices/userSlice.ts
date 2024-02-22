@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { RootState } from '../store/store';
-import { registerUser } from '../actions/registerUser';
+
 import { loginUser } from '../actions/loginUser';
+import { registerUser } from '../actions/registerUser';
+import type { RootState } from '../store/store';
 
 interface UserState {
   registeredUser: RegisteredUser | null;

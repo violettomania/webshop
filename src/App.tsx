@@ -1,16 +1,17 @@
 import { Routes, Route, Outlet } from 'react-router-dom';
+
 import Header from './components/Header';
 import MainPage from './components/MainPage';
 import Navbar from './components/Navbar';
-import PageNotFoundErrorPage from './pages/PageNotFoundErrorPage';
 import AboutPage from './pages/AboutPage';
-import ProductsPage from './pages/ProductsPage';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
-import OrdersPage from './pages/OrdersPage';
-import ProductPage from './pages/ProductPage';
-import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
+import OrdersPage from './pages/OrdersPage';
+import PageNotFoundErrorPage from './pages/PageNotFoundErrorPage';
+import ProductPage from './pages/ProductPage';
+import ProductsPage from './pages/ProductsPage';
+import RegisterPage from './pages/RegisterPage';
 
 export default function App() {
   return (

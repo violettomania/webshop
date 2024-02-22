@@ -1,13 +1,14 @@
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import {
   changeAmountInCart,
   clearCart,
   removeFromCart,
 } from '../state/slices/cartSlice';
 import { RootState } from '../state/store/store';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+
 import CartItems from './CartItems';
-import CartTotal from './CartTotal';
 import CartNavigation from './CartNavigation';
+import CartTotal from './CartTotal';
 import EmptyCartHeader from './EmptyCartHeader';
 
 export default function Cart() {
