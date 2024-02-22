@@ -11,7 +11,6 @@ import Products from './Products';
 import ProductsFilter from './ProductsFilter';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
 
-
 export default function ProductsContainer() {
   const dispatch = useAppDispatch();
   const total = useAppSelector((state: RootState) => state.paged.total);

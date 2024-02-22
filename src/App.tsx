@@ -42,6 +42,11 @@ export default function App() {
   }
 }
 
+// TODO: rehydration is called on frst startup and fetches everything
+// TODO: keep product card ordering (list or not) after navigation
+// TODO: loading should be still set to false by default
+// TODO: -1 product is also fetched
+// TODO: too many API calls
 // TODO: export workspace file
 // what if I save a cart, logout, and then login again with a different user?
 // TODO: package updates
