@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { config } from './config/config';
 import axios from 'axios';
+
+import { config } from './config/config';
 
 export const sendOrder = createAsyncThunk(
   'checkout/sendOrder',

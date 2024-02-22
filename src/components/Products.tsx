@@ -1,7 +1,8 @@
-import { RootState } from '../state/store/store';
 import { useAppSelector } from '../hooks/reduxHooks';
-import ProductCard from './ProductCard';
+import { RootState } from '../state/store/store';
+
 import Loading from './Loading';
+import ProductCard from './ProductCard';
 
 const gridDisplayClasses = 'pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3';
 const listDisplayClasses = 'mt-12 grid gap-y-8';

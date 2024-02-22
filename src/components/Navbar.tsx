@@ -1,11 +1,12 @@
-import { FaBarsStaggered } from 'react-icons/fa6';
-import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
+import { BsCart3, BsMoonFill, BsSunFill } from 'react-icons/bs';
+import { FaBarsStaggered } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { refreshProductsPage } from '../state/slices/productsSlice';
 import { RootState } from '../state/store/store';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 
 const defaultPaths = ['/', '/about', '/products', '/cart'];
 const defaultPages = ['home', 'about', 'products', 'cart'];

@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { RootState } from '../store/store';
+
 import { fetchOrders } from '../actions/fetchOrders';
 import { sendOrder } from '../actions/sendOrder';
+import type { RootState } from '../store/store';
 
 interface OrdersState {
   pagedOrders: Order[];

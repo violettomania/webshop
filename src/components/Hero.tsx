@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+
 import Carousel from './Carousel';
 
 export default function Hero() {

@@ -1,10 +1,13 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import formatPrice from '../util/priceFormatter';
-import ColorPicker from './ColorPicker';
+import { toast } from 'react-toastify';
+
 import { useAppDispatch } from '../hooks/reduxHooks';
 import { addToCart } from '../state/slices/cartSlice';
-import { useState } from 'react';
-import { toast } from 'react-toastify';
+import formatPrice from '../util/priceFormatter';
+
+import ColorPicker from './ColorPicker';
+
 
 interface ProductProps {
   id: string;

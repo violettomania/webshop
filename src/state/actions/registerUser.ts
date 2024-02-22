@@ -1,7 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { config } from './config/config';
-import { RegistrationError } from '../../util/RegistrationError';
 import axios from 'axios';
+
+import { RegistrationError } from '../../util/RegistrationError';
+
+import { config } from './config/config';
 
 interface Response {
   jwt: string;

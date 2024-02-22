@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
-import { RootState } from '../state/store/store';
+
 import { useAppSelector } from '../hooks/reduxHooks';
+import { RootState } from '../state/store/store';
 
 export default function CartNavigation() {
   const registeredUser = useAppSelector(

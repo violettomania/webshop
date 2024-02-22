@@ -1,10 +1,13 @@
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import Product from '../components/Product';
-import { useParams } from 'react-router-dom';
-import { RootState } from '../state/store/store';
 import { useEffect } from 'react';
-import { fetchProduct } from '../state/actions/fetchProduct';
+import { useParams } from 'react-router-dom';
+
 import Loading from '../components/Loading';
+import Product from '../components/Product';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { fetchProduct } from '../state/actions/fetchProduct';
+import { RootState } from '../state/store/store';
+
+
 
 export default function ProductPage() {
   const dispatch = useAppDispatch();

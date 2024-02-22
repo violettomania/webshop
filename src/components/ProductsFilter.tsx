@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import { useAppSelector } from '../hooks/reduxHooks';
 import { RootState } from '../state/store/store';
+
 import SpinnerButton from './SpinnerButton';
 
 type Category = 'all' | 'Tables' | 'Chairs' | 'Kids' | 'Sofas' | 'Beds';

@@ -1,6 +1,6 @@
-import { RootState } from '../state/store/store';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { setPage } from '../state/slices/productsSlice';
+import { RootState } from '../state/store/store';
 
 interface PaginationProps {
   onPageNumberChange: (page: number) => void;

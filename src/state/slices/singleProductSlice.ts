@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { RootState } from '../store/store';
+
 import { fetchProduct } from '../actions/fetchProduct';
+import type { RootState } from '../store/store';
 
 interface SingleProduct {
   id: string;

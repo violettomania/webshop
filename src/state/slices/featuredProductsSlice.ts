@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { RootState } from '../store/store';
+
 import { fetchFeaturedProducts } from '../actions/fetchFeaturedProducts';
+import type { RootState } from '../store/store';
 
 interface FeaturedProductState {
   products: ProductCard[];

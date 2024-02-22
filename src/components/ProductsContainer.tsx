@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
-import { fetchProducts } from '../state/actions/fetchProducts';
-import { RootState } from '../state/store/store';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { toast } from 'react-toastify';
-import ProductsFilter from './ProductsFilter';
-import Products from './Products';
-import ProductsLayoutToggle from './ProductsLayoutToggle';
-import Pagination from './Pagination';
+
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { fetchProducts } from '../state/actions/fetchProducts';
 import { refreshProductsPage, setPage } from '../state/slices/productsSlice';
+import { RootState } from '../state/store/store';
+
+import Pagination from './Pagination';
+import Products from './Products';
+import ProductsFilter from './ProductsFilter';
+import ProductsLayoutToggle from './ProductsLayoutToggle';
+
 
 export default function ProductsContainer() {
   const dispatch = useAppDispatch();

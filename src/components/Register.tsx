@@ -1,9 +1,12 @@
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { RootState } from '../state/store/store';
-import { Link, useNavigate } from 'react-router-dom';
-import { registerUser } from '../state/actions/registerUser';
 import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { registerUser } from '../state/actions/registerUser';
+import { RootState } from '../state/store/store';
+
+
 import SpinnerButton from './SpinnerButton';
 
 export default function Register() {

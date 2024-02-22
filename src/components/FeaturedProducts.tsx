@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
-import { RootState } from '../state/store/store';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { toast } from 'react-toastify';
+
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { fetchFeaturedProducts } from '../state/actions/fetchFeaturedProducts';
-import ProductCard from './ProductCard';
+import { RootState } from '../state/store/store';
+
 import Loading from './Loading';
+import ProductCard from './ProductCard';
 
 export default function FeaturedProducts() {
   const dispatch = useAppDispatch();

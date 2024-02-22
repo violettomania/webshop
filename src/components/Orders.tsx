@@ -1,10 +1,13 @@
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { RootState } from '../state/store/store';
-import { toast } from 'react-toastify';
-import { fetchOrders } from '../state/actions/fetchOrders';
 import { useEffect } from 'react';
-import SingleOrder from './Order';
+import { toast } from 'react-toastify';
+
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { fetchOrders } from '../state/actions/fetchOrders';
+import { RootState } from '../state/store/store';
+
+
 import Loading from './Loading';
+import SingleOrder from './Order';
 import OrdersPagination from './OrdersPagination';
 
 export default function Orders() {

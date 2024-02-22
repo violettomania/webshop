@@ -1,12 +1,13 @@
 import { combineReducers } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-import { configureStore } from '@reduxjs/toolkit';
-import productsReducer from '../slices/productsSlice';
+
+import cartReducer from '../slices/cartSlice';
 import featuredProductsReducer from '../slices/featuredProductsSlice';
 import ordersReducer from '../slices/ordersSlice';
+import productsReducer from '../slices/productsSlice';
 import singleProductReducer from '../slices/singleProductSlice';
-import cartReducer from '../slices/cartSlice';
 import userReducer from '../slices/userSlice';
 
 const persistConfig = {

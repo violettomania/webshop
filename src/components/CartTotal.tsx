@@ -1,5 +1,6 @@
-import formatPrice from '../util/priceFormatter';
 import React from 'react';
+
+import formatPrice from '../util/priceFormatter';
 
 interface CartTotalProps {
   totals: CartTotals;

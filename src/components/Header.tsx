@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom';
+
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { RootState } from '../state/store/store';
-import { logoutUser, signInRedirect } from '../state/slices/userSlice';
 import { clearCart } from '../state/slices/cartSlice';
+import { logoutUser, signInRedirect } from '../state/slices/userSlice';
+import { RootState } from '../state/store/store';
 
 export default function Header() {
   const registeredUser = useAppSelector(

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { RootState } from '../store/store';
+
 import { fetchProducts } from '../actions/fetchProducts';
+import type { RootState } from '../store/store';
 
 interface FeaturedProductType {
   id: string;

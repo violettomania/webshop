@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { RootState } from '../state/store/store';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../state/actions/loginUser';
-import SpinnerButton from './SpinnerButton';
 import { toast } from 'react-toastify';
+
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { loginUser } from '../state/actions/loginUser';
+import { RootState } from '../state/store/store';
+
+import SpinnerButton from './SpinnerButton';
+
 
 export default function Login() {
   const [identifier, setIdentifier] = useState('');
