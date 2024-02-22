@@ -21,6 +21,10 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    registerRedirect: (state) => {
+      state.userLoggedIn = false;
+      state.loading = false;
+    },
     signInRedirect: (state) => {
       state.userLoggedIn = false;
       state.loading = false;

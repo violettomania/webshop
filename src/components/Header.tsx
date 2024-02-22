@@ -11,6 +11,10 @@ export default function Header() {
 
   const dispatch = useAppDispatch();
 
+  function registerRedirect(): any {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <header className='bg-neutral py-2 text-neutral-content'>
       <div className='align-element flex justify-center sm:justify-end'>
@@ -36,7 +40,11 @@ export default function Header() {
             >
               Sign in / Guest
             </Link>
-            <Link className='link link-hover text-xs sm:text-sm' to='/register'>
+            <Link
+              className='link link-hover text-xs sm:text-sm'
+              to='/register'
+              onClick={() => dispatch(registerRedirect())}
+            >
               Create Account
             </Link>
           </div>
