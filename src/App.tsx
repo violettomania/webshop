@@ -33,11 +33,11 @@ export default function App() {
         { path: '/cart', element: <CartPage /> },
         {
           path: '/checkout',
-          element: userLoggedIn ? <CheckoutPage /> : <Navigate to='/login' />,
+          element: userLoggedIn ? <CheckoutPage /> : <Navigate to='/' />,
         },
         {
           path: '/orders',
-          element: userLoggedIn ? <OrdersPage /> : <Navigate to='/login' />,
+          element: userLoggedIn ? <OrdersPage /> : <Navigate to='/' />,
         },
       ],
     },
