@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { persistReducer, REHYDRATE } from 'redux-persist';
+import { createSlice } from '@reduxjs/toolkit';
 import type { RootState } from '../store/store';
 import { registerUser } from '../actions/registerUser';
 import { loginUser } from '../actions/loginUser';
