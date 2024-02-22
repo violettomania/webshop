@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { RootState } from '../state/store/store';
-import { logoutUser } from '../state/slices/userSlice';
+import { logoutUser, signInRedirect } from '../state/slices/userSlice';
 
 export default function Header() {
   const registeredUser = useAppSelector(
@@ -25,7 +25,11 @@ export default function Header() {
           </div>
         ) : (
           <div className='flex gap-x-6 justify-center items-center'>
-            <Link className='link link-hover text-xs sm:text-sm' to='login'>
+            <Link
+              className='link link-hover text-xs sm:text-sm'
+              to='login'
+              onClick={() => dispatch(signInRedirect())}
+            >
               Sign in / Guest
             </Link>
             <Link className='link link-hover text-xs sm:text-sm' to='/register'>
