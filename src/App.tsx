@@ -1,8 +1,10 @@
-import { Routes, Route, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
 
 import Header from './components/Header';
 import MainPage from './components/MainPage';
 import Navbar from './components/Navbar';
+import { useAppSelector } from './hooks/reduxHooks';
 import AboutPage from './pages/AboutPage';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';
@@ -12,34 +14,49 @@ import PageNotFoundErrorPage from './pages/PageNotFoundErrorPage';
 import ProductPage from './pages/ProductPage';
 import ProductsPage from './pages/ProductsPage';
 import RegisterPage from './pages/RegisterPage';
+import { RootState } from './state/store/store';
 
 export default function App() {
-  return (
-    <Routes>
-      <Route path='/' element={<MainLayout />}>
-        <Route path='/' element={<MainPage />} />
-        <Route path='/about' element={<AboutPage />} />
-        <Route path='/products' element={<ProductsPage />} />
-        <Route path='/products/:id' element={<ProductPage />} />
-        <Route path='/cart' element={<CartPage />} />
-        <Route path='/checkout' element={<CheckoutPage />} />
-        <Route path='/orders' element={<OrdersPage />} />
-      </Route>
-      <Route path='*' element={<PageNotFoundErrorPage />} />
-      <Route path='/login' element={<LoginPage />} />
-      <Route path='/register' element={<RegisterPage />} />
-    </Routes>
+  const userLoggedIn = useAppSelector(
+    (state: RootState) => state.user.userLoggedIn
   );
 
-  function MainLayout() {
-    return (
-      <>
-        <Header />
-        <Navbar />
-        <Outlet />
-      </>
-    );
-  }
+  const routes = useRoutes([
+    {
+      path: '/',
+      element: <MainLayout />,
+      children: [
+        { path: '/', element: <MainPage /> },
+        { path: '/about', element: <AboutPage /> },
+        { path: '/products', element: <ProductsPage /> },
+        { path: '/products/:id', element: <ProductPage /> },
+        { path: '/cart', element: <CartPage /> },
+        {
+          path: '/checkout',
+          element: userLoggedIn ? <CheckoutPage /> : <Navigate to='/login' />,
+        },
+        {
+          path: '/orders',
+          element: userLoggedIn ? <OrdersPage /> : <Navigate to='/login' />,
+        },
+      ],
+    },
+    { path: '*', element: <PageNotFoundErrorPage /> },
+    { path: '/login', element: <LoginPage /> },
+    { path: '/register', element: <RegisterPage /> },
+  ]);
+
+  return routes;
+}
+
+function MainLayout() {
+  return (
+    <>
+      <Header />
+      <Navbar />
+      <Outlet />
+    </>
+  );
 }
 
 // TODO: rehydration is called on frst startup and fetches everything
