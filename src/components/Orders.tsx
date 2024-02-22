@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { fetchOrders } from '../state/actions/fetchOrders';
 import { RootState } from '../state/store/store';
 
-
 import Loading from './Loading';
 import SingleOrder from './Order';
 import OrdersPagination from './OrdersPagination';
@@ -14,7 +13,6 @@ export default function Orders() {
   const registeredUser = useAppSelector(
     (state: RootState) => state.user.registeredUser
   );
-  // TODO: orders.orders is a horrible name
   const orders = useAppSelector((state: RootState) => state.orders.pagedOrders);
   const total = useAppSelector((state: RootState) => state.orders.total);
   const error = useAppSelector((state: RootState) => state.orders.error);
