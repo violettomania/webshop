@@ -7,8 +7,6 @@ import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { fetchProduct } from '../state/actions/fetchProduct';
 import { RootState } from '../state/store/store';
 
-
-
 export default function ProductPage() {
   const dispatch = useAppDispatch();
   const singleProduct = useAppSelector(
@@ -18,6 +16,7 @@ export default function ProductPage() {
 
   let { id } = useParams();
 
+  // TODO: next: bugfix: arbitrary id's work despite receiving 404 from server
   useEffect(() => {
     if (id) {
       dispatch(fetchProduct(id));
