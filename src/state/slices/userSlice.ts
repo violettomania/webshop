@@ -68,7 +68,6 @@ export const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        // TODO: next: this one causes problems if we try to login with an empty form
         state.errors = action.error.message
           ? JSON.parse(action.error.message)
           : ['An error occurred'];

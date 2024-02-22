@@ -8,7 +8,6 @@ import { RootState } from '../state/store/store';
 
 import SpinnerButton from './SpinnerButton';
 
-
 export default function Login() {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
@@ -27,7 +26,9 @@ export default function Login() {
 
   const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(loginUser({ identifier, password }));
+    if (!identifier) toast.error('Please enter an identifier');
+    if (!password) toast.error('Please enter a password');
+    if (identifier && password) dispatch(loginUser({ identifier, password }));
   };
 
   const handleGuestUserClick = (e: React.MouseEvent<HTMLButtonElement>) => {

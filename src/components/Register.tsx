@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { registerUser } from '../state/actions/registerUser';
 import { RootState } from '../state/store/store';
 
-
 import SpinnerButton from './SpinnerButton';
 
 export default function Register() {
@@ -25,7 +24,11 @@ export default function Register() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(registerUser({ username, email, password }));
+    if (!username) toast.error('Please enter a username');
+    if (!email) toast.error('Please enter an email');
+    if (!password) toast.error('Please enter a password');
+    if (username && email && password)
+      dispatch(registerUser({ username, email, password }));
   };
 
   // TODO: move to hook
