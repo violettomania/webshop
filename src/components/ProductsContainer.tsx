@@ -28,13 +28,14 @@ export default function ProductsContainer() {
   );
 
   useEffect(() => {
-    dispatch(fetchProducts({ page: 1 }));
-    dispatch(setPage(1));
-    setLastSearchParams(null);
     if (refresh) {
       dispatch(fetchProducts({ page: 1 }));
       dispatch(refreshProductsPage(false));
+    } else {
+      dispatch(fetchProducts({ page: 1 }));
     }
+    dispatch(setPage(1));
+    setLastSearchParams(null);
   }, [dispatch, refresh]);
 
   useEffect(() => {
