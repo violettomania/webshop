@@ -15,7 +15,6 @@ const loggedInUserPaths = ['/checkout', '/orders'];
 const loggedInUserPages = ['checkout', 'orders'];
 
 export default function Navbar() {
-  // TODO: create hook reusing the same logic from color picker
   // TODO: move theme selection to userSlice
   const location = useLocation();
   const totals = useAppSelector((state: RootState) => state.cart.totals);
