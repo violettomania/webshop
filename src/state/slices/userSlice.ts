@@ -18,6 +18,17 @@ const initialState: UserState = {
   errors: [],
 };
 
+const handleErrors = (action: any, state: UserState) => {
+  if (action.error.message) {
+    try {
+      const parsedError = JSON.parse(action.error.message);
+      state.errors = parsedError;
+    } catch (error) {
+      state.errors = ['An error occurred'];
+    }
+  }
+};
+
 export const userSlice = createSlice({
   name: 'user',
   initialState,
@@ -53,9 +64,7 @@ export const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(registerUser.rejected, (state, action) => {
-        state.errors = action.error.message
-          ? JSON.parse(action.error.message)
-          : ['An error occurred'];
+        handleErrors(action, state);
         state.userLoggedIn = false;
         state.loading = false;
       })
@@ -68,9 +77,7 @@ export const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(loginUser.rejected, (state, action) => {
-        state.errors = action.error.message
-          ? JSON.parse(action.error.message)
-          : ['An error occurred'];
+        handleErrors(action, state);
         state.userLoggedIn = false;
         state.loading = false;
       });
