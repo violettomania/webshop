@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
 import { RootState } from '../state/store/store';
 import { logoutUser, signInRedirect } from '../state/slices/userSlice';
+import { clearCart } from '../state/slices/cartSlice';
 
 export default function Header() {
   const registeredUser = useAppSelector(
@@ -18,7 +19,10 @@ export default function Header() {
             <p className='text-xs sm:text-sm'>{`Hello, ${registeredUser.user.username}`}</p>
             <button
               className='btn btn-xs btn-outline btn-primary'
-              onClick={() => dispatch(logoutUser())}
+              onClick={() => {
+                dispatch(clearCart());
+                dispatch(logoutUser());
+              }}
             >
               LOGOUT
             </button>
