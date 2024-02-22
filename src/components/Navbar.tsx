@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import useTheme from '../hooks/useTheme';
 import { refreshProductsPage } from '../state/slices/productsSlice';
 import { RootState } from '../state/store/store';
 
@@ -27,26 +28,8 @@ export default function Navbar() {
   );
 
   const [selectedPath, setSelectedPath] = useState(location.pathname);
-  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'winter');
+  const { toggleTheme } = useTheme('winter');
   const [navbarLinks, setNavbarLinks] = useState<JSX.Element[]>([]);
-
-  const toggleTheme = () => {
-    const newTheme = theme === 'winter' ? 'dracula' : 'winter';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-    document.documentElement.setAttribute(
-      'data-theme',
-      localStorage.getItem('theme') || 'winter'
-    );
-  };
-
-  useEffect(() => {
-    localStorage.setItem('theme', theme);
-    document.documentElement.setAttribute(
-      'data-theme',
-      localStorage.getItem('theme') || 'winter'
-    );
-  }, [theme]);
 
   useEffect(() => {
     if (location.pathname !== selectedPath) {
