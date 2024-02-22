@@ -28,8 +28,8 @@ export default function App() {
       children: [
         { path: '/', element: <MainPage /> },
         { path: '/about', element: <AboutPage /> },
-        { path: '/products', element: <ProductsPage /> },
         { path: '/products/:id', element: <ProductPage /> },
+        { path: '/products', element: <ProductsPage /> },
         { path: '/cart', element: <CartPage /> },
         {
           path: '/checkout',
