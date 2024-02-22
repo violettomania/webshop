@@ -21,6 +21,7 @@ interface ProductsState {
   error?: string;
   url?: string;
   refresh: boolean;
+  layout: DisplayMode;
 }
 
 const initialState: ProductsState = {
@@ -34,6 +35,7 @@ const initialState: ProductsState = {
   error: '',
   url: '',
   refresh: false,
+  layout: 'grid',
 };
 
 export const productsSlice = createSlice({
@@ -45,6 +47,9 @@ export const productsSlice = createSlice({
     },
     refreshProductsPage: (state, action) => {
       state.refresh = action.payload;
+    },
+    setLayout: (state, action) => {
+      state.layout = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -70,5 +75,6 @@ export const productsSlice = createSlice({
 export const selectProducts = (state: RootState) => state.paged.products;
 export const setPage = productsSlice.actions.setPage;
 export const refreshProductsPage = productsSlice.actions.refreshProductsPage;
+export const setLayout = productsSlice.actions.setLayout;
 
 export default productsSlice.reducer;

@@ -11,15 +11,12 @@ const listCardDisplayClasses =
 const gridCardDisplayClasses =
   'card w-full shadow-xl hover:shadow-2xl transition duration-300';
 
-interface ProductsProps {
-  displayMode: DisplayMode;
-}
-
-export default function Products({ displayMode }: ProductsProps) {
+export default function Products() {
   const pagedProducts = useAppSelector(
     (state: RootState) => state.paged.products
   );
   const loading = useAppSelector((state: RootState) => state.paged.loading);
+  const displayMode = useAppSelector((state: RootState) => state.paged.layout);
 
   return loading ? (
     <Loading />

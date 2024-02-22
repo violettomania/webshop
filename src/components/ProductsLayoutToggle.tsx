@@ -1,5 +1,8 @@
-import { useState } from 'react';
 import { BsFillGridFill, BsList } from 'react-icons/bs';
+
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { setLayout } from '../state/slices/productsSlice';
+import { RootState } from '../state/store/store';
 
 const selectedButtonClasses = 'btn-primary text-primary-content';
 const unselectedButtonClasses = 'btn-ghost text-based-content';
@@ -7,20 +10,18 @@ const unselectedButtonClasses = 'btn-ghost text-based-content';
 interface ProductsLayoutToggleProps {
   productQuantity: number;
   onLayoutToggle: (event: React.MouseEvent, display: DisplayMode) => void;
-  currentDisplayMode: DisplayMode;
 }
 
 // TODO: try to refactor this, maybe as a hook
 export default function ProductsLayoutToggle({
   productQuantity,
   onLayoutToggle,
-  currentDisplayMode,
 }: ProductsLayoutToggleProps) {
-  const [displayMode, setDisplayMode] =
-    useState<DisplayMode>(currentDisplayMode);
+  const displayMode = useAppSelector((state: RootState) => state.paged.layout);
+  const dispatch = useAppDispatch();
 
   const handleToggle = (event: React.MouseEvent, display: DisplayMode) => {
-    setDisplayMode(display);
+    dispatch(setLayout(display));
     onLayoutToggle(event, display);
   };
 

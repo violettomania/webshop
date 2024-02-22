@@ -21,8 +21,6 @@ export default function ProductsContainer() {
   const refresh = useAppSelector((state: RootState) => state.paged.refresh);
   const error = useAppSelector((state: RootState) => state.paged.error);
 
-  // TODO: good candidate for Context API / hook / signal
-  const [displayMode, setDisplayMode] = useState<DisplayMode>('grid');
   const [lastSearchParams, setLastSearchParams] = useState<URLParams | null>(
     null
   );
@@ -66,7 +64,6 @@ export default function ProductsContainer() {
   ) => {
     event.preventDefault();
     event.stopPropagation();
-    setDisplayMode(display);
   };
 
   return (
@@ -80,9 +77,8 @@ export default function ProductsContainer() {
       <ProductsLayoutToggle
         productQuantity={total}
         onLayoutToggle={handleLayoutToggle}
-        currentDisplayMode={displayMode}
       />
-      <Products displayMode={displayMode} />
+      <Products />
       <Pagination onPageNumberChange={handlePageNumberChange} />
     </section>
   );
