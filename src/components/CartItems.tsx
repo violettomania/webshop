@@ -26,12 +26,10 @@ export default function CartItems({
     productID: number,
     amount: number
   ) => {
-    event.preventDefault();
     onChangeItemAmount(productID, amount);
   };
 
   const handleRemoveItem = (event: React.MouseEvent, productID: number) => {
-    event.preventDefault();
     onRemoveItem(productID);
   };
 

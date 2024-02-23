@@ -9,20 +9,17 @@ const unselectedButtonClasses = 'btn-ghost text-based-content';
 
 interface ProductsLayoutToggleProps {
   productQuantity: number;
-  onLayoutToggle: (event: React.MouseEvent, display: DisplayMode) => void;
 }
 
 // TODO: try to refactor this, maybe as a hook
 export default function ProductsLayoutToggle({
   productQuantity,
-  onLayoutToggle,
 }: ProductsLayoutToggleProps) {
   const displayMode = useAppSelector((state: RootState) => state.paged.layout);
   const dispatch = useAppDispatch();
 
-  const handleToggle = (event: React.MouseEvent, display: DisplayMode) => {
+  const handleToggle = (display: DisplayMode) => {
     dispatch(setLayout(display));
-    onLayoutToggle(event, display);
   };
 
   return (
@@ -30,7 +27,7 @@ export default function ProductsLayoutToggle({
       <h4 className='font-medium text-md'>{`${productQuantity} products`}</h4>
       <div className='flex gap-x-2'>
         <button
-          onClick={(e) => handleToggle(e, 'grid')}
+          onClick={() => handleToggle('grid')}
           type='button'
           className={`text-xl btn btn-circle btn-sm ${
             displayMode === 'grid'
@@ -41,7 +38,7 @@ export default function ProductsLayoutToggle({
           <BsFillGridFill />
         </button>
         <button
-          onClick={(e) => handleToggle(e, 'list')}
+          onClick={() => handleToggle('list')}
           type='button'
           className={`text-xl btn btn-circle btn-sm ${
             displayMode === 'list'

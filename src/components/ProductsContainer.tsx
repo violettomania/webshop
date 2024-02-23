@@ -58,14 +58,6 @@ export default function ProductsContainer() {
     }
   };
 
-  const handleLayoutToggle = (
-    event: React.MouseEvent,
-    display: DisplayMode
-  ) => {
-    event.preventDefault();
-    event.stopPropagation();
-  };
-
   return (
     <section className='align-element py-20'>
       <ProductsFilter
@@ -74,10 +66,7 @@ export default function ProductsContainer() {
         categories={categories}
         companies={companies}
       />
-      <ProductsLayoutToggle
-        productQuantity={total}
-        onLayoutToggle={handleLayoutToggle}
-      />
+      <ProductsLayoutToggle productQuantity={total} />
       <Products />
       <Pagination onPageNumberChange={handlePageNumberChange} />
     </section>

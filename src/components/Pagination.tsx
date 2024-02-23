@@ -15,21 +15,18 @@ export default function Pagination({ onPageNumberChange }: PaginationProps) {
     (state: RootState) => state.paged.currentPage
   );
 
-  const handlePageNumberChange = (event: React.MouseEvent, page: number) => {
-    event.preventDefault();
+  const handlePageNumberChange = (page: number) => {
     onPageNumberChange(page);
     dispatch(setPage(page));
   };
 
-  const handleNextPage = (event: React.MouseEvent) => {
-    event.preventDefault();
+  const handleNextPage = () => {
     const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
     onPageNumberChange(nextPage);
     dispatch(setPage(nextPage));
   };
 
-  const handlePrevPage = (event: React.MouseEvent) => {
-    event.preventDefault();
+  const handlePrevPage = () => {
     const prevPage =
       currentPage - 1 < pageCount && currentPage - 1 > 0
         ? currentPage - 1
@@ -49,7 +46,7 @@ export default function Pagination({ onPageNumberChange }: PaginationProps) {
         </button>
         {Array.from({ length: pageCount }, (_, i) => i + 1).map((page) => (
           <button
-            onClick={(e) => handlePageNumberChange(e, page)}
+            onClick={() => handlePageNumberChange(page)}
             key={page}
             className={`btn btn-xs sm:btn-md border-none join-item ${
               currentPage === page ? selectedPageButtonClasses : ''
