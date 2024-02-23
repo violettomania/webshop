@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useHandleErrors as useHandleRegisterErrors } from '../hooks/useHandleErrors';
 import { useNavigateOn as useNavigateOnRegister } from '../hooks/useNavigateOn';
 import { registerUser } from '../state/actions/registerUser';
 import { RootState } from '../state/store/store';
@@ -15,7 +16,6 @@ export default function Register() {
   const [password, setPassword] = useState('');
 
   const loading = useAppSelector((state: RootState) => state.user.loading);
-  const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,9 +29,7 @@ export default function Register() {
 
   useNavigateOnRegister({ to: '/login', userStatus: 'registeredUser' });
 
-  useEffect(() => {
-    errors?.forEach((error: string) => toast.error(error));
-  }, [errors]);
+  useHandleRegisterErrors();
 
   return (
     <section className='h-screen grid place-items-center'>

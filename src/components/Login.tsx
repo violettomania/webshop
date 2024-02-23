@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useHandleErrors as useHandleLoginErrors } from '../hooks/useHandleErrors';
 import { useNavigateOn as useNavigateOnLogin } from '../hooks/useNavigateOn';
 import { loginUser } from '../state/actions/loginUser';
 import { RootState } from '../state/store/store';
@@ -14,7 +15,6 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   const loading = useAppSelector((state: RootState) => state.user.loading);
-  const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
 
   const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,9 +31,7 @@ export default function Login() {
 
   useNavigateOnLogin({ to: '/', userStatus: 'userLoggedIn' });
 
-  useEffect(() => {
-    errors?.forEach((error: string) => toast.error(error));
-  }, [errors]);
+  useHandleLoginErrors();
 
   return (
     <section className='h-screen grid place-items-center'>
