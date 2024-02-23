@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { useNavigateOn } from '../hooks/useNavigateOn';
+import { useNavigateOn as useNavigateOnLogin } from '../hooks/useNavigateOn';
 import { loginUser } from '../state/actions/loginUser';
 import { RootState } from '../state/store/store';
 
@@ -29,7 +29,7 @@ export default function Login() {
     dispatch(loginUser({ identifier: 'test@test.com', password: 'secret' }));
   };
 
-  useNavigateOn({ to: '/', userStatus: 'userLoggedIn' });
+  useNavigateOnLogin({ to: '/', userStatus: 'userLoggedIn' });
 
   useEffect(() => {
     errors?.forEach((error: string) => toast.error(error));
