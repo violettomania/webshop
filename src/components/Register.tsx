@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
-import { useNavigateOnRegister } from '../hooks/useNavigateOnRegister';
+import { useNavigateOn as useNavigateOnRegister } from '../hooks/useNavigateOn';
 import { registerUser } from '../state/actions/registerUser';
 import { RootState } from '../state/store/store';
 
@@ -27,7 +27,7 @@ export default function Register() {
       dispatch(registerUser({ username, email, password }));
   };
 
-  useNavigateOnRegister('/login');
+  useNavigateOnRegister({ to: '/login', userStatus: 'registeredUser' });
 
   useEffect(() => {
     errors?.forEach((error: string) => toast.error(error));

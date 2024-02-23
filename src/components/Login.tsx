@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useNavigateOn } from '../hooks/useNavigateOn';
 import { loginUser } from '../state/actions/loginUser';
 import { RootState } from '../state/store/store';
 
@@ -12,14 +13,6 @@ export default function Login() {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigate = useNavigate();
-
-  const registeredUser = useAppSelector(
-    (state: RootState) => state.user.registeredUser
-  );
-  const userLoggedIn = useAppSelector(
-    (state: RootState) => state.user.userLoggedIn
-  );
   const loading = useAppSelector((state: RootState) => state.user.loading);
   const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
@@ -36,16 +29,13 @@ export default function Login() {
     dispatch(loginUser({ identifier: 'test@test.com', password: 'secret' }));
   };
 
-  useEffect(() => {
-    if (userLoggedIn) {
-      navigate('/');
-    }
-  }, [navigate, registeredUser, userLoggedIn]);
+  useNavigateOn({ to: '/', userStatus: 'userLoggedIn' });
 
   useEffect(() => {
     errors?.forEach((error: string) => toast.error(error));
   }, [errors]);
 
+  // TODO: next: fix register link not working
   return (
     <section className='h-screen grid place-items-center'>
       <form
