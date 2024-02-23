@@ -14,8 +14,6 @@ export default function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const navigate = useNavigate();
-
   const loading = useAppSelector((state: RootState) => state.user.loading);
   const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
@@ -29,7 +27,7 @@ export default function Register() {
       dispatch(registerUser({ username, email, password }));
   };
 
-  useNavigateOnRegister(navigate, '/login');
+  useNavigateOnRegister('/login');
 
   useEffect(() => {
     errors?.forEach((error: string) => toast.error(error));
