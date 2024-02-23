@@ -47,7 +47,6 @@ export default function Checkout() {
             numItemsInCart: totals.numItemsInCart,
           },
         },
-        token: registeredUser?.jwt || '',
       };
       dispatch(sendOrder(order));
       if (error) {

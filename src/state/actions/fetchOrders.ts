@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 
 import { config } from './config/config';
 
@@ -14,13 +15,13 @@ interface OrdersResponse {
 }
 
 interface URLParams {
-  token: string;
   page?: number;
 }
 
 export const fetchOrders = createAsyncThunk(
   'orders/fetchOrders',
-  async ({ token, page }: URLParams) => {
+  async ({ page = undefined }: URLParams) => {
+    const token = Cookies.get('token');
     const pageParam = page ? `?page=${page}` : '';
     const response = await axios.get(`${config.ordersUrl}${pageParam}`, {
       headers: {

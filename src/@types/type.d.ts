@@ -8,15 +8,17 @@ interface ProductCard {
   classes?: string;
 }
 
+interface OrderAttributes {
+  name: string;
+  address: string;
+  numItemsInCart: number;
+  orderTotal: string;
+  createdAt: string;
+}
+
 interface Order {
   id: string;
-  attributes: {
-    address: string;
-    createdAt: string;
-    name: string;
-    orderTotal: string;
-    numItemsInCart: number;
-  };
+  attributes: OrderAttributes;
 }
 
 interface OrderPlacement {
@@ -30,7 +32,6 @@ interface OrderPlacement {
       numItemsInCart: number;
     };
   };
-  token: string;
 }
 
 interface CartItem {
@@ -66,7 +67,6 @@ interface URLParams {
 }
 
 interface RegisteredUser {
-  jwt: string;
   user: User;
 }
 

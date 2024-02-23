@@ -21,7 +21,7 @@ export default function Orders() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (registeredUser) dispatch(fetchOrders({ token: registeredUser?.jwt }));
+    if (registeredUser) dispatch(fetchOrders({}));
   }, [dispatch, registeredUser]);
 
   useEffect(() => {
@@ -29,8 +29,7 @@ export default function Orders() {
   }, [error]);
 
   const handlePageNumberChange = (page: number) => {
-    if (registeredUser)
-      dispatch(fetchOrders({ token: registeredUser?.jwt, page }));
+    if (registeredUser) dispatch(fetchOrders({ page }));
   };
 
   return (
@@ -57,9 +56,17 @@ export default function Orders() {
                 </tr>
               </thead>
               <tbody>
-                {orders.map(({ id, attributes }) => (
-                  <SingleOrder key={id} {...attributes} />
-                ))}
+                {orders.map(
+                  ({
+                    id,
+                    attributes,
+                  }: {
+                    id: string;
+                    attributes: OrderAttributes;
+                  }) => (
+                    <SingleOrder key={id} {...attributes} />
+                  )
+                )}
               </tbody>
             </table>
           </div>

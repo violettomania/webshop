@@ -43,7 +43,7 @@ export default function Login() {
   }, [navigate, registeredUser, userLoggedIn]);
 
   useEffect(() => {
-    errors?.forEach((error) => toast.error(error));
+    errors?.forEach((error: string) => toast.error(error));
   }, [errors]);
 
   return (
