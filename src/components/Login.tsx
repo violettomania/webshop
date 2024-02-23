@@ -35,7 +35,6 @@ export default function Login() {
     errors?.forEach((error: string) => toast.error(error));
   }, [errors]);
 
-  // TODO: next: fix register link not working
   return (
     <section className='h-screen grid place-items-center'>
       <form
