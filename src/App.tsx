@@ -61,7 +61,6 @@ function MainLayout() {
 
 // TODO: bugfix: sometimes, when redirecting from register in the header, there's a brief error screen flashing up
 // TODO: export workspace file
-// what if I save a cart, logout, and then login again with a different user?
 // TODO: package updates
 // TODO: what about testability?
 // TODO: performance improvements
