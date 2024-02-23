@@ -16,7 +16,6 @@ export default function ProductPage() {
 
   let { id } = useParams();
 
-  // TODO: next: bugfix: arbitrary id's work despite receiving 404 from server
   useEffect(() => {
     if (id) {
       dispatch(fetchProduct(id));
