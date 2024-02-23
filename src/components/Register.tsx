@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useNavigateOnRegister } from '../hooks/useNavigateOnRegister';
 import { registerUser } from '../state/actions/registerUser';
 import { RootState } from '../state/store/store';
 
@@ -15,9 +16,6 @@ export default function Register() {
 
   const navigate = useNavigate();
 
-  const registeredUser = useAppSelector(
-    (state: RootState) => state.user.registeredUser
-  );
   const loading = useAppSelector((state: RootState) => state.user.loading);
   const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
@@ -31,12 +29,7 @@ export default function Register() {
       dispatch(registerUser({ username, email, password }));
   };
 
-  // TODO: move to hook
-  useEffect(() => {
-    if (registeredUser) {
-      navigate('/login');
-    }
-  }, [registeredUser, navigate]);
+  useNavigateOnRegister(navigate, '/login');
 
   useEffect(() => {
     errors?.forEach((error: string) => toast.error(error));

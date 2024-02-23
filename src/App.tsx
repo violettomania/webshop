@@ -59,11 +59,6 @@ function MainLayout() {
   );
 }
 
-// TODO: rehydration is called on frst startup and fetches everything
-// TODO: keep product card ordering (list or not) after navigation
-// TODO: loading should be still set to false by default
-// TODO: -1 product is also fetched
-// TODO: too many API calls
 // TODO: export workspace file
 // what if I save a cart, logout, and then login again with a different user?
 // TODO: package updates
@@ -71,8 +66,6 @@ function MainLayout() {
 // TODO: performance improvements
 // TODO: bugfix: if the user deletes local storage, the app crashes on refresh
 // TODO: add error boundaries
-// TODO: login/register buttons are unresponsive
-// TODO: when user logs out, the restricted menus are still available, user is not redirected to login
 // TODO: add pages/index.js for easier imports
 // TODO: WCAG compliance
 // TODO: add a HOC somewhere
@@ -80,16 +73,7 @@ function MainLayout() {
 // TODO: logout after session expires
 // TODO: what happens when switching tabs
 // TODO: implement multi-tenancy
-// TODO: preventDefault?
 // TODO: oidc user
 // TODO: multifactor authentication?
 // TODO: fix high memory usage
-// TODO: import order
 // TODO: test error states with devtools
-// TODO: bugfix: you must be logged in to view... if somebody uses the url directly
-/*
-TODO: bugfix: 
-WARNING in [eslint]
-src/hooks/hooks.ts
-  Line 1:32:  'useDispatch' import from 'react-redux' is restricted. Use typed hooks `useAppDispatch` and `useAppSelector` instead  @typescript-eslint/no-restricted-imports
-  Line 1:45:  'useSelector' import from 'react-redux' is restricted. Use typed hooks `useAppDispatch` and `useAppSelector` instead  @typescript-eslint/no-restricted-imports*/
