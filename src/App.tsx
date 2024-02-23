@@ -78,3 +78,7 @@ function MainLayout() {
 // TODO: multifactor authentication?
 // TODO: fix high memory usage
 // TODO: test error states with devtools
+/* TODO: next: bugfix 
+if I login on one tab and open a new tab, the new tab will don't have me logged in, even after a page refresh
+if I login on one tab with a user, add to the cart, then on the other tab login with another user, the cart will still be there
+*/
