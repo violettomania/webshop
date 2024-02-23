@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { sendOrder } from '../state/actions/sendOrder';
 import { clearCart } from '../state/slices/cartSlice';
 import { RootState } from '../state/store/store';
@@ -19,9 +19,6 @@ export default function Checkout() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const registeredUser = useAppSelector(
-    (state: RootState) => state.user.registeredUser
-  );
   const cartItems = useAppSelector((state: RootState) => state.cart.cartItems);
   const loading = useAppSelector((state: RootState) => state.orders.loading);
   const totals = useAppSelector((state: RootState) => state.cart.totals);

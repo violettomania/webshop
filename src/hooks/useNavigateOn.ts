@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { RootState } from '../state/store/store';
 
-import { useAppSelector } from './reduxHooks';
+import { useAppSelector } from './reduxHooksWrapper';
 
 interface NavigateOnProps {
   to: string;

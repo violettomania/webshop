@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { clearCart } from '../state/slices/cartSlice';
 import { logoutUser, signInRedirect } from '../state/slices/userSlice';
 import { RootState } from '../state/store/store';

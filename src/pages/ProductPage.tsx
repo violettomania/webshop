@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import Loading from '../components/Loading';
 import Product from '../components/Product';
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { fetchProduct } from '../state/actions/fetchProduct';
 import { RootState } from '../state/store/store';
 

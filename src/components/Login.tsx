@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { useHandleErrors as useHandleLoginErrors } from '../hooks/useHandleErrors';
 import { useNavigateOn as useNavigateOnLogin } from '../hooks/useNavigateOn';
 import { loginUser } from '../state/actions/loginUser';

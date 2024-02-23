@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { useHandleErrors as useHandleRegisterErrors } from '../hooks/useHandleErrors';
 import { useNavigateOn as useNavigateOnRegister } from '../hooks/useNavigateOn';
 import { registerUser } from '../state/actions/registerUser';

@@ -1,4 +1,4 @@
-import { useAppSelector } from '../hooks/reduxHooks';
+import { useAppSelector } from '../hooks/reduxHooksWrapper';
 import { RootState } from '../state/store/store';
 
 import Loading from './Loading';

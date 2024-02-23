@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { fetchOrders } from '../state/actions/fetchOrders';
 import { RootState } from '../state/store/store';
 

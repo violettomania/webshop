@@ -4,7 +4,7 @@ import { Navigate, useRoutes } from 'react-router-dom';
 import Header from './components/Header';
 import MainPage from './components/MainPage';
 import Navbar from './components/Navbar';
-import { useAppSelector } from './hooks/reduxHooks';
+import { useAppSelector } from './hooks/reduxHooksWrapper';
 import AboutPage from './pages/AboutPage';
 import CartPage from './pages/CartPage';
 import CheckoutPage from './pages/CheckoutPage';

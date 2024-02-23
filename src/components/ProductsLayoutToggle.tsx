@@ -1,6 +1,6 @@
 import { BsFillGridFill, BsList } from 'react-icons/bs';
 
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { setLayout } from '../state/slices/productsSlice';
 import { RootState } from '../state/store/store';
 

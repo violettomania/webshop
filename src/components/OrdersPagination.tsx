@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import { setPage } from '../state/slices/ordersSlice';
 import { RootState } from '../state/store/store';
 

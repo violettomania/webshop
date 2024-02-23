@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
 import {
   changeAmountInCart,
   clearCart,

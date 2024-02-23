@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import { useAppSelector } from '../hooks/reduxHooks';
 import { RootState } from '../state/store/store';
+
+import { useAppSelector } from './reduxHooksWrapper';
 
 export const useHandleErrors = () => {
   const errors = useAppSelector((state: RootState) => state.user.errors);
