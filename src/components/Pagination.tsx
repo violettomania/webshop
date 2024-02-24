@@ -1,5 +1,5 @@
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
-import { setPage } from '../state/slices/productsSlice';
+import { useAppSelector } from '../hooks/reduxHooksWrapper';
+import { usePagination } from '../hooks/usePagination';
 import { RootState } from '../state/store/store';
 
 interface PaginationProps {
@@ -9,31 +9,13 @@ interface PaginationProps {
 const selectedPageButtonClasses = 'bg-base-300 border-base-300';
 
 export default function Pagination({ onPageNumberChange }: PaginationProps) {
-  const dispatch = useAppDispatch();
   const pageCount = useAppSelector((state: RootState) => state.paged.pageCount);
   const currentPage = useAppSelector(
     (state: RootState) => state.paged.currentPage
   );
 
-  const handlePageNumberChange = (page: number) => {
-    onPageNumberChange(page);
-    dispatch(setPage(page));
-  };
-
-  const handleNextPage = () => {
-    const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
-    onPageNumberChange(nextPage);
-    dispatch(setPage(nextPage));
-  };
-
-  const handlePrevPage = () => {
-    const prevPage =
-      currentPage - 1 < pageCount && currentPage - 1 > 0
-        ? currentPage - 1
-        : pageCount;
-    onPageNumberChange(prevPage);
-    dispatch(setPage(prevPage));
-  };
+  const { handlePageNumberChange, handleNextPage, handlePrevPage } =
+    usePagination(onPageNumberChange, pageCount, currentPage);
 
   return pageCount > 1 ? (
     <div className='mt-16 flex justify-end'>

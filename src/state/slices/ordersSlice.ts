@@ -10,7 +10,7 @@ interface OrdersState {
   total: number;
   currentPage: number;
   loading: boolean;
-  error?: string;
+  errors?: string[];
   placedOrder?: OrderPlacementResponse;
 }
 
@@ -20,7 +20,7 @@ const initialState: OrdersState = {
   total: 0,
   currentPage: 1,
   loading: false,
-  error: '',
+  errors: [],
   placedOrder: undefined,
 };
 
@@ -44,7 +44,9 @@ export const ordersSlice = createSlice({
         state.loading = false;
       })
       .addCase(fetchOrders.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.errors = action.error.message
+          ? [action.error.message]
+          : ['An error happened'];
         state.loading = false;
       })
       .addCase(sendOrder.pending, (state) => {
@@ -55,7 +57,9 @@ export const ordersSlice = createSlice({
         state.loading = false;
       })
       .addCase(sendOrder.rejected, (state, action) => {
-        state.error = action.error.message;
+        state.errors = action.error.message
+          ? [action.error.message]
+          : ['An error happened'];
         state.loading = false;
       });
   },

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { toast } from 'react-toastify';
 
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
+import { useHandleErrors as useHandleOrdersErrors } from '../hooks/useHandleErrors';
 import { fetchOrders } from '../state/actions/fetchOrders';
 import { RootState } from '../state/store/store';
 
@@ -15,7 +15,7 @@ export default function Orders() {
   );
   const orders = useAppSelector((state: RootState) => state.orders.pagedOrders);
   const total = useAppSelector((state: RootState) => state.orders.total);
-  const error = useAppSelector((state: RootState) => state.orders.error);
+  const errors = useAppSelector((state: RootState) => state.orders.errors);
   const loading = useAppSelector((state: RootState) => state.orders.loading);
 
   const dispatch = useAppDispatch();
@@ -24,9 +24,7 @@ export default function Orders() {
     if (registeredUser) dispatch(fetchOrders({}));
   }, [dispatch, registeredUser]);
 
-  useEffect(() => {
-    if (error) toast.error('There was an error fetching your orders');
-  }, [error]);
+  useHandleOrdersErrors(errors);
 
   const handlePageNumberChange = (page: number) => {
     if (registeredUser) dispatch(fetchOrders({ page }));

@@ -15,6 +15,7 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   const loading = useAppSelector((state: RootState) => state.user.loading);
+  const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
 
   const handleLoginClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -31,7 +32,7 @@ export default function Login() {
 
   useNavigateOnLogin({ to: '/', userStatus: 'userLoggedIn' });
 
-  useHandleLoginErrors();
+  useHandleLoginErrors(errors);
 
   return (
     <section className='h-screen grid place-items-center'>

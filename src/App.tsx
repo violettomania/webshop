@@ -59,6 +59,7 @@ function MainLayout() {
   );
 }
 
+// TODO: next: bugfix: useHandleErrors hook always returns generic errors
 // TODO: bugfix: sometimes, when redirecting from register in the header, there's a brief error screen flashing up
 // TODO: export workspace file
 // TODO: package updates

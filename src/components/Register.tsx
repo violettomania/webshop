@@ -16,6 +16,7 @@ export default function Register() {
   const [password, setPassword] = useState('');
 
   const loading = useAppSelector((state: RootState) => state.user.loading);
+  const errors = useAppSelector((state: RootState) => state.user.errors);
   const dispatch = useAppDispatch();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -29,7 +30,7 @@ export default function Register() {
 
   useNavigateOnRegister({ to: '/login', userStatus: 'registeredUser' });
 
-  useHandleRegisterErrors();
+  useHandleRegisterErrors(errors);
 
   return (
     <section className='h-screen grid place-items-center'>
