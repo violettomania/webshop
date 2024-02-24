@@ -6,10 +6,10 @@ import { fetchProducts } from '../state/actions/fetchProducts';
 import { refreshProductsPage, setPage } from '../state/slices/productsSlice';
 import { RootState } from '../state/store/store';
 
-import Pagination from './Pagination';
 import Products from './Products';
 import ProductsFilter from './ProductsFilter';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
+import Pagination from './ShortPagination';
 
 export default function ProductsContainer() {
   const dispatch = useAppDispatch();
@@ -20,6 +20,7 @@ export default function ProductsContainer() {
   const companies = useAppSelector((state: RootState) => state.paged.companies);
   const refresh = useAppSelector((state: RootState) => state.paged.refresh);
   const error = useAppSelector((state: RootState) => state.paged.error);
+  const pageCount = useAppSelector((state: RootState) => state.paged.pageCount);
 
   const [lastSearchParams, setLastSearchParams] = useState<URLParams | null>(
     null
@@ -67,7 +68,10 @@ export default function ProductsContainer() {
       />
       <ProductsLayoutToggle productQuantity={total} />
       <Products />
-      <Pagination onPageNumberChange={handlePageNumberChange} />
+      <Pagination
+        onPageNumberChange={handlePageNumberChange}
+        pageCount={pageCount}
+      />
     </section>
   );
 }

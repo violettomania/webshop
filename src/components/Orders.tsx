@@ -7,7 +7,7 @@ import { RootState } from '../state/store/store';
 
 import Loading from './Loading';
 import SingleOrder from './Order';
-import OrdersPagination from './OrdersPagination';
+import Pagination from './Pagination';
 
 export default function Orders() {
   const registeredUser = useAppSelector(
@@ -17,7 +17,9 @@ export default function Orders() {
   const total = useAppSelector((state: RootState) => state.orders.total);
   const errors = useAppSelector((state: RootState) => state.orders.errors);
   const loading = useAppSelector((state: RootState) => state.orders.loading);
-
+  const pageCount = useAppSelector(
+    (state: RootState) => state.orders.pageCount
+  );
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -70,7 +72,10 @@ export default function Orders() {
           </div>
         </div>
       )}
-      <OrdersPagination onPageNumberChange={handlePageNumberChange} />
+      <Pagination
+        onPageNumberChange={handlePageNumberChange}
+        pageCount={pageCount}
+      />
     </section>
   );
 }

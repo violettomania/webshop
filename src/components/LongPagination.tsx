@@ -5,19 +5,16 @@ import { RootState } from '../state/store/store';
 
 import paginationConfig from './config/paginationConfig';
 
-// TODO: merge with Pagination.tsx (HOC?) OR replace the original one with this
-// OR switch between them depending on the max number of pages
 interface PaginationProps {
   onPageNumberChange: (page: number) => void;
+  pageCount: number;
 }
 
-export default function OrdersPagination({
+export default function LongPagination({
   onPageNumberChange,
+  pageCount,
 }: PaginationProps) {
   const dispatch = useAppDispatch();
-  const pageCount = useAppSelector(
-    (state: RootState) => state.orders.pageCount
-  );
   const currentPage = useAppSelector(
     (state: RootState) => state.orders.currentPage
   );
