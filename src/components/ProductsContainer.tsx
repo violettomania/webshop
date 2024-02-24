@@ -49,7 +49,6 @@ export default function ProductsContainer() {
     dispatch(fetchProducts({ page: 1 }));
   };
 
-  // TODO: move this to a custom hook
   const handlePageNumberChange = (page: number) => {
     if (lastSearchParams) {
       dispatch(fetchProducts({ ...lastSearchParams, page }));
