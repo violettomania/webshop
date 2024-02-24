@@ -3,13 +3,13 @@ import { usePagination } from '../hooks/usePagination';
 import { setPage } from '../state/slices/ordersSlice';
 import { RootState } from '../state/store/store';
 
+import paginationConfig from './config/paginationConfig';
+
 // TODO: merge with Pagination.tsx (HOC?) OR replace the original one with this
 // OR switch between them depending on the max number of pages
 interface PaginationProps {
   onPageNumberChange: (page: number) => void;
 }
-
-const selectedPageButtonClasses = 'bg-base-300 border-base-300';
 
 export default function OrdersPagination({
   onPageNumberChange,
@@ -32,7 +32,9 @@ export default function OrdersPagination({
       onClick={() => handlePageNumberChange(page)}
       key={page}
       className={`btn btn-xs sm:btn-md border-none join-item ${
-        currentPage === page ? selectedPageButtonClasses : ''
+        currentPage === page
+          ? paginationConfig.css.selectedPageButtonClasses
+          : ''
       }`}
     >
       {page}
@@ -95,14 +97,14 @@ export default function OrdersPagination({
     <div className='mt-16 flex justify-end'>
       <div className='join'>
         <button
-          className='btn btn-xs sm:btn-md join-item'
+          className={paginationConfig.css.otherButtonClasses}
           onClick={handlePrevPage}
         >
           Prev
         </button>
         {displayPageNumbers()}
         <button
-          className='btn btn-xs sm:btn-md join-item'
+          className={paginationConfig.css.otherButtonClasses}
           onClick={handleNextPage}
         >
           Next

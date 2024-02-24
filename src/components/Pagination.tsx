@@ -3,11 +3,11 @@ import { usePagination } from '../hooks/usePagination';
 import { setPage } from '../state/slices/productsSlice';
 import { RootState } from '../state/store/store';
 
+import paginationConfig from './config/paginationConfig';
+
 interface PaginationProps {
   onPageNumberChange: (page: number) => void;
 }
-
-const selectedPageButtonClasses = 'bg-base-300 border-base-300';
 
 export default function Pagination({ onPageNumberChange }: PaginationProps) {
   const dispatch = useAppDispatch();
@@ -26,7 +26,7 @@ export default function Pagination({ onPageNumberChange }: PaginationProps) {
     <div className='mt-16 flex justify-end'>
       <div className='join'>
         <button
-          className='btn btn-xs sm:btn-md join-item'
+          className={paginationConfig.css.otherButtonClasses}
           onClick={handlePrevPage}
         >
           Prev
@@ -35,15 +35,19 @@ export default function Pagination({ onPageNumberChange }: PaginationProps) {
           <button
             onClick={() => handlePageNumberChange(page)}
             key={page}
-            className={`btn btn-xs sm:btn-md border-none join-item ${
-              currentPage === page ? selectedPageButtonClasses : ''
+            className={`${
+              paginationConfig.css.otherButtonClasses
+            } border-none ${
+              currentPage === page
+                ? paginationConfig.css.selectedPageButtonClasses
+                : ''
             }`}
           >
             {page}
           </button>
         ))}
         <button
-          className='btn btn-xs sm:btn-md join-item'
+          className={paginationConfig.css.otherButtonClasses}
           onClick={handleNextPage}
         >
           Next
