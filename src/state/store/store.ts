@@ -65,6 +65,20 @@ const store = configureStore({
     }),
 });
 
+// TODO: temporary solution to rehydrate the state from localStorage
+window.addEventListener('storage', () => {
+  // Get the item from localStorage
+  const persistedState = localStorage.getItem('persist:root');
+
+  // If the item is not null, parse it and dispatch the action
+  if (persistedState !== null) {
+    store.dispatch({
+      type: 'persist/REHYDRATE',
+      payload: JSON.parse(persistedState),
+    });
+  }
+});
+
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 
