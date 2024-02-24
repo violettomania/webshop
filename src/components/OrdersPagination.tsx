@@ -41,7 +41,7 @@ export default function OrdersPagination({
     dispatch(setPage(prevPage));
   };
 
-  const numberButton = (page: number) => (
+  const renderNumberButton = (page: number) => (
     <button
       onClick={() => handlePageNumberChange(page)}
       key={page}
@@ -53,7 +53,7 @@ export default function OrdersPagination({
     </button>
   );
 
-  const dividerButton = () => (
+  const renderDividerButton = () => (
     <button className='join-item btn btn-xs sm:btn-md'>...</button>
   );
 
@@ -64,9 +64,9 @@ export default function OrdersPagination({
       // [1][...][pageCount]
       return (
         <>
-          {numberButton(1)}
-          {dividerButton()}
-          {numberButton(pageCount)}
+          {renderNumberButton(1)}
+          {renderDividerButton()}
+          {renderNumberButton(pageCount)}
         </>
       );
     }
@@ -74,10 +74,10 @@ export default function OrdersPagination({
       // [1][2][...][pageCount]
       return (
         <>
-          {numberButton(1)}
-          {numberButton(2)}
-          {dividerButton()}
-          {numberButton(pageCount)}
+          {renderNumberButton(1)}
+          {renderNumberButton(2)}
+          {renderDividerButton()}
+          {renderNumberButton(pageCount)}
         </>
       );
     }
@@ -85,21 +85,21 @@ export default function OrdersPagination({
       // [1][...][pageCount - 1][pageCount]
       return (
         <>
-          {numberButton(1)}
-          {dividerButton()}
-          {numberButton(pageCount - 1)}
-          {numberButton(pageCount)}
+          {renderNumberButton(1)}
+          {renderDividerButton()}
+          {renderNumberButton(pageCount - 1)}
+          {renderNumberButton(pageCount)}
         </>
       );
     } else {
       // [1][...][currentPage][...][pageCount]
       return (
         <>
-          {numberButton(1)}
-          {dividerButton()}
-          {numberButton(currentPage)}
-          {dividerButton()}
-          {numberButton(pageCount)}
+          {renderNumberButton(1)}
+          {renderDividerButton()}
+          {renderNumberButton(currentPage)}
+          {renderDividerButton()}
+          {renderNumberButton(pageCount)}
         </>
       );
     }
