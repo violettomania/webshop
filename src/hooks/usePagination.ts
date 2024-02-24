@@ -1,22 +1,18 @@
-import { useAppDispatch } from '../hooks/reduxHooksWrapper';
-import { setPage } from '../state/slices/productsSlice';
-
 export const usePagination = (
   onPageNumberChange: (page: number) => void,
   pageCount: number,
-  currentPage: number
+  currentPage: number,
+  setPage: (page: number) => void
 ) => {
-  const dispatch = useAppDispatch();
-
   const handlePageNumberChange = (page: number) => {
     onPageNumberChange(page);
-    dispatch(setPage(page));
+    setPage(page);
   };
 
   const handleNextPage = () => {
     const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
     onPageNumberChange(nextPage);
-    dispatch(setPage(nextPage));
+    setPage(nextPage);
   };
 
   const handlePrevPage = () => {
@@ -25,7 +21,7 @@ export const usePagination = (
         ? currentPage - 1
         : pageCount;
     onPageNumberChange(prevPage);
-    dispatch(setPage(prevPage));
+    setPage(prevPage);
   };
 
   return {

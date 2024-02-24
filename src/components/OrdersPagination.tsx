@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
+import { usePagination } from '../hooks/usePagination';
 import { setPage } from '../state/slices/ordersSlice';
 import { RootState } from '../state/store/store';
 
@@ -21,25 +22,10 @@ export default function OrdersPagination({
     (state: RootState) => state.orders.currentPage
   );
 
-  const handlePageNumberChange = (page: number) => {
-    onPageNumberChange(page);
-    dispatch(setPage(page));
-  };
-
-  const handleNextPage = () => {
-    const nextPage = currentPage + 1 > pageCount ? 1 : currentPage + 1;
-    onPageNumberChange(nextPage);
-    dispatch(setPage(nextPage));
-  };
-
-  const handlePrevPage = () => {
-    const prevPage =
-      currentPage - 1 < pageCount && currentPage - 1 > 0
-        ? currentPage - 1
-        : pageCount;
-    onPageNumberChange(prevPage);
-    dispatch(setPage(prevPage));
-  };
+  const { handlePageNumberChange, handleNextPage, handlePrevPage } =
+    usePagination(onPageNumberChange, pageCount, currentPage, (page) =>
+      dispatch(setPage(page))
+    );
 
   const renderNumberButton = (page: number) => (
     <button
