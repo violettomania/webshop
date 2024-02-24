@@ -7,11 +7,11 @@ import { RootState } from '../state/store/store';
 
 import Loading from './Loading';
 import SingleOrder from './Order';
-import Pagination from './Pagination';
+import Pagination from './pagination/Pagination';
 
 export default function Orders() {
-  const registeredUser = useAppSelector(
-    (state: RootState) => state.user.registeredUser
+  const userLoggedIn = useAppSelector(
+    (state: RootState) => state.user.userLoggedIn
   );
   const orders = useAppSelector((state: RootState) => state.orders.pagedOrders);
   const total = useAppSelector((state: RootState) => state.orders.total);
@@ -23,13 +23,13 @@ export default function Orders() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (registeredUser) dispatch(fetchOrders({}));
-  }, [dispatch, registeredUser]);
+    if (userLoggedIn) dispatch(fetchOrders({}));
+  }, [dispatch, userLoggedIn]);
 
   useHandleOrdersErrors(errors);
 
   const handlePageNumberChange = (page: number) => {
-    if (registeredUser) dispatch(fetchOrders({ page }));
+    if (userLoggedIn) dispatch(fetchOrders({ page }));
   };
 
   return (

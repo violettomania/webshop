@@ -6,10 +6,10 @@ import { fetchProducts } from '../state/actions/fetchProducts';
 import { refreshProductsPage, setPage } from '../state/slices/productsSlice';
 import { RootState } from '../state/store/store';
 
+import Pagination from './pagination/ShortPagination';
 import Products from './Products';
 import ProductsFilter from './ProductsFilter';
 import ProductsLayoutToggle from './ProductsLayoutToggle';
-import Pagination from './ShortPagination';
 
 export default function ProductsContainer() {
   const dispatch = useAppDispatch();

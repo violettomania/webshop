@@ -1,9 +1,7 @@
-import { useAppDispatch, useAppSelector } from '../hooks/reduxHooksWrapper';
-import { usePagination } from '../hooks/usePagination';
-import { setPage } from '../state/slices/productsSlice';
-import { RootState } from '../state/store/store';
-
-import paginationConfig from './config/paginationConfig';
+import { useAppDispatch, useAppSelector } from '../../hooks/reduxHooksWrapper';
+import { usePagination } from '../../hooks/usePagination';
+import { setPage } from '../../state/slices/productsSlice';
+import { RootState } from '../../state/store/store';
 
 interface PaginationProps {
   onPageNumberChange: (page: number) => void;
@@ -29,7 +27,7 @@ export default function ShortPagination({
     <div className='mt-16 flex justify-end'>
       <div className='join'>
         <button
-          className={paginationConfig.css.otherButtonClasses}
+          className={'btn btn-xs sm:btn-md join-item'}
           onClick={handlePrevPage}
         >
           Prev
@@ -38,19 +36,15 @@ export default function ShortPagination({
           <button
             onClick={() => handlePageNumberChange(page)}
             key={page}
-            className={`${
-              paginationConfig.css.otherButtonClasses
-            } border-none ${
-              currentPage === page
-                ? paginationConfig.css.selectedPageButtonClasses
-                : ''
+            className={`${'btn btn-xs sm:btn-md join-item'} border-none ${
+              currentPage === page ? 'bg-base-300 border-base-300' : ''
             }`}
           >
             {page}
           </button>
         ))}
         <button
-          className={paginationConfig.css.otherButtonClasses}
+          className={'btn btn-xs sm:btn-md join-item'}
           onClick={handleNextPage}
         >
           Next

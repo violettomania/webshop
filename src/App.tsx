@@ -59,6 +59,7 @@ function MainLayout() {
   );
 }
 
+// TODO: rethink pagination: since it has a wrapper component, that can cause a lot of unnecessary re-renders
 // TODO: next: bugfix: useHandleErrors hook always returns generic errors
 // TODO: bugfix: sometimes, when redirecting from register in the header, there's a brief error screen flashing up
 // TODO: export workspace file

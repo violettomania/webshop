@@ -10,7 +10,7 @@ export default function Pagination({
   onPageNumberChange,
   pageCount,
 }: PaginationProps) {
-  if (pageCount > 10) {
+  if (pageCount > 20) {
     return (
       <LongPagination
         onPageNumberChange={onPageNumberChange}
