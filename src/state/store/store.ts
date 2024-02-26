@@ -20,7 +20,10 @@ const SetTransform = createTransform(
       const inboundStateClone = { ...inboundState };
       const { registeredUser } = inboundStateClone;
       if (registeredUser && registeredUser.jwt) {
-        Cookies.set('token', registeredUser.jwt);
+        Cookies.set('token', registeredUser.jwt, {
+          secure: true,
+          sameSite: 'Strict',
+        });
       } else {
         Cookies.remove('token');
       }
