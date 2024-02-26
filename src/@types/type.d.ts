@@ -68,6 +68,7 @@ interface URLParams {
 
 interface RegisteredUser {
   user: User;
+  jwt: string;
 }
 
 interface RegistrationErrorResponse {

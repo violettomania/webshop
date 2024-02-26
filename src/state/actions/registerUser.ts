@@ -20,6 +20,6 @@ export const registerUser = createAsyncThunk(
     if (error) {
       throw new RegistrationError(error);
     }
-    return { jwt, user: userData };
+    return { jwt, user: userData } as RegisteredUser;
   }
 );

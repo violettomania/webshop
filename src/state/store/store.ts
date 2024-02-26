@@ -12,14 +12,14 @@ import singleProductReducer from '../slices/singleProductSlice';
 import userReducer from '../slices/userSlice';
 import { UserState } from '../slices/userSlice';
 
-// TODO: add types - UserState, jwt
 // makes sure that state persists even after a page refresh
 const SetTransform = createTransform(
   // transform state going to localStorage
-  (inboundState: any, key) => {
+  (inboundState: UserState, key) => {
     if (key === 'user' && typeof inboundState === 'object') {
       const inboundStateClone = { ...inboundState };
       const { registeredUser } = inboundStateClone;
+      console.log(inboundStateClone);
       if (registeredUser && registeredUser.jwt) {
         Cookies.set('token', registeredUser.jwt);
       }
@@ -28,7 +28,7 @@ const SetTransform = createTransform(
     return inboundState;
   },
   // transform state being rehydrated
-  (outboundState: any, key) => {
+  (outboundState: UserState, key) => {
     if (key === 'user' && typeof outboundState === 'object') {
       const jwt = Cookies.get('token');
       if (jwt && outboundState.registeredUser) {
