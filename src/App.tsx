@@ -59,13 +59,8 @@ function MainLayout() {
   );
 }
 
-// TODO: research: is it safe to keep the token in cookies?
-// TODO: clear cookies on logout
-// TODO: setUser in userSlice is not used
 // TODO: add component/unit tests
 // TODO: add e2e tests
-// TODO: rethink pagination: since it has a wrapper component, that can cause a lot of unnecessary re-renders (also consider using a HOC)
-// TODO: next: bugfix: useHandleErrors hook always returns generic errors
 // TODO: bugfix: sometimes, when redirecting from register in the header, there's a brief error screen flashing up
 // TODO: export workspace file
 // TODO: package updates
@@ -75,16 +70,10 @@ function MainLayout() {
 // TODO: add error boundaries
 // TODO: add pages/index.js for easier imports
 // TODO: WCAG compliance
-// TODO: add a HOC somewhere
 // TODO: translations
 // TODO: logout after session expires
 // TODO: what happens when switching tabs
-// TODO: implement multi-tenancy
 // TODO: oidc user
 // TODO: multifactor authentication?
 // TODO: fix high memory usage
 // TODO: test error states with devtools
-/* TODO: next: bugfix 
-if I login on one tab and open a new tab, the new tab will don't have me logged in, even after a page refresh
-if I login on one tab with a user, add to the cart, then on the other tab login with another user, the cart will still be there
-*/

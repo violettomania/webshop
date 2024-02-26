@@ -46,11 +46,6 @@ export const userSlice = createSlice({
       state.userLoggedIn = false;
       state.loading = false;
     },
-    setUser: (state, action) => {
-      state.registeredUser = action.payload;
-      state.userLoggedIn = true;
-      state.loading = false;
-    },
   },
   extraReducers: (builder) => {
     builder
@@ -84,7 +79,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { signInRedirect, logoutUser, setUser } = userSlice.actions;
+export const { signInRedirect, logoutUser } = userSlice.actions;
 
 export const selectUser = (state: RootState) => state.user.registeredUser;
 
