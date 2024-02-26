@@ -19,9 +19,10 @@ const SetTransform = createTransform(
     if (key === 'user' && typeof inboundState === 'object') {
       const inboundStateClone = { ...inboundState };
       const { registeredUser } = inboundStateClone;
-      console.log(inboundStateClone);
       if (registeredUser && registeredUser.jwt) {
         Cookies.set('token', registeredUser.jwt);
+      } else {
+        Cookies.remove('token');
       }
       return inboundStateClone;
     }
