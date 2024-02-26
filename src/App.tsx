@@ -67,7 +67,6 @@ function MainLayout() {
 // TODO: what about testability?
 // TODO: performance improvements
 // TODO: bugfix: if the user deletes local storage, the app crashes on refresh
-// TODO: add error boundaries
 // TODO: add pages/index.js for easier imports
 // TODO: WCAG compliance
 // TODO: translations

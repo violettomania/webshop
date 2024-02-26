@@ -8,6 +8,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import App from './App';
 import './index.css';
 import 'react-toastify/dist/ReactToastify.css';
+import ErrorBoundary from './components/ErrorBoundary';
 import Loading from './components/Loading';
 import store, { persistor } from './state/store/store';
 
@@ -20,7 +21,9 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate loading={<Loading />} persistor={persistor}>
-          <App />
+          <ErrorBoundary>
+            <App />
+          </ErrorBoundary>
           <ToastContainer position='bottom-right' />
         </PersistGate>
       </Provider>
