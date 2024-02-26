@@ -59,6 +59,9 @@ function MainLayout() {
   );
 }
 
+// TODO: research: is it safe to keep the token in cookies?
+// TODO: clear cookies on logout
+// TODO: setUser in userSlice is not used
 // TODO: add component/unit tests
 // TODO: add e2e tests
 // TODO: rethink pagination: since it has a wrapper component, that can cause a lot of unnecessary re-renders (also consider using a HOC)
