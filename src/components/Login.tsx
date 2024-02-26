@@ -10,7 +10,6 @@ import { RootState } from '../state/store/store';
 
 import SpinnerButton from './SpinnerButton';
 
-// TODO: next: clear cart if different user logs in - compare user id, and if it doesn't match, clear cart
 export default function Login() {
   const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');

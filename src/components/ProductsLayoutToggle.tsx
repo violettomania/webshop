@@ -11,7 +11,6 @@ interface ProductsLayoutToggleProps {
   productQuantity: number;
 }
 
-// TODO: try to refactor this, maybe as a hook
 export default function ProductsLayoutToggle({
   productQuantity,
 }: ProductsLayoutToggleProps) {
