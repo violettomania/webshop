@@ -10,18 +10,18 @@ import ordersReducer from '../slices/ordersSlice';
 import productsReducer from '../slices/productsSlice';
 import singleProductReducer from '../slices/singleProductSlice';
 import userReducer from '../slices/userSlice';
+import { UserState } from '../slices/userSlice';
 
-// Create a transform to split the state between localStorage and cookies
+// TODO: add types - UserState, jwt
+// makes sure that state persists even after a page refresh
 const SetTransform = createTransform(
+  // transform state going to localStorage
   (inboundState: any, key) => {
     if (key === 'user' && typeof inboundState === 'object') {
-      const inboundStateClone = { ...inboundState.registeredUser } as {
-        jwt?: string;
-      };
-      const { jwt } = inboundStateClone;
-      if (jwt) {
-        Cookies.set('token', jwt);
-        delete inboundStateClone.jwt;
+      const inboundStateClone = { ...inboundState };
+      const { registeredUser } = inboundStateClone;
+      if (registeredUser && registeredUser.jwt) {
+        Cookies.set('token', registeredUser.jwt);
       }
       return inboundStateClone;
     }
@@ -31,7 +31,12 @@ const SetTransform = createTransform(
   (outboundState: any, key) => {
     if (key === 'user' && typeof outboundState === 'object') {
       const jwt = Cookies.get('token');
-      return { ...outboundState.registeredUser, jwt } as { jwt?: string };
+      if (jwt && outboundState.registeredUser) {
+        return {
+          ...outboundState,
+          registeredUser: { ...outboundState.registeredUser, jwt },
+        };
+      }
     }
     return outboundState;
   }
@@ -63,20 +68,6 @@ const store = configureStore({
         ignoredActions: ['persist/PERSIST'],
       },
     }),
-});
-
-// TODO: temporary solution to rehydrate the state from localStorage
-window.addEventListener('storage', () => {
-  // Get the item from localStorage
-  const persistedState = localStorage.getItem('persist:root');
-
-  // If the item is not null, parse it and dispatch the action
-  if (persistedState !== null) {
-    store.dispatch({
-      type: 'persist/REHYDRATE',
-      payload: JSON.parse(persistedState),
-    });
-  }
 });
 
 export type AppDispatch = typeof store.dispatch;

@@ -4,7 +4,7 @@ import { loginUser } from '../actions/loginUser';
 import { registerUser } from '../actions/registerUser';
 import type { RootState } from '../store/store';
 
-interface UserState {
+export interface UserState {
   registeredUser: RegisteredUser | null;
   userLoggedIn: boolean;
   loading: boolean;

@@ -1,0 +1,30 @@
+persistor.subscribe(() => {
+  const currentState = store.getState();
+
+  // Check if the state has been rehydrated from the local storage
+  if (persistor.getState().bootstrapped) {
+    console.log('State has been rehydrated');
+    // If the state has been rehydrated, dispatch the setUser and setCart actions
+    console.log(currentState);
+    if (currentState.user.registeredUser) {
+      store.dispatch(setUser(currentState.user.registeredUser));
+    }
+    if (currentState.cart.cartItems.length > 0) {
+      store.dispatch(setCart(currentState.cart.cartItems));
+    }
+  }
+});
+
+TODO: temporary solution to rehydrate the state from localStorage
+window.addEventListener('storage', () => {
+  // Get the item from localStorage
+  const persistedState = localStorage.getItem('persist:root');
+
+  // If the item is not null, parse it and dispatch the action
+  if (persistedState !== null) {
+    store.dispatch({
+      type: 'persist/REHYDRATE',
+      payload: JSON.parse(persistedState),
+    });
+  }
+});
