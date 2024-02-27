@@ -59,20 +59,3 @@ function MainLayout() {
   );
 }
 
-// TODO: add component/unit tests
-// TODO: add e2e tests
-// TODO: bugfix: sometimes, when redirecting from register in the header, there's a brief error screen flashing up
-// TODO: export workspace file
-// TODO: package updates
-// TODO: what about testability?
-// TODO: performance improvements
-// TODO: bugfix: if the user deletes local storage, the app crashes on refresh
-// TODO: add pages/index.js for easier imports
-// TODO: WCAG compliance
-// TODO: translations
-// TODO: logout after session expires
-// TODO: what happens when switching tabs
-// TODO: oidc user
-// TODO: multifactor authentication?
-// TODO: fix high memory usage
-// TODO: test error states with devtools
