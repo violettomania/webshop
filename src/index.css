@@ -13,3 +13,10 @@
     @apply mx-auto max-w-7xl px-8;
   }
 }
+
+.version-info {
+  display: flex;
+  justify-content: center;
+  font-size: small;
+  margin-bottom: 10px;
+}
